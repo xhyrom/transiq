@@ -29,8 +29,9 @@ jobs:
 
       - name: Checkout gtfs branch
         run: |
-          git clone --branch gtfs --single-branch https://github.com/${{ github.repository }}.git gtfs-branch ||
-          git clone --no-checkout https://github.com/${{ github.repository }}.git gtfs-branch && cd gtfs-branch && git checkout --orphan gtfs
+          rm -rf gtfs-branch
+
+          git clone --branch gtfs --single-branch https://github.com/${{ github.repository }}.git gtfs-branch
 
       - name: Copy and commit GTFS files
         run: |
