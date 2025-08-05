@@ -1,4 +1,4 @@
-import { loadFeeds } from "@feed";
+import { loadFeeds } from "@feeds";
 import { downloadFile, ensureDirectory, generateLicenseFile } from "@utils";
 import { join } from "node:path";
 import ora from "ora";
