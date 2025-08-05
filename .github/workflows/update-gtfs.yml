@@ -5,6 +5,9 @@ on:
     - cron: "0 0 * * *"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   update-gtfs:
     runs-on: ubuntu-latest
@@ -21,21 +24,20 @@ jobs:
 
       - name: Setup Git
         run: |
-          git config --global user.name 'github-actions[bot]''
+          git config --global user.name 'github-actions[bot]'
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
 
-      - name: Switch to gtfs branch
+      - name: Checkout gtfs branch
         run: |
-          git fetch origin gtfs || true
-          git checkout gtfs || git checkout -b gtfs
+          git clone --branch gtfs --single-branch https://github.com/${{ github.repository }}.git gtfs-branch ||
+          git clone --no-checkout https://github.com/${{ github.repository }}.git gtfs-branch && cd gtfs-branch && git checkout --orphan gtfs
 
-      - name: Update GTFS files
+      - name: Copy and commit GTFS files
         run: |
-          # Move GTFS files to root
-          mv gtfs/* ./ || true
+          cd gtfs-branch
 
-          git add *.zip
+          cp -r ../gtfs .
+
+          git add -A
           git commit -m "📦 Update GTFS data $(date +'%Y-%m-%d')" || echo "No changes to commit"
-
-      - name: Push changes
-        run: git push origin gtfs
+          git push https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git gtfs
