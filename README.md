@@ -2,6 +2,16 @@
 
 This project was originally created to handle IDS BK regional buses GTFS data from Slovakia 🇸🇰 (https://www.idsbk.sk/en/about/open-data/), which is hosted on Google Drive and can't be easily accessed. However, transiq is designed to be generic, so if you want to add another feed, your contributions are appreciated :)
 
+### Accessing GTFS Files
+
+All mirrored GTFS files are accessible at: [https://transiq.xhyrom.dev/](https://transiq.xhyrom.dev/)
+
+Files follow this pattern:
+`https://transiq.xhyrom.dev/gtfs/{country_code}/{feed_id}.zip`
+
+For example, to access the IDS BK regional buses data:
+`https://transiq.xhyrom.dev/gtfs/sk/ids-bk_regional.zip`
+
 ### Adding New Feeds
 
 To add a new GTFS feed:

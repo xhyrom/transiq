@@ -19,8 +19,8 @@
     "paths": {
       "@/*": ["./*"],
       "@helpers/*": ["./helpers/*"],
-      "@feed": ["./feed"],
-      "@feed/*": ["./feed/*"],
+      "@feeds": ["./feeds"],
+      "@feeds/*": ["./feeds/*"],
       "@scripts/*": ["./scripts/*"],
       "@types": ["./helpers/types"],
       "@utils": ["./helpers/util"]
