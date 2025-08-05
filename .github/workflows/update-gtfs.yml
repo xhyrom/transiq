@@ -1,0 +1,41 @@
+name: Update GTFS Data
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  update-gtfs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: oven-sh/setup-bun@v1
+      - run: bun install
+
+      - name: Download GTFS files
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        run: bun run scripts/download_gtfs.ts
+
+      - name: Setup Git
+        run: |
+          git config --global user.name 'github-actions[bot]''
+          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+      - name: Switch to gtfs branch
+        run: |
+          git fetch origin gtfs || true
+          git checkout gtfs || git checkout -b gtfs
+
+      - name: Update GTFS files
+        run: |
+          # Move GTFS files to root
+          mv gtfs/* ./ || true
+
+          git add *.zip
+          git commit -m "📦 Update GTFS data $(date +'%Y-%m-%d')" || echo "No changes to commit"
+
+      - name: Push changes
+        run: git push origin gtfs
