@@ -33,6 +33,17 @@ export async function ensureDirectory(path: string): Promise<void> {
   await mkdir(path, { recursive: true });
 }
 
+export function sanitizeFolderName(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[\.,:;'"!?()[\]{}\/\\+*=&%$#@^|<>]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/--+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+
 export async function generateLicenseFile(
   feed: Feed,
   filePath: string,

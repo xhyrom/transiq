@@ -1,0 +1,9 @@
+{
+  "name": "cis",
+  "type": "module",
+  "private": true,
+  "workspaces": [
+    "scraper",
+    "xlsx2gtfs"
+  ]
+}
