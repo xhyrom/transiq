@@ -1,4 +1,4 @@
-**cis** aims to make public transport timetable data from Slovakia available in the open GTFS format.
+**cis** aims to make public transport timetable data from Slovakia 🇸🇰 available in the open GTFS format.
 
 The official _Celoštátny informačný systém o cestovných poriadkoch_ (CIS CP) publishes timetable data only as PDF and XLSX files on [portal.cp.sk](http://portal.cp.sk/), but does not provide GTFS feeds to the public.
 

@@ -1,4 +1,4 @@
-**transiq** (pronounced "transique") is a toolset for accessing, processing, and publishing public transport data in [GTFS](https://gtfs.org) format. While it began as a simple mirror for GTFS feeds that don't allow direct downloading, it has evolved to focus particularly on making Slovak 🇸🇰 public transport data accessible.
+**transiq** (pronounced "transique") is a toolset for accessing, processing, and publishing public transport data in [GTFS](https://gtfs.org) format.
 
 This project was originally created to handle IDS BK regional buses GTFS data from Slovakia 🇸🇰 (https://www.idsbk.sk/en/about/open-data/), which is hosted on Google Drive and can't be easily accessed. However, transiq is designed to be generic, so if you want to add another feed, your contributions are appreciated :)
 
