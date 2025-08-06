@@ -23,7 +23,7 @@
       "@scripts/*": ["./scripts/*"],
       "@types": ["./helpers/types"],
       "@utils": ["./helpers/util"],
-      "@cis": ["./cis/*"]
+      "@cis/*": ["./cis/*"]
     },
 
     // Best practices

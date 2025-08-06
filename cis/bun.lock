@@ -4,6 +4,9 @@
     "": {
       "name": "cis",
     },
+    "cis2gtfs": {
+      "name": "@cis/cis2gtfs",
+    },
     "scraper": {
       "name": "@cis/scraper",
       "dependencies": {
@@ -18,6 +21,8 @@
     },
   },
   "packages": {
+    "@cis/cis2gtfs": ["@cis/cis2gtfs@workspace:cis2gtfs"],
+
     "@cis/scraper": ["@cis/scraper@workspace:scraper"],
 
     "@cis/xlsx2gtfs": ["@cis/xlsx2gtfs@workspace:xlsx2gtfs"],
