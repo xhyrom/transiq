@@ -2,8 +2,10 @@ import { ensureDirectory } from "@helpers/util";
 import { Glob } from "bun";
 import { exists, readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { convertToGtfsAgency } from "./converter";
-import { objectToCsv } from "./gtfs/util";
+import { convertToGtfsAgency, convertXlsxToGtfs } from "./converter";
+import { arrayToCsv, objectToCsv } from "./utils/csv";
+import type { PartialGtfsStop } from "./gtfs/models";
+import { resolvePartialGtfsStops } from "./resolver";
 
 const dir = join(".tmp", "cp-sk");
 if (!(await exists(dir))) {
@@ -29,12 +31,24 @@ for (const agencyFolderName of await readdir(dir)) {
 
   console.log(`Processing agency: ${info.agency_short} (${agencyFolderName})`);
 
+  const stops: PartialGtfsStop[] = [];
+
   for await (const route of xlsxGlob.scan(agencyFolderPath)) {
-    //console.log(route);
+    const data = convertXlsxToGtfs(await readFile(join(agencyFolderPath, route)));
+
+    stops.push(...data.stops);
+    break;
   }
+
+  await Bun.write(
+    join(gtfs, "stops.txt"),
+    arrayToCsv(["stop_id", "stop_name", "stop_lat", "stop_lon", "zone_id", "location_type"], resolvePartialGtfsStops(stops)),
+  )
 
   await Bun.write(
     join(gtfs, "agency.txt"),
     objectToCsv(convertToGtfsAgency(info)),
   );
+
+  break;
 }

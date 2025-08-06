@@ -8,6 +8,8 @@ export interface GtfsAgency {
   agency_fare_url?: string;
 }
 
+export type PartialGtfsStop = Omit<GtfsStop, "stop_id" | "stop_lat" | "stop_lon">;
+
 export interface GtfsStop {
   stop_id: string;
   stop_name: string;
