@@ -14,11 +14,14 @@ export function convertXlsxToGtfs(data: Buffer<ArrayBufferLike>): {
 } {
   const workbook = XLSX.read(data, { type: "buffer" });
 
-  const inboundSheet = workbook.Sheets[Sheet.INBOUND]!;
-  const outboundSheet = workbook.Sheets[Sheet.OUTBOUND]!;
+  const inboundSheet = workbook.Sheets[Sheet.INBOUND]! ?? [];
+  const outboundSheet = workbook.Sheets[Sheet.OUTBOUND]! ?? [];
 
   return {
-    stops: [...convertToGtfsStop(inboundSheet), ...convertToGtfsStop(outboundSheet)],
+    stops: [
+      ...convertToGtfsStop(inboundSheet),
+      ...convertToGtfsStop(outboundSheet),
+    ],
   };
 }
 
@@ -27,7 +30,7 @@ export function convertToGtfsStop(sheet: XLSX.WorkSheet): PartialGtfsStop[] {
 
   let tpzColumn: string | undefined;
   const tpzCellKey = Object.entries(sheet).find(
-    ([, cell]) => cell.t === "s" && cell.v === "TPZ"
+    ([, cell]) => cell.t === "s" && cell.v === "TPZ",
   )?.[0];
 
   if (tpzCellKey) {
@@ -35,29 +38,36 @@ export function convertToGtfsStop(sheet: XLSX.WorkSheet): PartialGtfsStop[] {
 
     const dataCells = filterCells(sheet, (key, cell) => {
       const col = cellColumn(key);
-      return (col === stopColumn || col === tpzColumn) &&
-             cell.v !== "TPZ" &&
-             cell.v !== "Zastávka";
+      return (
+        (col === stopColumn || col === tpzColumn) &&
+        cell.v !== "TPZ" &&
+        cell.v !== "Zastávka"
+      );
     });
 
     const groupedCells = groupCells(dataCells);
 
     return groupedCells
-      .filter(row => row[stopColumn] && row[stopColumn].v)
+      .filter((row) => row[stopColumn] && row[stopColumn].v)
       .map((row) => ({
         stop_name: (row[stopColumn]!.v as string).split(";")[0]!,
-        zone_id: tpzColumn && row[tpzColumn]?.v ? String(row[tpzColumn]!.v).split(",")[0] : undefined,
+        zone_id:
+          tpzColumn && row[tpzColumn]?.v
+            ? String(row[tpzColumn]!.v).split(",")[0]
+            : undefined,
         location_type: 0,
       }));
   } else {
     const stopCells = filterCells(sheet, (key, cell) => {
-      return cellColumn(key) === stopColumn &&
-             cell.v !== "Zastávka" &&
-             Boolean(cell.v);
+      return (
+        cellColumn(key) === stopColumn &&
+        cell.v !== "Zastávka" &&
+        Boolean(cell.v)
+      );
     });
 
     return Object.values(stopCells)
-      .filter(cell => Boolean(cell.v))
+      .filter((cell) => Boolean(cell.v))
       .map((cell) => ({
         stop_name: (cell.v as string).split(";")[0]!,
         location_type: 0,

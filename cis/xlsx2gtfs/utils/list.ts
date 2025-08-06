@@ -1,4 +1,7 @@
-export function removeDuplicates<T>(items: T[], keyFn: (item: T) => string): T[] {
+export function removeDuplicates<T>(
+  items: T[],
+  keyFn: (item: T) => string,
+): T[] {
   const uniqueMap = new Map<string, T>();
 
   for (const item of items) {

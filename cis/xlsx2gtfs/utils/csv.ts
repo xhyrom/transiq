@@ -6,7 +6,7 @@ function formatCsvValue(value: any): string {
   if (typeof value === "string") {
     if (
       value.includes(",") ||
-      value.includes("\"") ||
+      value.includes('"') ||
       value.includes("\n") ||
       value.includes("\r") ||
       value.trim() !== value
@@ -38,9 +38,12 @@ export function arrayToCsv(header: string[], data: any[]): string {
     return headerRow;
   }
 
-  const rows = data.map(item => {
-    return header.map(key => formatCsvValue(item[key])).join(",");
-  }).join("\n") + "\n";
+  const rows =
+    data
+      .map((item) => {
+        return header.map((key) => formatCsvValue(item[key])).join(",");
+      })
+      .join("\n") + "\n";
 
   return headerRow + rows;
 }

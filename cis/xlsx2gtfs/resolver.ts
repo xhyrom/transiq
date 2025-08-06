@@ -3,12 +3,12 @@ import { stopId } from "./utils/id";
 import { removeDuplicates } from "./utils/list";
 
 export function resolvePartialGtfsStops(stops: PartialGtfsStop[]): GtfsStop[] {
-  return removeDuplicates(stops, (stop) => stop.stop_name).map(resolvePartialGtfsStop);
+  return removeDuplicates(stops, (stop) => stop.stop_name).map(
+    resolvePartialGtfsStop,
+  );
 }
 
-export function resolvePartialGtfsStop(
-  stop: PartialGtfsStop
-): GtfsStop {
+export function resolvePartialGtfsStop(stop: PartialGtfsStop): GtfsStop {
   return {
     stop_id: stopId(),
     stop_name: stop.stop_name,

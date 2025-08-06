@@ -17,7 +17,9 @@ export function filterCells(
   return cells;
 }
 
-export function groupCells(cells: Record<string, CellObject>): Record<string, CellObject>[] {
+export function groupCells(
+  cells: Record<string, CellObject>,
+): Record<string, CellObject>[] {
   const rowMap: Map<number, Record<string, CellObject>> = new Map();
 
   for (const cellKey in cells) {
