@@ -1,4 +1,4 @@
-import type { GtfsAgency, PartialGtfsStop } from "./gtfs/models";
+import type { GtfsAgency, GtfsRoute, PartialGtfsStop } from "./gtfs/models";
 import { agencyId } from "./utils/id";
 import * as XLSX from "xlsx";
 import { cellColumn, filterCells, groupCells } from "./xlsx_helper";
@@ -6,26 +6,58 @@ import { cellColumn, filterCells, groupCells } from "./xlsx_helper";
 enum Sheet {
   INBOUND = "Smer tam",
   OUTBOUND = "Smer späť",
+  SIGN_EXPLANATION = "Vysvetlenie značiek",
   NOTES = "Poznámky",
 }
 
-export function convertXlsxToGtfs(data: Buffer<ArrayBufferLike>): {
+export function convertXlsxToGtfs(
+  agency: GtfsAgency,
+  route: string,
+  data: Buffer<ArrayBufferLike>,
+): {
   stops: PartialGtfsStop[];
+  route: GtfsRoute;
 } {
   const workbook = XLSX.read(data, { type: "buffer" });
 
   const inboundSheet = workbook.Sheets[Sheet.INBOUND]! ?? [];
   const outboundSheet = workbook.Sheets[Sheet.OUTBOUND]! ?? [];
+  const signExplanationSheet = workbook.Sheets[Sheet.SIGN_EXPLANATION]! ?? [];
+  const notesSheet = workbook.Sheets[Sheet.NOTES]! ?? [];
 
   return {
     stops: [
       ...convertToGtfsStop(inboundSheet),
       ...convertToGtfsStop(outboundSheet),
     ],
+    route: convertToGtfsRoute(
+      agency,
+      route,
+      signExplanationSheet || notesSheet || inboundSheet || outboundSheet,
+    ),
   };
 }
 
-export function convertToGtfsStop(sheet: XLSX.WorkSheet): PartialGtfsStop[] {
+function convertToGtfsRoute(
+  agency: GtfsAgency,
+  route: string,
+  sheet: XLSX.WorkSheet,
+): GtfsRoute {
+  const routeId = route.split("_")[0]!;
+  const routeShortName = routeId.startsWith("L010")
+    ? parseInt(routeId.slice(4))
+    : parseInt(routeId.slice(1));
+
+  return {
+    route_id: routeId,
+    agency_id: agency.agency_id,
+    route_short_name: routeShortName,
+    route_long_name: sheet.C1.v.trim().replace(/\s*\(.*?\)\s*/g, ""),
+    route_type: 3,
+  } satisfies GtfsRoute;
+}
+
+function convertToGtfsStop(sheet: XLSX.WorkSheet): PartialGtfsStop[] {
   const stopColumn = "B";
 
   let tpzColumn: string | undefined;

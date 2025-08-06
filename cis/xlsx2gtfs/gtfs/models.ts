@@ -25,7 +25,7 @@ export interface GtfsStop {
 export interface GtfsRoute {
   route_id: string;
   agency_id: string;
-  route_short_name: string;
+  route_short_name: number;
   route_long_name: string;
   route_type: number;
   route_color?: string;
