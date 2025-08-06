@@ -22,8 +22,7 @@
       "@feeds/*": ["./feeds/*"],
       "@scripts/*": ["./scripts/*"],
       "@types": ["./helpers/types"],
-      "@utils": ["./helpers/util"],
-      "@cis/*": ["./cis/*"]
+      "@utils": ["./helpers/util"]
     },
 
     // Best practices
