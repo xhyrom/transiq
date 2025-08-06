@@ -4,6 +4,7 @@ import { parse as parseCsv } from "csv-parse/sync";
 import { stringify as stringifyCsv } from "csv-stringify/sync";
 import { queryGeocode } from "./query";
 import { log } from "./logger";
+import type { KaeruCsvItem } from "./types";
 
 const csvPath = join(".transiq", "kaeru.csv");
 if (!(await exists(csvPath))) {
@@ -13,12 +14,7 @@ if (!(await exists(csvPath))) {
 }
 
 const content = await Bun.file(csvPath).text();
-const data = parseCsv<{
-  cis_name: string;
-  name: string;
-  lat: number;
-  lon: number;
-}>(content, {
+const data = parseCsv<KaeruCsvItem>(content, {
   columns: true,
   skip_empty_lines: true,
   trim: true,

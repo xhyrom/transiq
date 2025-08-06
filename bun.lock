@@ -29,6 +29,7 @@
       "name": "@cis/xlsx2gtfs",
       "dependencies": {
         "csv-parse": "^6.1.0",
+        "kaeru": "workspace:*",
         "xlsx": "^0.18.5",
       },
     },
