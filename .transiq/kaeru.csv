@@ -139,7 +139,7 @@ Lokca,Lokca,49.36624,19.41018
 "Oravský Biely Potok,,Čuporák","Oravský Biely Potok, Čuporák",49.28754,19.56112
 "Habovka,,Pod Klinkovým vŕškom","Habovka, Pod Klinkovým vŕškom",49.2778,19.60416
 "Habovka,,Blatná dolina","Habovka, Blatná dolina",49.2778,19.61412
-"Habovka,,ZŠ",Tvrdošín ŽS,49.33741,19.5626
+"Habovka,,ZŠ","Habovka, ZŠ",49.27273,19.60628
 "Zuberec,,Šroba rázc.","Zuberec, Šroba rázc.",49.2641,19.60789
 "Zuberec,,pri kostole","Zuberec, pri kostole",49.25859,19.61257
 "Zuberec,,gar.SAD rázc.","Zuberec, gar.SAD rázc.",49.25853,19.61882
@@ -318,11 +318,11 @@ Vavrečka,Vavrečka,49.38932,19.46836
 "Huty,,ZŠ","Huty, ZŠ",49.21923,19.566
 "Huty,,Dolinky","Huty, Dolinky",49.21701,19.56105
 "Huty,,rázc.na Malé Borové","Huty, rázc.na Malé Borové",49.21317,19.55455
-"Malé Borové,Novoť",Novoť,49.22166,19.54349
+"Malé Borové,Novoť","Malé Borové, Novoť",49.22163,19.54346
 Malé Borové,Malé Borové,49.22541,19.53705
 "Huty,,rázc.na Veľké Borové","Huty, rázc.na Veľké Borové",49.20927,19.54968
-"Veľké Borové,,Ráztoka",Ráztoka,49.20503,19.53478
-"Veľké Borové,,Salaj",Salaj,49.19764,19.5176
+"Veľké Borové,,Ráztoka","Veľké Borové, Ráztoka",49.20506,19.53475
+"Veľké Borové,,Salaj","Veľké Borové, Salaj",49.19766,19.51765
 "Veľké Borové,,Jednota","Veľké Borové, Jednota",49.19946,19.51455
 "Veľké Borové,,Škrlák","Veľké Borové, Škrlák",49.2013,19.50862
 "Lipt.Mikuláš,,ul.Hurbanova MŠ",,,
@@ -421,12 +421,12 @@ Malé Borové,Malé Borové,49.22541,19.53705
 "Tvrdošín,,hotel Limba","Tvrdošín, hotel Limba",49.33308,19.55412
 "Ružomberok,,Supra-stred","Ružomberok, Supra-stred",49.07617,19.31679
 "Ružomberok,,sídl.SNP","Ružomberok, sídl.SNP",49.07214,19.31387
-"Ružomberok,,tehelňa",Tehelňa,49.06684,19.31004
+"Ružomberok,,tehelňa","Ružomberok, tehelňa",49.06681,19.31022
 "Ružomberok,,Pod skalami","Ružomberok, Pod skalami",49.05895,19.30635
 "Ružomberok,,Vápenka","Ružomberok, Vápenka",49.05277,19.30334
 "Ružomberok,Biely Potok,Raveň","Ružomberok, Biely Potok, Raveň",49.04896,19.30181
 "Ružomberok,Biely Potok,pri moste","Ružomberok, Biely Potok, pri moste",49.04137,19.29962
-"Ružomberok,Biely Potok,Do Uhliska","Biely Potok,Do Uhliska",49.03367,19.29644
+"Ružomberok,Biely Potok,Do Uhliska","Ružomberok, Biely Potok, Do Uhliska",49.03141,19.29565
 "Ružomberok,Biely Potok,Kovostav","Ružomberok, Biely Potok, Kovostav",49.02794,19.29434
 "Ružomberok,Biely Potok,Trlenská dolina","Ružomberok, Biely Potok, Trlenská dolina",49.02175,19.29255
 "Ružomberok,Biely Potok,Bohunka","Ružomberok, Biely Potok, Bohunka",49.01684,19.29309
@@ -566,7 +566,7 @@ Krivá,,,
 "Lipt.Hrádok,,Vyšné fabriky","Liptovský Hrádok, Vyšné fabriky",49.03766,19.74325
 "Lipt.Hrádok,,Nižné fabriky","Liptovský Hrádok, Nižné fabriky",49.03843,19.73554
 "Lipt.Hrádok,,internát strednej školy","Liptovský Hrádok, internát strednej školy",49.03969,19.73014
-"Lipt.Hrádok,,ZŠ","Nové Mesto nad Váhom, ZŠ Športová",48.7575,17.82193
+"Lipt.Hrádok,,ZŠ","Liptovský Hrádok, ZŠ",49.03881,19.72675
 "Lipt.Hrádok,,Sokolovňa",,,
 "Lipt.Hrádok,,Pod skalou","Liptovský Hrádok, Pod skalou",49.04455,19.73159
 "Lipt.Hrádok,,Repček",,,
@@ -765,9 +765,9 @@ Ižipovce,Ižipovce,49.14048,19.49102
 "Lipt.Lúžna,,Brezniak",,,
 "Lipt.Lúžna,,bytovka RD",,,
 "Lipt.Lúžna,,MŠ",,,
-"Lipt.Lúžna,,Weiss",Weiss,48.93729,19.32876
+"Lipt.Lúžna,,Weiss","Liptovská Lúžna, Weiss",48.93694,19.32928
 "Lipt.Lúžna,,nocovňa SAD","Liptovská Lúžna, nocovňa SAD",48.93391,19.33892
-"Lipt.Lúžna,,Hronec",Hronec,48.93735,19.34539
+"Lipt.Lúžna,,Hronec","Liptovská Lúžna, Hronec",48.93734,19.34546
 "Jasenová,,Jednota","Jasenová, Jednota",49.17703,19.29423
 "Vavrečka,,Jednota","Vavrečka, Jednota",49.38787,19.46802
 "Krušetnica,,Jakubík","Krušetnica, Jakubík",49.37442,19.33919
@@ -822,7 +822,7 @@ Jasenová,Jasenová,49.17621,19.2995
 "Konská,,hájenka","Konská, hájenka",49.11632,19.71963
 "Konská,,ZŠ","Konská, ZŠ",49.11884,19.71734
 "Lipt.Mikuláš,Palúdzka,ZŠ",,,
-"Lipt.Mikuláš,,TESCO","Tesco, nástup",49.07863,19.60467
+"Lipt.Mikuláš,,TESCO","Liptovský Mikuláš, Tesco výstup",49.07853,19.6047
 "Lipt.Mikuláš,Demänová,rázc.",,,
 "Lipt.Mikuláš,Demänová,Mlynisko",,,
 "Lipt.Mikuláš,Bodice,kostol",,,
@@ -856,11 +856,11 @@ Jasenová,Jasenová,49.17621,19.2995
 "Staré Hory,Dolný Jelenec","Staré Hory, Dolný Jelenec",48.85376,19.13995
 "Staré Hory,,kaplnka","Staré Hory, kaplnka",48.83947,19.11507
 "Banská Bystrica,Uľanka,hlavná cesta","Banská Bystrica, Uľanka, hlavná cesta",48.7879,19.10758
-"Banská Bystrica,Jakub,Nový Svet II.","Jakub, Nový Svet II.",48.77706,19.12894
+"Banská Bystrica,Jakub,Nový Svet II.","Banská Bystrica, Jakub, Nový Svet II.",48.77657,19.12916
 "Banská Bystrica,,Strieborné námestie","Banská Bystrica, Strieborné námestie",48.73727,19.14175
-"Banská Bystrica,,EUROPA SC",EUROPA SC,48.73086,19.13753
+"Banská Bystrica,,EUROPA SC","Banská Bystrica, EUROPA SC",48.7308,19.13758
 "Banská Bystrica,,Námestie H.Vajanského","Banská Bystrica, Námestie H.Vajanského",48.73187,19.14004
-"Banská Bystrica,,AS",Autobusová stanica Banská Bystrica,48.73485,19.15901
+"Banská Bystrica,,AS","Banská Bystrica, AS",48.7351,19.15931
 "Banská Bystrica,,parkovisko Mičinská","Banská Bystrica, parkovisko Mičinská",48.73264,19.15968
 "Banská Bystrica,,žel.st.",,,
 "Banská Bystrica,,Národná","Banská Bystrica, Národná",48.73226,19.14633
@@ -899,7 +899,7 @@ Jasenová,Jasenová,49.17621,19.2995
 "Nová Baňa,,žel.st.","Nová Baňa, žel.st.",48.41274,18.64689
 "Žarnovica,,motel Sitno","Žarnovica, motel Sitno",48.48264,18.72157
 "Žiar n.Hronom,,aut.st.","Žiar nad Hronom, aut.st.",48.58911,18.85716
-"Zvolen,,AS",Autobusová stanica Zvolen,48.57085,19.11985
+"Zvolen,,AS","Zvolen, AS",48.57113,19.11919
 "Bratislava,,Letisko-Airport",,,
 "Hronský Beňadik,,námestie","Hronský Beňadik, námestie",48.34533,18.55889
 Hliník n.Hronom,,,
@@ -947,7 +947,7 @@ Ráztočno,Ráztočno,48.76866,18.75769
 "Handlová,,žel.nadjazd","Handlová, žel.nadjazd",48.73684,18.76142
 "Handlová,,centrum","Handlová, centrum",48.72838,18.76011
 "Banská Bystrica,,Štadlerovo nábr.","Banská Bystrica, Štadlerovo nábr.",48.7316,19.14142
-"Brezno,,ul.ČSA",Ul. ČSA,48.80713,19.63947
+"Brezno,,ul.ČSA","Brezno, ul.ČSA",48.80729,19.63898
 "Pohronská Polhora,,OcÚ","Pohronská Polhora, OcÚ",48.75493,19.79903
 "Tisovec,,nám.","Tisovec, nám.",48.68005,19.94322
 "Hnúšťa,,aut.st.","Hnúšťa, aut.st.",48.57588,19.95352
@@ -1263,7 +1263,7 @@ Drienčany,Drienčany,48.48096,20.07208
 Hrušovo,Hrušovo,48.51087,20.0492
 "Hrušovo,Striežovce","Hrušovo, Striežovce",48.52768,20.02963
 "Lučenec,,obchodné centrum Galéria","Lučenec, obchodné centrum Galéria",48.33136,19.66134
-"Lučenec,,TESCO",TESCO,48.33946,19.66031
+"Lučenec,,TESCO","Lučenec, TESCO",48.338,19.66067
 "Lučenec,,Zvolenská cesta SOŠ","Lučenec, Zvolenská cesta SOŠ",48.34426,19.65867
 "Vidiná,,Obkladačky","Vidiná, Obkladačky",48.35025,19.65672
 "Vidiná,,Nová Vidiná","Vidiná, Nová Vidiná",48.35626,19.65636
@@ -1383,10 +1383,10 @@ Ružiná,Ružiná,48.4302,19.55126
 "Čierny Balog,Krám","Čierny Balog, Krám",48.75452,19.63335
 "Brezno,Mazorníkovo,obchod","Brezno, Mazorníkovo, obchod",48.79183,19.64071
 "Brezno,,ul.Fr.Kráľa BILLA","Brezno, ul.Fr.Kráľa BILLA",48.80522,19.63093
-"Brezno,,TESCO",TESCO,48.80725,19.62883
+"Brezno,,TESCO","Brezno, TESCO",48.80729,19.62891
 "Brezno,,rázc.k nemocnici","Brezno, rázc.k nemocnici",48.80734,19.62714
 "Podbrezová,Lopej","Podbrezová, Lopej",48.817,19.49743
-"Banská Bystrica,,29.augusta",29. augusta,48.73859,19.16194
+"Banská Bystrica,,29.augusta","Banská Bystrica, 29.augusta",48.73855,19.1618
 "Banská Bystrica,,Tajovského školy","Banská Bystrica, Tajovského školy",48.74015,19.12656
 "Banská Bystrica,,Roosevelt.nem.","Banská Bystrica, Roosevelt.nem.",48.74445,19.11878
 "Rimavská Sobota,,Pivovar","Rimavská Sobota, Pivovar",48.38526,20.00756
@@ -1643,7 +1643,7 @@ Stránska,Stránska,48.40347,20.28089
 "Fiľakovské Kováče,Kurtáň","Fiľakovské Kováče, Kurtáň",48.28662,19.79567
 Fiľakovské Kováče,Fiľakovské Kováče,48.29054,19.77694
 "Fiľakovské Kováče,Fiľakovské Kľač.","Fiľakovské Kováče, Fiľakovské Kľač.",48.28982,19.75375
-"Lučenec,,pri moste",Pri moste,48.32573,19.67084
+"Lučenec,,pri moste","Lučenec, pri moste",48.32566,19.67087
 "Fiľakovské Kováče,Fiľakovské Kľač.,rázc.","Fiľakovské Kováče, Fiľakovské Kľač., rázc.",48.29927,19.73946
 "Holiša,,žel.zast.","Holiša, žel.zast.",48.30433,19.7416
 "Holiša,,bufet","Holiša, bufet",48.3094,19.74757
@@ -2238,7 +2238,7 @@ Mlynica,Mlynica,49.10123,20.31332
 "Spišské Podhradie,Katúň,kostol","Spišské Podhradie, Katúň, kostol",48.97182,20.73852
 "Spišské Podhradie,Katúň,konečná","Spišské Podhradie, Katúň, konečná",48.9747,20.73251
 "Levoča,,AS","Levoča, AS",49.0188,20.58703
-"Levoča,,SAD",SAD,49.01507,20.57274
+"Levoča,,SAD","Levoča, SAD",49.01565,20.57444
 "Levoča,,rázc.Kurimany","Levoča, rázc.Kurimany",49.01328,20.55343
 "Dlhé Stráže,,rázc.","Dlhé Stráže, rázc.",49.01931,20.52306
 "Dlhé Stráže,,OcÚ","Dlhé Stráže, OcÚ",49.02533,20.52154
@@ -2523,7 +2523,7 @@ Jamník,Jamník,48.94341,20.66294
 "Spišská N.Ves,,EMBRACO","Spišská Nová Ves, EMBRACO",48.9372,20.59962
 "Spišská N.Ves,,AChP","Spišská Nová Ves, AChP",48.93876,20.59489
 "Spišská N.Ves,,Pod nemocnicou","Spišská Nová Ves, Pod nemocnicou",48.95532,20.56788
-"Spišská N.Ves,,Štefánikovo nám.",Štefánikovo námestie,48.94553,20.56226
+"Spišská N.Ves,,Štefánikovo nám.","Spišská Nová Ves, Štefánikovo nám.",48.94587,20.56148
 "Spišská N.Ves,,žel.st.","Spišská Nová Ves, žel.st.",48.94999,20.56056
 "Veľká Lomnica,,rázc.Stará Lesná","Veľká Lomnica, rázc.Stará Lesná",49.11913,20.35273
 "Veľká Lomnica,,obaľovačka","Veľká Lomnica, obaľovačka",49.12253,20.34146
@@ -2631,13 +2631,13 @@ Abrahámovce,Abrahámovce,49.04473,20.4389
 "Abrahámovce,,OcÚ","Abrahámovce, OcÚ",49.04171,20.44688
 "Jánovce,,rázc.Čenčice","Jánovce, rázc.Čenčice",49.02037,20.44085
 "Dlhé Stráže,,obec","Dlhé Stráže, OcÚ",49.02533,20.52154
-"Komárno,,AS",AS Komárno,47.76898,18.12776
+"Komárno,,AS","Komárno, SLK a.s.",47.76462,18.10514
 "Komárno,,SLK a.s.","Komárno, SLK a.s.",47.76462,18.10514
-"Komárno,,Kaufland",Kaufland,47.76555,18.09422
+"Komárno,,Kaufland","Komárno, Kaufland",47.76561,18.09423
 "Komárno,,ARRIVA","Komárno, ARRIVA",47.76566,18.09085
 "Komárno,Nová Stráž,Nový diel","Komárno, Nová Stráž, Nový diel",47.76325,18.0582
-"Komárno,Nová Stráž,žel.st.","Nová Stráž, žel.st.",47.76408,18.04784
-"Komárno,Nová Stráž,pošta","Nová Stráž, pošta",47.76437,18.04263
+"Komárno,Nová Stráž,žel.st.","Komárno, Nová Stráž, žel.st.",47.76415,18.04781
+"Komárno,Nová Stráž,pošta","Komárno, Nová Stráž, pošta",47.76447,18.0424
 "Komárno,Pavel,ŠM","Komárno, Pavel, ŠM",47.76677,18.01579
 "Komárno,Nová Stráž,Š.hyd.farma","Komárno, Nová Stráž, Š.hyd.farma",47.76658,17.99679
 "Zlatná na Ostrove,,RD","Zlatná na Ostrove, RD",47.7679,17.98208
@@ -2755,7 +2755,7 @@ Abrahámovce,Abrahámovce,49.04473,20.4389
 "Veľký Kýr,,cintorín","Veľký Kýr, cintorín",48.18344,18.14872
 "Veľký Kýr,,Nám.sv.Štefana","Veľký Kýr, Nám.sv.Štefana",48.18432,18.15549
 "Štúrovo,,aut.st.","Stúrovo, aut.st.",47.80031,18.72105
-"Štúrovo,,Mestský úrad",Mestský úrad,47.79775,18.72429
+"Štúrovo,,Mestský úrad","Štúrovo, Mestský úrad",47.79779,18.72424
 "Štúrovo,,Jesenského ul.",Jesenského ulica,47.79214,18.72321
 "Štúrovo,,poliklinika","Štúrovo, poliklinika",47.78926,18.71711
 "Štúrovo,,Sídlisko I.Billa","Štúrovo, Sídlisko I.Billa",47.79366,18.71787
@@ -3206,7 +3206,7 @@ Hrkovce,Hrkovce,48.08819,18.90214
 "Mužla,,žel.st.","Mužla, žel.st.",47.8139,18.59587
 "Mužla,,rázc.vinohrad","Mužla, rázc.vinohrad",47.81232,18.60185
 "Belá,,č.d.46","Belá, č.d.46",47.82818,18.60052
-"Belá,,nám.","Banská Belá, námestie",48.47511,18.93372
+"Belá,,nám.","Belá, nám.",47.83079,18.59785
 "Ľubá,,cintorín","Ľubá, cintorín",47.84623,18.59423
 "Ľubá,,OcÚ","Ľubá, OcÚ",47.85072,18.59576
 "Šarkan,Diva,RD","Šarkan,Diva,RD",47.8669,18.56845
@@ -4115,7 +4115,7 @@ Rokytov,,,
 "Kobyly,,vyšný koniec","Kobyly, vyšný koniec",49.21903,21.29402
 "Kobyly,,centrum","Kobyly, centrum",49.2136,21.2967
 "Kobyly,,mlynky",,,
-"Janovce,,stred","Jánovce, stred",49.01672,20.43268
+"Janovce,,stred","Janovce, stred",49.19022,21.30505
 Tročany,Tročany,49.1834,21.32254
 "Raslavice,,Vaniškovská","Raslavice, Vaniškovská",49.15749,21.30944
 "Vaniškovce,,cintorín","Vaniškovce, cintorín",49.16033,21.30304
@@ -4927,7 +4927,7 @@ Hlinné,Hlinné,48.95252,21.58215
 "Michalovce,Topoľany,č.d.32","Michalovce, Topoľany, č.d.32",48.77043,21.89451
 "Michalovce,,Zemplín market","Michalovce, Zemplín market",48.75904,21.91642
 "Michalovce,,Ul.Masarykova gymnázium","Michalovce, Ul.Masarykova gymnázium",48.75569,21.90717
-"Michalovce,,Ul.Masarykova MMB",Masarykova ul.,48.75583,21.90727
+"Michalovce,,Ul.Masarykova MMB","Michalovce, Ul.Masarykova gymnázium",48.75569,21.90717
 "Bzenov,,č.d.65","Bzenov, č.d.65",48.94604,21.17022
 "Janov,,Dúbrava","Janov, Dúbrava",48.94287,21.17601
 "Janov,,rázc.","Janov, rázc.",48.94074,21.18145
@@ -4956,7 +4956,7 @@ Suchá Dolina,,,
 "Margecany,,horáreň","Margecany, horáreň",48.90945,21.0297
 "Margecany,,osada Bystré","Margecany, osada Bystré",48.90128,21.02241
 "Margecany,,žel.st.","Margecany,,žel.st.",48.8939,21.0138
-"Piešťany,,AS",Autobusová stanica Piešťany,48.5968,17.81629
+"Piešťany,,AS","Piešťany, AS",48.59666,17.81619
 "Walserberg,,ZOLL",,,
 "Bad Reichenhall,,ZOLL",,,
 "Düsseldorf,,Fernbushaltestelle Woringerstr.",,,
@@ -5011,7 +5011,7 @@ Suchá Dolina,,,
 "Bratislava,,Pekná cesta",Pekná cesta,48.19585,17.14414
 "Bratislava,,Záhumenice","Bratislava, Záhumenice",48.21068,17.15762
 "Bratislava,,Púchovská",Púchovská,48.21483,17.16371
-"Bratislava,,Vajnorský potok",Vajnorský potok,48.22138,17.17869
+"Bratislava,,Vajnorský potok","Bratislava, Vajnorský potok",48.22146,17.17847
 "Svätý Jur,,Šúr","Svätý Jur, Šúr",48.23591,17.20291
 "Svätý Jur,,Logistické centrum","Svätý Jur, Logistické centrum",48.24428,17.20732
 "Svätý Jur,,Krajinská","Svätý Jur, Krajinská",48.25173,17.21523
@@ -5249,7 +5249,7 @@ Doľany,Doľany,48.41596,17.37841
 "Dolné Orešany,,Obec","Dolné Orešany, Obec",48.43864,17.42766
 "Dolné Orešany,,Vinohrady","Dolné Orešany, Vinohrady",48.45273,17.42629
 "Horné Orešany,,Reštaurácia","Horné Orešany, Reštaurácia",48.46066,17.43436
-"Horné Orešany,,Potraviny","Smolenice,,potraviny",48.49702,17.42127
+"Horné Orešany,,Potraviny","Horné Orešany, Potraviny",48.4653,17.43885
 "Horné Orešany,,Most","Horné Orešany, Most",48.46655,17.4418
 "Stupava,,Bočná","Stupava, Bočná",48.27103,17.0207
 "Stupava,,Štadión","Stupava, Štadión",48.27905,17.04109
@@ -5285,7 +5285,7 @@ Kostolná pri Dunaji,Kostolná pri Dunaji,48.18657,17.4334
 "Hrubý Šúr,,Ihrisko",,,
 Hurbanova Ves,Hurbanova Ves,48.15214,17.43668
 "Zlaté Klasy,,Nový Trh","Zlaté Klasy, Nový Trh",48.13692,17.44217
-"Bratislava,,Shopping Palace",Shopping Palace,48.18584,17.17666
+"Bratislava,,Shopping Palace","Bratislava, Shopping Palace",48.18584,17.17666
 "Bratislava,,Pri mlyne","Bratislava, Pri mlyne",48.19893,17.21074
 "Bratislava,,Pračanská","Bratislava, Pračanská",48.20132,17.20826
 "Bratislava,,MiÚ Vajnory","Bratislava, MiÚ Vajnory",48.2045,17.20731
@@ -5353,7 +5353,7 @@ Nový Svet,Nový Svet,48.21323,17.47972
 "Marianka,,Námestie","Marianka, Námestie",48.24923,17.0624
 "Marianka,,Stupavská","Marianka, Stupavská",48.25163,17.05552
 "Marianka,,Agátová","Marianka, Agátová",48.25043,17.047
-"Bratislava,,Mariánsky potok",Mariánsky potok,48.24623,17.03913
+"Bratislava,,Mariánsky potok","Bratislava, Mariánsky potok",48.24598,17.03895
 "Bratislava,,MiÚ Záh.Bystrica","Bratislava, MiÚ Záh. Bystrica",48.23879,17.03774
 "Stupava,,Mlynská","Stupava, Mlynská",48.27155,17.03
 "Stupava,,Vajanského","Stupava, Vajanského",48.26868,17.02225
@@ -5582,10 +5582,10 @@ Dlhá,,,
 "Tesáre,,domovina","Tesáre, domovina",48.59709,18.07967
 "Tesáre,,Kokošová","Tesáre, Kokošová",48.59475,18.07596
 "Zlaté Moravce,,žel.st.","Zlaté Moravce, žel.st.",48.38639,18.37733
-"Zlaté Moravce,,Továrenská ul.",Továrenská ul.,48.38711,18.38958
+"Zlaté Moravce,,Továrenská ul.","Zlaté Moravce, Továrenská ul.",48.38713,18.3894
 "Zlaté Moravce,,Kaufland","Zlaté Moravce, Kaufland",48.39019,18.39365
 "Zlaté Moravce,,Danfoss","Zlaté Moravce, Danfoss",48.39492,18.40041
-"Zlaté Moravce,,žel.st.mesto",žel.st.mesto,48.39794,18.40449
+"Zlaté Moravce,,žel.st.mesto","Zlaté Moravce, žel.st.",48.38639,18.37733
 "Žitavany,,rázc.","Žitavany, rázc.",48.40276,18.4116
 "Topoľčianky,,RD","Topoľčianky, RD",48.40832,18.4103
 "Topoľčianky,,Števula","Topoľčianky, Števula",48.41227,18.40882
@@ -5604,7 +5604,7 @@ Dlhá,,,
 "Velušovce,,RD","Velušovce, RD",48.62626,18.10441
 Velušovce,Velušovce,48.63039,18.09824
 "Velušovce,,cintorín","Velušovce, cintorín",48.63407,18.09523
-"Závada,,ZŠ","Paština Závada, ZŠ",49.21147,18.63891
+"Závada,,ZŠ","Závada, ZŠ",48.63802,18.08963
 "Závada,,nám.","Závada, nám.",48.63889,18.08266
 "Závada,,RD","Závada, RD",48.63916,18.07942
 "Závada,,Branko","Závada, Branko",48.63704,18.06997
@@ -5818,7 +5818,7 @@ Blesovce,Blesovce,48.55759,18.03831
 "Nitra,,Bohúňova","Nitra, Bohúňova",48.30999,18.1137
 "Nitra,,Mikov dvor","Nitra, Mikov dvor",48.30408,18.11738
 "Nitra,,Janíkovská cesta","Nitra, Janíkovská cesta",48.30104,18.12029
-"Nitra,,Malé Janíkovce I",Malé Janíkovce II,48.29531,18.12809
+"Nitra,,Malé Janíkovce I","Nitra, Malé Janíkovce",48.2983,18.12522
 "Nitra,,Slamkova","Nitra, Slamkova",48.2921,18.12827
 "Nitra,,Malanta rázc.",,,
 "Kolíňany,,ZŠ","Kolíňany, ZŠ",48.36267,18.19693
@@ -5871,7 +5871,7 @@ Nemčiňany,Nemčiňany,48.30451,18.44629
 "Volkovce,,osada","Volkovce, osada",48.35405,18.47458
 "Volkovce,Olichov,rázc.",,,
 Kozárovce,Kozárovce,48.32244,18.51615
-"Vráble,,žel.st.","Kalná nad Hronom, Mochovce, žel. st.",48.26697,18.44591
+"Vráble,,žel.st.","Vráble, rázc.k žel.st.",48.24998,18.29824
 "Melek,,RD","Melek, RD",48.20459,18.32276
 "Melek,,OcÚ","Melek, OcÚ",48.20207,18.32752
 "Melek,,Jednota","Melek, Jednota",48.19992,18.33012
@@ -6061,7 +6061,7 @@ Malé Chyndice,Malé Chyndice,48.30431,18.28509
 "Veľké Chyndice,,č.d.8","Veľké Chyndice, č.d.8",48.28683,18.28276
 "Neverice,,kostol","Neverice, kostol",48.36836,18.27037
 "Neverice,,Baláž","Neverice, Baláž",48.37173,18.27042
-"Ladice,,žel.zast.","Štrba, Štrbské Pleso, žel.st.",49.11912,20.06402
+"Ladice,,žel.zast.","Ladice, žel.zast.",48.38085,18.26641
 "Ladice,,RD",,,
 "Ladice,,kostol",,,
 "Ladice,,domovina",,,
@@ -6087,7 +6087,7 @@ Golianovo,Golianovo,48.26878,18.18842
 "Tekovská Breznica,,OcÚ","Tekovská Breznica, OcÚ",48.38541,18.61662
 "Nová Baňa,,Námestie slobody","Nová Baňa, Námestie slobody",48.4246,18.63906
 "Lehota,,pošta","Lehota, pošta",48.31239,17.99206
-"Lehota,,RD","Janova Lehota, RD",48.65456,18.77743
+"Lehota,,RD","Lehota, RD",48.31213,17.98205
 "Veľké Zálužie,,OcÚ","Veľké Zálužie, OcÚ",48.30798,17.94205
 "Veľké Zálužie,,hor.koniec","Veľké Zálužie, hor.koniec",48.30847,17.93448
 "Veľké Zálužie,,Betlahom","Veľké Zálužie, Betlahom",48.3082,17.929
@@ -6302,10 +6302,10 @@ Vyšný Komárnik,Vyšný Komárnik,49.40282,21.70341
 Michajlov,Michajlov,48.91017,22.34612
 "Ubľa,,rázc.Brezovec","Ubľa, rázc.Brezovec",48.903,22.3841
 "Brezovec,,OcÚ","Brezovec, OcÚ",48.93533,22.38705
-"Ubľa,,reštaurácia","Ulič, reštauracia",48.9633,22.42391
+"Ubľa,,reštaurácia","Ubľa, reštaurácia",48.89934,22.39182
 "Ubľa,,most","Ubľa, most",48.89829,22.38717
 "Dúbrava,,č.d.6","Dúbrava, č.d.6",48.88389,22.36212
-"Dúbrava,,OcÚ","Dúbravy, OcÚ",48.58746,19.36835
+"Dúbrava,,OcÚ","Dúbrava, OcÚ",48.87578,22.35947
 "Ruský Hrabovec,,Jednota","Ruský Hrabovec, Jednota",48.85495,22.35222
 "Dúbrava,,č.d.85","Dúbrava, č.d.85",48.87681,22.35166
 "Šmigovec,,rázc.Hrabová Roztoka","Šmigovec, rázc.Hrabová Roztoka",48.89193,22.31762
@@ -6315,7 +6315,7 @@ Hrabová Roztoka,Hrabová Roztoka,48.87995,22.30279
 "Strihovce,,č.d.18",,,
 "Strihovce,,OcÚ","Strihovce, OcÚ",48.89692,22.2756
 "Strihovce,,otoč.","Strihovce, otoč.",48.89645,22.25969
-Nová Polianka,"Vysoké Tatry, Nová Polianka",49.11869,20.15068
+Nová Polianka,Nová Polianka,49.28775,21.62029
 Potoky,Zlatý Potok Kalinka,48.57723,19.15349
 "Svidník,,vojenské múzeum","Svidník, vojenské múzeum",49.30643,21.5666
 "Roztoky,,č.d.8","Roztoky, č.d.8",49.38111,21.4876
@@ -7035,7 +7035,7 @@ Oľšinkov,Oľšinkov,49.1999,22.03937
 "Ňagov,,ZŠ","Ňagov, ZŠ",49.25163,21.93512
 "Bystré,,žel.zastávka","Bystré, žel. zastávka",49.00387,21.54161
 "Bystré,,Stavenec","Bystré, Stavenec",48.99569,21.52844
-"Bystré,,Kamence","Spišské Bystré, Kamenec",48.99687,20.24183
+"Bystré,,Kamence","Bystré, Kamence",48.99292,21.52361
 "Hermanovce nad Topľou,,dolná","Hermanovce nad Topľou, dolná",48.98946,21.51628
 "Hermanovce nad Topľou,,kostol","Hermanovce nad Topľou, kostol",48.98595,21.5125
 "Hermanovce nad Topľou,,stred","Hermanovce nad Topľou, stred",48.9821,21.50827
@@ -7140,12 +7140,12 @@ Jalovec,Jalovec,48.77181,18.74414
 "Veľká Čausa,,hor.koniec","Veľká Čausa, hor.koniec",48.77891,18.70111
 "Veľká Čausa,,dol.koniec","Veľká Čausa, dol.koniec",48.78022,18.69263
 "Prievidza,,Lehotská cesta","Prievidza, Lehotská cesta",48.76796,18.64802
-"Prievidza,,Pod skalou",Pod skalou,48.76979,18.63729
+"Prievidza,,Pod skalou","Prievidza, Pod skalou",48.76984,18.63705
 "Prievidza,,Nábrežie sv.Cyrila","Prievidza, Nábrežie sv.Cyrila",48.76907,18.62874
-"Prievidza,,centrum",Centrum,48.77083,18.6221
+"Prievidza,,centrum","Prievidza, centrum",48.77076,18.62264
 "Prievidza,,Carpathia","Prievidza, Carpathia",48.76807,18.61904
 "Prievidza,,Košovská cesta","Prievidza, Košovská cesta",48.76401,18.61822
-"Prievidza,,SAD",SAD,48.75829,18.61799
+"Prievidza,,SAD","Prievidza, SAD",48.7582,18.61792
 "Prievidza,,Ciglianska cesta","Prievidza, Ciglianska cesta",48.75608,18.62025
 "Prievidza,,Vlčie Kúty II","Prievidza, Vlčie Kúty II",48.74336,18.62832
 "Sebedražie,,Baňa Cigeľ","Sebedražie, Baňa Cigeľ",48.73415,18.64096
@@ -7266,8 +7266,8 @@ Cimenná,Cimenná,48.72679,18.14269
 "Bánovce n.Bebravou,,SAD","Bánovce nad Bebravou, SAD",48.7109,18.25241
 "Ruskovce,,žel.st.","Ruskovce, žel.st.",48.74814,18.19612
 "Ruskovce,,rázc.","Ruskovce, rázc.",48.74478,18.19025
-"Bánovce n.Bebravou,Biskupice,rázc.","Biskupice,rázc.",48.70945,18.24608
-"Bánovce n.Bebravou,Biskupice,nám.","Biskupice,nám.",48.7091,18.24087
+"Bánovce n.Bebravou,Biskupice,rázc.","Bánovce nad Bebravou, Biskupice, rázc.",48.70946,18.24592
+"Bánovce n.Bebravou,Biskupice,nám.","Bánovce nad Bebravou, Biskupice, nám.",48.70903,18.24106
 "Veľké Chlievany,,nám.","Veľké Chlievany, nám.",48.7038,18.22671
 "Dežerice,Vlčkovo","Dežerice, Vlčkovo",48.75982,18.21159
 "Dežerice,,OcÚ","Dežerice, OcÚ",48.76336,18.21378
@@ -7318,7 +7318,7 @@ Malé Uherce,Malé Uherce,48.62189,18.40259
 "Pravenec,,ZŠ",,,
 "Nitrianske Pravno,,Jednota","Nitrianske Pravno, Jednota",48.87186,18.63506
 "Nitrianske Pravno,,zdrav.str.","Nitrianske Pravno, zdrav.str.",48.86748,18.63805
-"Poluvsie,,rázc.","Rajecké Teplice, Poluvsie, rázc.",49.13392,18.7093
+"Poluvsie,,rázc.","Poluvsie, rázc.",48.84442,18.64447
 "Pravenec,,Tatra hor.vrátnica",,,
 "Nedožery-Brezany,,cintorín","Nedožery-Brezany, cintorín",48.82593,18.64383
 "Nedožery-Brezany,,pošta","Nedožery-Brezany, pošta",48.821,18.64417
@@ -7357,7 +7357,7 @@ Omastiná,Omastiná,48.77708,18.38876
 "Kšinná,,OcÚ","Kšinná, OcÚ",48.80604,18.35121
 "Kšinná,,poľovnícky dom","Kšinná, poľovnícky dom",48.80966,18.35396
 "Kšinná,,Volavka","Kšinná, Volavka",48.81255,18.3573
-"Kšinná,Závada p.Čiernym vrchom,obchod","Závada p.Čiernym Vrchom,obchod",48.82267,18.35742
+"Kšinná,Závada p.Čiernym vrchom,obchod","Kšinná, Závada pod Čiernym vrchom, obchod",48.82238,18.35745
 "Kšinná,Závada p.Čiernym vrchom,otoč.","Závada p.Čiernym Vrchom,otoč.",48.82512,18.35854
 "Lovčica-Trubín,,rázc.","Lovčica-Trubín, rázc.",48.62328,18.79473
 "Sebedražie,,sídl.","Sebedražie, sídl.",48.73045,18.62904
@@ -7384,17 +7384,17 @@ Veľké Kršteňany,Veľké Kršteňany,48.64536,18.41384
 "Prievidza,,zimný štadión",Zimný štadión,48.77671,18.60642
 "Prievidza,,Uniklinika","Prievidza, Uniklinika",48.78045,18.61141
 "Prievidza,,Ľ.Ondrejova","Prievidza, Ľ.Ondrejova",48.78223,18.61851
-"Prievidza,,Kino Baník",Kino Baník,48.77026,18.60881
+"Prievidza,,Kino Baník","Prievidza, kino Baník",48.77067,18.60886
 "Prievidza,,cintorín",,,
 "Prievidza,,K.Novackého","Prievidza, K.Novackého",48.77727,18.64315
-"Prievidza,,Lesopark",Lesopark,48.78317,18.64385
+"Prievidza,,Lesopark","Prievidza, Lesopark",48.78305,18.64333
 "Zemianske Kostoľany,,žel.st.","Zemianske Kostoľany, žel.st.",48.6844,18.52027
 "Zemianske Kostoľany,,kasárne","Zemianske Kostoľany, kasárne",48.69111,18.51519
 "Zemianske Kostoľany,,dolina","Zemianske Kostoľany, dolina",48.69471,18.50832
 "Prievidza,,V.Clementisa",V. Clementisa,48.77962,18.64658
-"Prievidza,,S.Chalupku",S. Chalupku,48.77302,18.60095
+"Prievidza,,S.Chalupku","Prievidza, S.Chalupku",48.77306,18.60111
 "Prievidza,,Okružná cesta",Okružná cesta,48.7704,18.60001
-"Prievidza,,Kolotoč",Kolotoč,48.76862,18.60119
+"Prievidza,,Kolotoč","Prievidza, Kolotoč",48.76859,18.60109
 "Dolné Vestenice,,Vegum a.s.","Dolné Vestenice, Vegum a.s.",48.70161,18.40204
 "Veľké Chlievany,,kostol","Veľké Chlievany, kostol",48.7024,18.2224
 "Otrhánky,,rázc.","Otrhánky, rázc.",48.69478,18.20805
@@ -7482,7 +7482,7 @@ Slatinka n.Bebr.,Slatinka nad Bebr.,48.842,18.24161
 "Motešice,,Sláče","Motešice, Sláče",48.84477,18.20734
 "Motešice,Horné Motešice,č.d.150","Motešice, Horné Motešice, č.d.150",48.83247,18.19065
 "Motešice,Horné Motešice,č.d.113","Motešice, Horné Motešice, č.d.113",48.83057,18.18717
-"Trenčín,,SAD","Zlatovská, SAD",48.89364,18.01904
+"Trenčín,,SAD","Trenčín, SAD",48.89312,18.018
 "Valaská Belá,,Ševelov mlyn","Valaská Belá, Ševelov mlyn",48.89552,18.44955
 "Valaská Belá,,Kremeň","Valaská Belá, Kremeň",48.90767,18.46211
 "Valaská Belá,Gápel","Valaská Belá, Gápel",48.91348,18.49107
@@ -7570,13 +7570,13 @@ Turčianky,Turčianky,48.58103,18.32081
 "Handlová,Nová Lehota,hájovňa","Handlová, Nová Lehota, hájovňa",48.65627,18.74205
 "Janova Lehota,,Dérerov mlyn","Janova Lehota, Dérerov mlyn",48.65257,18.75339
 "Lovčica-Trubín,,Dubník","Lovčica-Trubín, Dubník",48.64433,18.76785
-"Žiar n.Hronom,,Domov dôchodcov",Domov dôchodcov,48.59842,18.8451
-"Žiar n.Hronom,,TESCO",TESCO,48.59178,18.8532
+"Žiar n.Hronom,,Domov dôchodcov","Žiar nad Hronom, Domov dôchodcov",48.59843,18.84534
+"Žiar n.Hronom,,TESCO","Žiar nad Hronom, TESCO",48.59276,18.85226
 "Žiar n.Hronom,,žel.st.","Žiar nad Hronom, žel.st.",48.57883,18.87018
-"Žiar n.Hronom,,nadjazd",Nadjazd,48.57988,18.87069
+"Žiar n.Hronom,,nadjazd","Žiar nad Hronom, nadjazd",48.5801,18.87016
 "Žiar n.Hronom,,RSC","Žiar nad Hronom, RSC",48.57606,18.86983
 "Žiar n.Hronom,,SAD","Žiar nad Hronom, SAD",48.5721,18.86737
-"Žiar n.Hronom,,Závod SNP",Závod SNP,48.56575,18.85512
+"Žiar n.Hronom,,Závod SNP","Žiar nad Hronom, Závod SNP",48.56577,18.855
 "Lehota p.Vtáčnikom,,Podhr.ul.","Lehota pod Vtáčnikom, Podhr.ul.",48.69383,18.60131
 "Bojnice,,ZŠ","Bojnice, ZŠ",48.7824,18.58494
 "Bojnice,,nám.","Bojnice, nám.",48.77913,18.58311
@@ -7621,7 +7621,7 @@ Vysočany,Vysočany,48.67956,18.31721
 "Drvenik,,autobusna stanica",,,
 "Praha,,Zličín",,,
 "Praha,,Roztyly",,,
-"Považ.Bystrica,,AS","Pov.Teplá,chata",49.14492,18.49112
+"Považ.Bystrica,,AS","Považ.Bystrica,rázc.Kunovec",49.09237,18.41643
 "Wien,,Südtirolerplatz",,,
 "Nickelsdorf,,ZOLL",,,
 "Hegyeshalom,,ZOLL",,,
@@ -7792,7 +7792,7 @@ Ratkovce,Ratkovce,48.46734,17.72054
 "Nové Mesto n.V.,,Malinovského",,,
 "Nové Mesto n.V.,,žel.st.",,,
 "Piešťany,,N.Tesla sídl.","N. Tesla sídl., Tesco",48.59049,17.80305
-"Piešťany,,tepláreň",Tepláreň,48.58945,17.78132
+"Piešťany,,tepláreň","Piešťany, tepláreň",48.58942,17.78112
 "Piešťany,Kocurice,rázc.","Piešťany, Kocurice, rázc.",48.58818,17.76627
 "Trebatice,,štadión","Trebatice, štadión",48.59018,17.7538
 "Trebatice,,obec","Trebatice, obec",48.59801,17.75204
@@ -7936,7 +7936,7 @@ Rakovice,Rakovice,48.56016,17.73875
 "Zavar,,otoč","Zavar, otoč",48.33945,17.6646
 "Trnava,,Prílohy","Trnava, Prílohy",48.37077,17.63433
 "Trnava,,Zavarská rozvodňa","Trnava, Zavarská rozvodňa",48.3778,17.62649
-"Trnava,,ŽOS",ŽOS,48.37389,17.60935
+"Trnava,,ŽOS","Trnava, ŽOS",48.37385,17.60894
 "Trnava,,Zdravotnícka škola","Trnava, Zdravotnícka škola",48.37093,17.59865
 "Trnava,,Starohájska Poliklinika","Trnava, Starohájska Poliklinika",48.37916,17.59324
 "Dolné Dubové,,pošta","Dolné Dubové, pošta",48.48992,17.61182
@@ -8033,7 +8033,7 @@ Rakovice,Rakovice,48.56016,17.73875
 "Pastuchov,,obchod","Pastuchov, obchod",48.42621,17.87811
 "Dolné Otrokovce,,obec","Dolné Otrokovce, obec",48.46625,17.91208
 "Trnava,,Letisko",,,
-"Trnava,,Doliny",Doliny,48.40563,17.61157
+"Trnava,,Doliny","Trnava, Doliny",48.40567,17.61152
 "Trnava,,Záhrada",,,
 "Trnava,,Veľký Dvor","Trnava, Veľký Dvor",48.42099,17.63309
 "Malženice,,ZŠ I","Malženice, ZŠ",48.44844,17.67042
@@ -8041,7 +8041,7 @@ Rakovice,Rakovice,48.56016,17.73875
 "Žlkovce,,rázc.I","Žlkovce, Trnavské rázc.",48.45545,17.7288
 "Ratkovce,,rázc.","Ratkovce, rázc.",48.47538,17.70822
 "Borský Mikuláš,,pri moste","Borský Mikuláš, pri moste",48.62864,17.19746
-"Trnava,,Družba",Družba,48.38265,17.59994
+"Trnava,,Družba","Trnava, Družba",48.38256,17.59985
 "Trnava,,Trstínska","Trnava, Trstínska",48.38851,17.56953
 "Trnava,,Nemečanka rázc.","Trnava, Nemečanka rázc.",48.41028,17.54797
 "Bohdanovce n.Trnavou,,rázc.","Bohdanovce nad Trnavou, rázc.",48.42522,17.53599
@@ -8210,7 +8210,7 @@ Potvorice,,,
 "Gbely,,kolónia","Gbely, kolónia",48.72081,17.10558
 "Gbely,,žel.st.","Gbely, žel.st.",48.72187,17.08985
 "Trnava,,T.Vansovej cintorín","Trnava, T.Vansovej cintorín",48.38183,17.57713
-"Trnava,,Okružné nám.",Okružné námestie,48.37928,17.57176
+"Trnava,,Okružné nám.","Trnava, Okružné nám.",48.37916,17.57171
 "Trnava,,Kamenná cesta cintorín","Trnava, Kamenná cesta cintorín",48.37442,17.56243
 "Trnava,,T.Kružliaka","Trnava, T.Kružliaka",48.37031,17.55436
 "Trnava,,Kamenný mlyn","Trnava, Kamenný mlyn",48.36793,17.54958
@@ -8246,7 +8246,7 @@ Potvorice,,,
 "Buková,,pažitie","Buková, pažitie",48.54272,17.40508
 "Buková,,hostinec","Buková, hostinec",48.54228,17.39621
 "Buková,,ZŠ","Buková, ZŠ",48.54255,17.39082
-"Trnava,,Hlboká",Hlboká ulica,48.37958,17.59315
+"Trnava,,Hlboká","Trnava, Hlboká",48.37433,17.59448
 "Trnava,,Ovocná","Trnava, Ovocná",48.37722,17.5679
 "Trnava,,Záhradkárska osada","Trnava, Záhradkárska osada",48.36647,17.54296
 "Biely Kostol,,cintorín","Biely Kostol, cintorín",48.36586,17.52915
@@ -8405,7 +8405,7 @@ Vinica,,,
 "Banská Bystrica,,Partizánska cesta tlačiareň","Banská Bystrica, Partizánska cesta tlačiareň",48.74041,19.16975
 "Banská Bystrica,,Partizánska cesta SVP","Banská Bystrica, Partizánska cesta SVP",48.74114,19.1741
 "Banská Bystrica,,Partizánska cesta čerp.stanica","Banská Bystrica, Partizánska cesta čerp.stanica",48.7414,19.1777
-"Banská Bystrica,,SAD",SAD,48.74207,19.18292
+"Banská Bystrica,,SAD","Banská Bystrica, SAD",48.74198,19.18277
 "Banská Bystrica,,rázc.Kynceľová","Banská Bystrica, rázc.Kynceľová",48.745,19.185
 "Kynceľová,,OcÚ","Kynceľová, OcÚ",48.7495,19.18499
 "Kynceľová,,Múzeum máp","Kynceľová, Múzeum máp",48.75228,19.18736
@@ -8498,20 +8498,20 @@ Vinica,,,
 "Lieskovec,,panelák","Lieskovec, panelák",48.5765,19.18838
 "Lieskovec,,hasičská stanica","Lieskovec, hasičská stanica",48.57685,19.18002
 "Zvolen,,Agrozet","Zvolen, Agrozet",48.57676,19.16977
-"Zvolen,,SPP",SPP,48.57618,19.15648
+"Zvolen,,SPP","Zvolen, SPP",48.57618,19.15653
 "Zvolen,,Zlatý Potok rázc.","Zvolen, Zlatý Potok rázc.",48.57606,19.15287
 "Zvolen,,náklad.st.","Zvolen, náklad.st.",48.5732,19.14403
 "Zvolen,,ul.Jesenského","Zvolen, ul.Jesenského",48.57495,19.13662
-"Zvolen,,Poľana",Poľana,48.574,19.12763
+"Zvolen,,Poľana","Zvolen, Poľana",48.574,19.12837
 "Lieskovec,,rázc.lesy","Lieskovec, rázc.lesy",48.57123,19.19145
 "Zvolen,,Tepláreň","Zvolen, Tepláreň",48.56712,19.16307
 "Zvolen,,Bučina aut.nást.","Zvolen, Bučina aut.nást.",48.56715,19.15653
 "Zvolen,Môťová,rázc.","Zvolen, Môťová, rázc.",48.56737,19.14873
 "Zvolen,Môťová,čerpacia stanica","Zvolen, Môťová, čerpacia stanica",48.56737,19.14315
-"Zvolen,,STRABAG",STRABAG,48.56854,19.12966
-"Zvolen,,Pod Dráhy",Pod Dráhy,48.56817,19.12803
+"Zvolen,,STRABAG","Zvolen, STRABAG",48.56836,19.12968
+"Zvolen,,Pod Dráhy","Zvolen, Pod Dráhy",48.5681,19.12804
 "Žiar n.Hronom,,hasičská stanica","Žiar nad Hronom, hasičská stanica",48.59725,18.84675
-"Žiar n.Hronom,,nemocnica",Nemocnica,48.59189,18.84262
+"Žiar n.Hronom,,nemocnica","Žiar nad Hronom, nemocnica",48.58942,18.84575
 "Žiar n.Hronom,,Slovalco","Žiar nad Hronom, Slovalco a.s.",48.5603,18.84858
 "Lehôtka p.Brehmi,,KZ","Lehôtka pod Brehmi, KZ",48.55067,18.82044
 Lehôtka p.Brehmi,Lehôtka pod Brehmi,48.5441,18.80542
@@ -8647,7 +8647,7 @@ Ipeľské Predmostie,Ipeľské Predmostie,48.06355,19.05777
 "Šahy,Tešmák,Šomoš","Šahy, Tešmák, Šomoš",48.0777,19.01332
 "Šahy,Tešmák","Šahy, Tešmák",48.0635,18.98367
 "Šahy,,vinice","Šahy, vinice",48.07321,18.96419
-"Žiar n.Hronom,Šášovské Podhradie,píla","Šášovské Podhradie, píla",48.58815,18.89884
+"Žiar n.Hronom,Šášovské Podhradie,píla","Žiar nad Hronom, Šášovské Podhradie, píla",48.58811,18.89923
 "Pitelová,,rázc.","Pitelová, rázc.",48.59162,18.92387
 "Trnavá Hora,,Žiarska cesta rázc.","Trnavá Hora, Žiarska cesta rázc.",48.58832,18.94993
 "Trnavá Hora,,Žiarska cesta kostol","Trnavá Hora, Žiarska cesta kostol",48.58747,18.95551
@@ -8700,7 +8700,7 @@ Ipeľské Predmostie,Ipeľské Predmostie,48.06355,19.05777
 "Valaská,,sídlisko","Valaská, sídlisko",48.80978,19.57147
 "Valaská,,za ulicou","Valaská, za ulicou",48.8127,19.59073
 "Valaská,,čistička","Valaská, čistička",48.81207,19.59832
-"Brezno,,nemocnica",Nemocnica,48.80939,19.62409
+"Brezno,,nemocnica","Brezno, nemocnica",48.80951,19.62427
 "Brezno,,Rázusova ul.","Brezno, Rázusova ul.",48.80197,19.64195
 "Brezno,Mazorníkovo,ul.9.mája","Brezno, Mazorníkovo, ul.9.mája",48.78897,19.63985
 "Brezno,Mazorníkovo,SAD","Brezno, Mazorníkovo, SAD",48.78292,19.64289
@@ -8787,7 +8787,7 @@ Srdiečko,,,
 "Brezno,Bujakovo,Kuvert","Brezno, Bujakovo, Kuvert",48.8205,19.68375
 "Brezno,Zadné Halny,tehelňa","Brezno, Zadné Halny, tehelňa",48.81927,19.67098
 "Brezno,Predné Halny,Lesná","Brezno, Predné Halny, Lesná",48.81146,19.64909
-"Brezno,,ul.L.Novomeského",Ul. L. Novomeského,48.80565,19.62656
+"Brezno,,ul.L.Novomeského","Brezno, ul.L.Novomeského",48.80621,19.63108
 "Brezno,,Švermova ul.","Brezno, Švermova ul.",48.80358,19.63621
 "Brezno,Mazorníkovo,plaváreň","Brezno, Mazorníkovo, plaváreň",48.79128,19.64084
 "Brezno,Mazorníkovo,ul.Nová","Brezno, Mazorníkovo, ul.Nová",48.78912,19.64098
@@ -8796,9 +8796,9 @@ Srdiečko,,,
 "Brezno,Mazorníkovo,ul.MPČĽ otočka","Brezno, Mazorníkovo, ul.MPČĽ otočka",48.7868,19.63338
 "Zvolen,,ul.Štefánika ŽSR","Zvolen, ul.Štefánika ŽSR",48.57402,19.12369
 "Zvolen,,Západ Tepličky","Zvolen, Západ Tepličky",48.58313,19.10716
-"Zvolen,,EUROPA SC",EUROPA SC,48.58043,19.12554
+"Zvolen,,EUROPA SC","Zvolen, EUROPA SC",48.58043,19.12559
 "Zvolen,,ul.Kozáčeka Centrum","Zvolen, ul.Kozáčeka Centrum",48.5785,19.12867
-"Zvolen,,Sliačan",Sliačan,48.58382,19.12347
+"Zvolen,,Sliačan","Zvolen, Sliačan",48.58371,19.12342
 "Zvolen,,Západ Strážska cesta","Zvolen, Západ Strážska cesta",48.58279,19.11213
 "Kováčová,,OcÚ","Kováčová, OcÚ",48.60148,19.10455
 "Kováčová,,kúpele","Kováčová, kúpele",48.60692,19.10189
@@ -8872,7 +8872,7 @@ Vígľašská Huta-Kalinka,Vígľašská Huta-Kalinka,48.48607,19.24554
 "Slatinské Lazy,,Kocaň","Slatinské Lazy, Kocaň",48.52743,19.30985
 "Podbrezová,,ŽP a.s.","Podbrezová, ŽP a.s.",48.81114,19.52926
 "Brezno,,Na rovniach","Brezno, Na rovniach",48.78057,19.64338
-"Brezno,,Dolinka",Dolinka,48.77205,19.64364
+"Brezno,,Dolinka","Brezno, Dolinka",48.77216,19.64387
 "Brezno,,Vrch Dolinka","Brezno, Vrch Dolinka",48.76961,19.64096
 "Čierny Balog,,Nový Krám","Čierny Balog, Nový Krám",48.75903,19.62761
 "Čierny Balog,Krám,starý mlyn","Čierny Balog, Krám, starý mlyn",48.75184,19.643
@@ -9001,7 +9001,7 @@ Lackov,Lackov,48.32137,19.18793
 "Litava,,mlyn",,,
 "Litava,,Jednota","Litava, Jednota",48.29904,19.17874
 "Banská Bystrica,,Lazovná","Banská Bystrica, Lazovná",48.74239,19.13976
-"Banská Bystrica,,Medený Hámor",Medený Hámor,48.7457,19.14029
+"Banská Bystrica,,Medený Hámor","Banská Bystrica, Medený Hámor",48.74608,19.14053
 "Staré Hory,,žel.stanica Uľanka","Staré Hory, žel.stanica Uľanka",48.80309,19.09828
 "Staré Hory,Polkanová","Staré Hory, Polkanová",48.81442,19.09949
 "Staré Hory,,č.d.21","Staré Hory, č.d.21",48.83243,19.10475
@@ -9048,7 +9048,7 @@ Devičie,Devičie,48.30524,19.02709
 "Krupina,,rázc.Bzovík","Krupina, rázc.Bzovík",48.32556,19.05875
 "Krupina,,rázc.k žel.st.","Krupina, rázc.k žel.st.",48.34658,19.06647
 "Krupina,,areál škôl","Krupina, areál škôl",48.3507,19.06792
-"Žiar n.Hronom,,ul.Priemyselná",ul. Priemyselná,48.56784,18.86202
+"Žiar n.Hronom,,ul.Priemyselná","Žiar nad Hronom, ul.Priemyselná",48.56778,18.86165
 "Žiar n.Hronom,,cintorín","Žiar nad Hronom, cintorín",48.58497,18.84499
 "Lovča,,Kutiny","Lovča, Kutiny",48.58016,18.83192
 "Lovča,,Nová ul.","Lovča, Nová ul.",48.57362,18.81896
@@ -9296,10 +9296,10 @@ Bzovská Lehôtka,Bzovská Lehôtka,48.41386,19.13102
 "Vlkanová,,žel.st.","Vlkanová, žel.st.",48.66867,19.14892
 "Badín,,rázc.","Badín, rázc.",48.66743,19.13913
 "Badín,,ZŠ","Badín, ZŠ",48.66537,19.12753
-"Banská Bystrica,Rakytovce",Rakytovce,48.67745,19.12679
+"Banská Bystrica,Rakytovce","Banská Bystrica, Rakytovce",48.67745,19.12667
 "Banská Bystrica,Kremnička","Banská Bystrica, Kremnička",48.69749,19.12818
 "Banská Bystrica,,pivovar","Banská Bystrica, pivovar",48.70528,19.12838
-"Banská Bystrica,,Sládkovičova",Sládkovičova,48.72084,19.13315
+"Banská Bystrica,,Sládkovičova","Banská Bystrica, Sládkovičova",48.72014,19.13277
 "Banská Bystrica,Rakytovce,ČOV","Banská Bystrica, Rakytovce, ČOV",48.67757,19.13934
 "Banská Bystrica,,STK","Banská Bystrica, STK",48.70515,19.1382
 "Banská Bystrica,,Zvolenská cesta stred","Banská Bystrica, Zvolenská cesta stred",48.70976,19.13907
@@ -9336,7 +9336,7 @@ Močiar,"Kokava nad Rimavicou, Močiar",48.58427,19.76858
 "Lehôtka p.Brehmi,,mlyn","Lehôtka pod Brehmi, mlyn",48.53687,18.80288
 "Hliník n.Hronom,,rázc.","Hliník nad Hronom, rázc.",48.54047,18.79395
 "Hliník n.Hronom,,IBV","Hliník nad Hronom, IBV",48.53555,18.78741
-"Žiar n.Hronom,,Slovalco a.s.",Slovalco a.s.,48.56062,18.84678
+"Žiar n.Hronom,,Slovalco a.s.","Žiar nad Hronom, Slovalco a.s.",48.5603,18.84858
 "Banská Bystrica,,Mičinská cesta","Banská Bystrica, Mičinská cesta",48.73196,19.15922
 "Horná Mičiná,,strelnica","Horná Mičiná, strelnica",48.71544,19.18321
 "Horná Mičiná,,bytovky","Horná Mičiná, bytovky",48.70255,19.21312
@@ -9366,7 +9366,7 @@ Dolná Mičiná,Dolná Mičiná,48.67408,19.22191
 "Sebechleby,,Jednota","Sebechleby, Jednota",48.27478,18.9513
 "Ladzany,,Jednota","Ladzany, Jednota",48.26566,18.90455
 "Drážovce,,Pivarč","Drážovce, Pivarč",48.25804,18.9078
-Drážovce,Dražovce,48.35207,18.05695
+Drážovce,Drážovce,48.25302,18.90752
 "Drážovce,,Blatište","Drážovce, Blatište",48.2423,18.90935
 "Hontianske Tesáre,Báčovce","Hontianske Tesáre, Báčovce",48.23696,18.91646
 "Hontianske Tesáre,Šipice","Hontianske Tesáre, Šipice",48.22332,18.92597
@@ -9614,7 +9614,7 @@ Baláže,Baláže,48.81367,19.19587
 "Michalová,,Kubická","Michalová, Kubická",48.77267,19.75784
 "Pohronská Polhora,,Jánošíkovo","Pohronská Polhora, Jánošíkovo",48.74832,19.81952
 "Banská Bystrica,Majer,otočka","Banská Bystrica, Majer, otočka",48.73738,19.17884
-"Banská Bystrica,Majer",Majer,48.73547,19.17841
+"Banská Bystrica,Majer","Banská Bystrica, Majer",48.73564,19.17846
 "Banská Bystrica,,Majerská cesta","Banská Bystrica, Majerská cesta",48.73326,19.17828
 "Banská Bystrica,,RSC","Banská Bystrica, RSC",48.73239,19.17396
 "Banská Bystrica,,Cesta k Smrečine","Banská Bystrica, Cesta k Smrečine",48.7331,19.16054
@@ -9765,10 +9765,10 @@ Baďan,Baďan,48.33237,18.84074
 "Žarnovica,Revištské Podzámčie","Žarnovica, Revištské Podzámčie",48.52098,18.72668
 Voznica,Voznica,48.45864,18.70431
 "Voznica,,Rychňava","Voznica, Rychňava",48.45673,18.71123
-"Banská Bystrica,,Úsvit",Úsvit,48.7281,19.12979
+"Banská Bystrica,,Úsvit","Banská Bystrica, Úsvit",48.72809,19.12946
 "Banská Bystrica,,Magurská otočka","Banská Bystrica, Magurská otočka",48.76274,19.15988
-"Banská Bystrica,,Rudohorská horná","Rudohorská, horná",48.76152,19.16659
-"Banská Bystrica,,Rudohorská dolná","Rudohorská, dolná",48.75619,19.16595
+"Banská Bystrica,,Rudohorská horná","Banská Bystrica, Rudohorská horná",48.76146,19.16646
+"Banská Bystrica,,Rudohorská dolná","Banská Bystrica, Rudohorská dolná",48.75625,19.16613
 "Banská Bystrica,,Ďumbierska ŠZŠ","Banská Bystrica, Ďumbierska ŠZŠ",48.75509,19.15996
 "Banská Bystrica,,Ďumbierska ZŠ","Banská Bystrica, Ďumbierska ZŠ",48.75249,19.15892
 "Banská Bystrica,,Cesta k nemocnici","Banská Bystrica, Cesta k nemocnici",48.74189,19.15905
@@ -9989,7 +9989,7 @@ Malé Ozorovce,Malé Ozorovce,48.67997,21.61609
 "Zalužice,,križ.","Zalužice, križ.",48.75688,21.977
 "Michalovce,,križ.na Okružnej","Michalovce, križ.na Okružnej",48.74609,21.9255
 "Michalovce,,J.Hollého IDEA","Michalovce, J.Hollého IDEA",48.7505,21.92557
-"Michalovce,,hotel Družba",Hotel Družba,48.75709,21.9231
+"Michalovce,,hotel Družba","Michalovce, hotel Družba",48.75725,21.92324
 "Trhovište,,č.d.229","Trhovište, č.d.229",48.69876,21.79527
 "Horovce,,č.d.240","Horovce, č.d.240",48.7027,21.76282
 "Sečovce,,č.d.107","Sečovce, č.d.107",48.70376,21.6434
@@ -10507,7 +10507,7 @@ Kačanov,Kačanov,48.61179,21.84585
 "Oreské,,č.d.130","Oreské, č.d.130",48.85789,21.90454
 "Oreské,,č.d.86","Oreské, č.d.86",48.86082,21.90383
 "Staré,,č.d.162","Staré, č.d.162",48.85752,21.87587
-"Staré,,OcÚ","Stará Huta, OcÚ",48.47499,19.34197
+"Staré,,OcÚ","Staré Hory, OcÚ",48.83448,19.11296
 "Staré,,č.d.236","Staré, č.d.236",48.86433,21.8712
 "Strážske,Krivošťany,č.d.382","Strážske, Krivošťany, č.d.382",48.87804,21.85339
 "Remetské Hámre,,ZŠ","Remetské Hámre, ZŠ",48.84204,22.1807
@@ -10729,7 +10729,7 @@ Markovce,Markovce,48.59426,21.84643
 "Kysucké N.Mesto,,Schaeffler I.","Kysucké Nové Mesto, Schaeffler I.",49.2991,18.76775
 "Kysucké N.Mesto,,Schaeffler II.","Kysucké Nové Mesto, Schaeffler II.",49.29229,18.76585
 "Martin,,Prieložtek","Martin, Prieložtek",49.05622,18.91768
-"Martin,,SAD",SAD,49.05106,18.91424
+"Martin,,SAD","Martin, SAD",49.05129,18.91417
 "Martin,,Turčan","Martin, Turčan",49.04628,18.9109
 "Košťany n.Turcom,,žel.st.",,,
 Príbovce,Príbovce,48.99847,18.881
@@ -10842,7 +10842,7 @@ Rakša,Rakša,48.88158,18.87989
 "Kunerad,,ZŠ","Kunerad, ZŠ",49.09452,18.71522
 "Kunerad,,pod Lieč.ústavom","Kunerad, pod Lieč.ústavom",49.08356,18.73847
 "Bytča,Mikšová,Hydrocentrála rázc.","Bytča, Mikšová, Hydrocentrála rázc.",49.19188,18.51177
-"Považ.Bystrica,Podvažie,lávka","Podvažie,lávka",49.16676,18.46741
+"Považ.Bystrica,Podvažie,lávka","Považská Bystrica, Podvažie, lávka",49.16775,18.46856
 "Považ.Bystrica,Šebešťanová,ihrisko","Považská Bystrica, Šebešťanová, ihrisko",49.16023,18.46495
 "Považ.Bystrica,Považ.Podhr.,RD","Považská Bystrica, Považ.Podhr., RD",49.13392,18.45167
 "Považ.Bystrica,Považ.Podhr.,priem.areál II","Považská Bystrica, Považ.Podhr., priem.areál II",49.13056,18.44297
@@ -11000,7 +11000,7 @@ Jasenovo,Jasenovo,48.87867,18.72462
 "Martin,,Poliklinika Škultétyho","Martin, Poliklinika Škultétyho",49.06943,18.92082
 "Martin,,Ul.A.Pietra","Martin, Ul.A.Pietra",49.07363,18.92283
 "Martin,,štadión","Martin, štadión",49.07234,18.92561
-"Martin,,Sever II.",Sever II.,49.08178,18.9297
+"Martin,,Sever II.","Martin, Sever II.",49.08191,18.93003
 "Martin,Košúty,kostol","Martin, Košúty, kostol",49.08498,18.93147
 "Martin,Košúty,zdrav.str.","Martin, Košúty, zdrav.str.",49.08599,18.93213
 "Martin,Košúty,nadjazd","Martin, Košúty, nadjazd",49.08905,18.93304
@@ -11363,7 +11363,7 @@ Rudno,Rudno,48.88413,18.74721
 "Klokočov,Klin,Potraviny","Klokočov, Klin, Potraviny",49.46059,18.57792
 "Klokočov,Vrchpredmier,u Žora","Klokočov, Vrchpredmier, u Žora",49.47065,18.56542
 "Klokočov,Vrchpredmier,Pavlík","Klokočov, Vrchpredmier, Pavlík",49.47545,18.56321
-"Klokočov,,OcÚ","Klokoč, OcÚ",48.50301,19.33924
+"Klokočov,,OcÚ","Klokočov, OcÚ",49.45125,18.57162
 "Klokočov,Kornica,Cisárikovia","Klokočov, Kornica, Cisárikovia",49.45449,18.56601
 "Klokočov,Kornica,Stopka","Klokočov, Kornica, Stopka",49.45646,18.55373
 "Klokočov,Kornica,Šamajovia","Klokočov, Kornica, Šamajovia",49.45642,18.54145
@@ -11490,7 +11490,7 @@ Abramová,Abramová,48.93603,18.79737
 "Vrícko,,konečná","Vrícko, konečná",48.97113,18.69744
 "Teplička n.Váhom,,Pod Vršky","Teplička nad Váhom, Pod Vršky",49.22285,18.80654
 "Teplička n.Váhom,,KIA Site","Teplička nad Váhom, KIA Site",49.21586,18.8076
-"Gbeľany,,Mobis Site","Gbelany, Mobis Site",49.212,18.83931
+"Gbeľany,,Mobis Site","Gbeľany, Mobis Site",49.21065,18.83782
 "Nededza,,Jednota","Nededza, Jednota",49.22082,18.83634
 "Nededza,,Škorvánkovia","Nededza, Škorvánkovia",49.22442,18.83869
 "Kotrčiná Lúčka,,rázc.Zástranie","Kotrčiná Lúčka, rázc.Zástranie",49.2491,18.83818
@@ -11661,10 +11661,10 @@ Ratkovo,Ratkovo,49.13539,19.0864
 "Skalica,,Schaeffler-2","Skalica, Schaeffler",48.84998,17.21213
 "Radošovce,,pož.zbroj.","Radošovce, pož.zbroj.",48.76944,17.27938
 "Radošovce,,kult.dom","Radošovce, kult.dom",48.76882,17.28109
-"Kopčany,,u Rúžičku",u Rúžičku,48.79239,17.12918
+"Kopčany,,u Rúžičku","Kopčany, u Rúžičku",48.79242,17.12914
 "Gbely,,Adamov","Gbely, Adamov",48.72338,17.04272
 "Brodské,,horáreň","Brodské, horáreň",48.69988,17.04012
-"Podbranč,Horná Dolina",Horná Dolina,48.74348,17.44858
+"Podbranč,Horná Dolina","Podbranč, Horná Dolina",48.74357,17.44856
 "Myjava,,Malejov","Myjava, Malejov",48.75267,17.49822
 "Skalica,,ZŠ Strážnická ul.","Skalica, ZŠ Strážnická ul.",48.84759,17.2325
 "Skalica,,dr.Clementisa","Skalica, dr.Clementisa",48.84043,17.22148
@@ -12071,9 +12071,9 @@ Vojka n.Dunajom,Vojka nad Dunajom,47.97429,17.38256
 "Bratislava,,Areál vodných športov","Bratislava, Areál vodných športov",48.0319,17.22924
 "Bratislava,,Čunovo-priehrada","Bratislava, Čunovo-priehrada",48.02704,17.20687
 "Bratislava,,Gaštanová aleja","Bratislava, Gaštanová aleja",48.0431,17.15603
-"Bratislava,,Gerulata",Gerulata,48.054,17.14734
+"Bratislava,,Gerulata","Bratislava, Gerulata",48.05413,17.14697
 "Bratislava,,Žltá","Bratislava, Žltá",48.08705,17.12404
-"Bratislava,,Ekonomická univerzita",Ekonom. univerzita,48.12624,17.13098
+"Bratislava,,Ekonomická univerzita","Bratislava, Ekonomická univerzita",48.12597,17.13098
 "Sládkovičovo,,Medea-s","Sládkovičovo, Medea",48.19453,17.61915
 "Veľké Úľany,,Mlynská","Veľké Úľany, Mlynská",48.17118,17.57726
 "Nový Život,,Hóstágy","Nový Život, Hóstágy",48.1251,17.46829
@@ -12285,15 +12285,15 @@ Borčice,Borčice,48.97839,18.13794
 "Považ.Bystrica,Dolný Moštenec,Cing.laz","Považská Bystrica, Dolný Moštenec, Cing.laz",49.08992,18.42844
 "Považ.Bystrica,,pošta",,,
 "Považ.Bystrica,,SPŠ",SPŠ,49.11442,18.44528
-"Považ.Bystrica,,Kukučínova ul.",Ul.Kukučínova,49.11748,18.43646
-"Považ.Bystrica,,Mládežnícka ul.",Ul. Mládežnícka,49.12296,18.42835
+"Považ.Bystrica,,Kukučínova ul.","Považská Bystrica, Kukučínova ul.",49.11757,18.4363
+"Považ.Bystrica,,Mládežnícka ul.","Považská Bystrica, Mládežnícka ul.",49.12159,18.42711
 "Považ.Bystrica,Považ.Podhr.,n.kol.","Považská Bystrica, Považ.Podhr., nad kol.",49.13927,18.46091
 "Považ.Bystrica,Považ.Podhr.,Križan","Považská Bystrica, Považ.Podhr., Križan",49.13522,18.44924
 "Považ.Bystrica,Považ.Podhr.,cint.","Považská Bystrica, Považ.Podhr., cint.",49.13817,18.45389
 "Považ.Bystrica,Považ.Podhr.,ZŠ","Považská Bystrica, Považ.Podhr., ZŠ",49.1404,18.4577
 "Považ.Bystrica,Považ.Podhr.,kaštieľ","Považská Bystrica, Považ.Podhr., kaštieľ",49.1434,18.46137
 "Považ.Bystrica,Šebešťanová,priem.areál","Považská Bystrica, Šebešťanová, priem.areál",49.15622,18.4593
-"Považ.Bystrica,Šebešťanová,kaplnka","Šebešťanová,kaplnka",49.16048,18.46113
+"Považ.Bystrica,Šebešťanová,kaplnka","Považská Bystrica, Šebešťanová, kaplnka",49.16048,18.4612
 "Jasenica,,farma","Jasenica, farma",49.17292,18.45744
 "Jasenica,,Jednota","Jasenica, Jednota",49.17945,18.45071
 "Jasenica,,č.d.158","Jasenica, č.d.158",49.18217,18.44866
@@ -12306,7 +12306,7 @@ Borčice,Borčice,48.97839,18.13794
 "Brvnište,,Vachalík","Brvnište, Vachalík",49.21728,18.42312
 "Papradno,,zdrav.str.","Papradno, zdrav.str.",49.22161,18.41622
 "Papradno,,Jednota","Papradno, Jednota",49.22612,18.41273
-"Papradno,,kostol",Kostol,49.22973,18.41148
+"Papradno,,kostol","Papradno, kostol",49.22996,18.41112
 "Papradno,,Podhúboč","Papradno, Podhúboč",49.23411,18.40845
 "Papradno,,garáž SAD","Papradno, garáž SAD",49.23614,18.40391
 "Papradno,,Košiare","Papradno, Košiare",49.23979,18.39905
@@ -12365,7 +12365,7 @@ Borčice,Borčice,48.97839,18.13794
 "Visolaje,,Kračiny","Visolaje, Kračiny",49.06933,18.35667
 "Ladce,,Cementáreň","Ladce, Cementáreň",49.03515,18.29539
 "Ladce,,Hor.Ladce Potraviny","Ladce, Hor.Ladce Potraviny",49.03138,18.30335
-"Trenčín,,gymnázium",Gymnázium,48.89232,18.03685
+"Trenčín,,gymnázium","Trenčín, gymnázium",48.89232,18.0369
 "Trenčín,,Orechové","Trenčín, Orechové",48.90165,18.03732
 "Zamarovce,,kaplnka","Zamarovce, kaplnka",48.90545,18.04349
 "Zamarovce,,kult.dom","Zamarovce, kult.dom",48.90968,18.05155
@@ -12408,7 +12408,7 @@ Borčice,Borčice,48.97839,18.13794
 "Dubnica n.V.,,Lieskovec",,,
 "Dubnica n.V.,,Hasičská",,,
 "Dubnica n.V.,,ZŠ Pod hájom",,,
-"Trenčín,,Braneckého",Braneckého,48.89127,18.03768
+"Trenčín,,Braneckého","Trenčín, Braneckého",48.89127,18.03773
 "Trenčín,,Cintorínska","Trenčín, Cintorínska",48.87603,18.03535
 "Trenčín,,Na Zongorke","Trenčín, Na Zongorke",48.86824,18.03581
 "Soblahov,,Pažite","Soblahov, Pažite",48.85893,18.06581
@@ -12447,9 +12447,9 @@ Zemianske Podhradie,Zemianske Podhradie,48.84526,17.82871
 "Nová Bošáca,,Predpoloma hájovňa","Nová Bošáca, Predpoloma hájovňa",48.9162,17.81765
 "Považ.Bystrica,,ul.Slov.partiz.","Považská Bystrica, Kukučínova ul.",49.11757,18.4363
 "Považ.Bystrica,,ul.Slov.partiz.II","Považská Bystrica, ul.Slov.partiz.II",49.10304,18.45537
-"Považ.Bystrica,,TESCO parkovisko","TESCO, parkovisko",49.10256,18.46104
+"Považ.Bystrica,,TESCO parkovisko","Považská Bystrica, TESCO parkovisko",49.10256,18.46109
 "Považ.Bystrica,,Pekárne",,,
-"Považ.Bystrica,,Hliny","Brezno, Rohozná Hliny",48.79506,19.72857
+"Považ.Bystrica,,Hliny","Považská Bystrica, Hliny",49.09907,18.46557
 "Považ.Bystrica,,Zakvášov Šuraba",,,
 "Považ.Bystrica,Praznov,rázc.",,,
 "Prečín,,Podskálie","Prečín, Podskálie",49.09057,18.51086
@@ -12641,7 +12641,7 @@ Kostolná-Záriečie,Kostolná-Záriečie,48.87597,17.96665
 "Myjava,,u Belanských Jednota","Myjava, u Belanských Jednota",48.72262,17.52144
 "Bukovec,,u Bašnárov","Bukovec, u Bašnárov",48.72232,17.50469
 "Bukovec,,Kršlenica","Bukovec, Kršlenica",48.70706,17.49274
-"Bukovec,,OcÚ","Pohronský Bukovec, OcÚ",48.83696,19.37821
+"Bukovec,,OcÚ","Bukovec, OcÚ",48.70129,17.49347
 "Bukovec,,Jednota","Bukovec, Jednota",48.69748,17.49981
 "Brezová p.Bradlom,,Žriedl.dol.","Brezová pod Bradlom, Žriedl.dol.Papán.",48.68123,17.52881
 "Brezová p.Bradlom,,Hor.Štverník","Brezová pod Bradlom, Hor.Štverník",48.67458,17.51996
@@ -12816,14 +12816,14 @@ Hatné,Hatné,49.18596,18.38437
 "Považ.Bystrica,,MTS",,,
 "Považ.Bystrica,,IBV",,,
 "Považ.Bystrica,Považ.Teplá,Močiare","Pov.Teplá,močiare",49.13539,18.47472
-"Považ.Bystrica,Považ.Teplá,č.d.56","Pov.Teplá,č.d.56",49.13826,18.47489
+"Považ.Bystrica,Považ.Teplá,č.d.56","Považská Bystrica, Považ.Teplá, č.d.56",49.13861,18.47472
 "Považ.Bystrica,Považ.Teplá,Jednota","Pov.Teplá,Jednota",49.14156,18.47352
 "Považ.Bystrica,Považ.Teplá,Zápotočie","Považská Bystrica, Považ.Teplá, Zápotočie",49.14577,18.47173
 "Považ.Bystrica,Vrtižer",,,
 "Považ.Bystrica,Považ.Teplá,Zálužie","Považská Bystrica, Považ.Teplá, Zálužie",49.14337,18.47862
 "Považ.Bystrica,Považ.Teplá,č.d.221","Považská Bystrica, Považ.Teplá, č.d.221",49.14422,18.48425
 "Považ.Bystrica,Považ.Teplá,chata","Pov.Teplá,chata",49.14492,18.49112
-"Považ.Bystrica,Považ.Teplá,autocamp.","Pov.Teplá,autocamp.",49.14413,18.49778
+"Považ.Bystrica,Považ.Teplá,autocamp.","Považská Bystrica, Považ.Teplá, autocamp.",49.1441,18.49774
 "Záskalie,,Bazália","Záskalie, Bazália",49.13987,18.51324
 "Záskalie,,Jednota","Záskalie, Jednota",49.13552,18.51792
 "Kostolec,,Penzión","Kostolec, penzión",49.13078,18.52951
@@ -13186,9 +13186,9 @@ Hrašovík,Hrašovík,48.74735,21.32184
 "Beniakovce,,OcÚ","Beniakovce, OcÚ",48.76963,21.31737
 "Beniakovce,,MŠ","Beniakovce, MŠ",48.76588,21.31858
 "Smižany,,Maša rázc.","Smižany, Maša rázc.",48.95276,20.5129
-"Spišská N.Ves,,ZŠ Hutnícka",ZŠ Hutnícka,48.95326,20.53617
+"Spišská N.Ves,,ZŠ Hutnícka","Spišská Nová Ves, ZŠ Hutnícka",48.95322,20.53571
 "Smižany,,Smreková ihrisko","Smižany, Smreková ihrisko",48.95751,20.52522
-"Smižany,,kostol","Ferčekovce,kostol",48.92386,20.54258
+"Smižany,,kostol","Smižany, kostol",48.95869,20.52128
 "Arnutovce,,OcÚ","Arnutovce, OcÚ",48.97741,20.49365
 "Letanovce,,OcÚ","Letanovce, OcÚ",48.97997,20.46718
 "Letanovce,,časť Strelník","Letanovce, časť Strelník",48.99518,20.44667
@@ -13382,7 +13382,7 @@ Sokoľ,,,
 "Čierna Lehota,,č.d.264","Čierna Lehota, č.d.264",48.72301,20.25737
 "Čierna Lehota,,kostol","Čierna Lehota, kostol",48.72264,20.25159
 "Košice,,Moldavská obchodné centrá","Košice, Moldavská obchodné centrá",48.70011,21.2388
-"Malá Ida,,kostol","Myslava, kostol",48.70732,21.20748
+"Malá Ida,,kostol","Malá Ida, kostol",48.67493,21.17017
 "Malá Ida,,OcÚ","Malá Ida, OcÚ",48.67599,21.16696
 Šemša,Šemša,48.675,21.11377
 "Šemša,,ZŠ","Šemša, ZŠ",48.67572,21.10812
@@ -13556,7 +13556,7 @@ Nižný Čaj,Nižný Čaj,48.66585,21.39813
 "Košická Belá,,potoky","Košická Belá, potoky",48.78629,21.1253
 "Košice,,Jahodná kopec","Košice, Jahodná kopec",48.78073,21.14108
 "Košice,,Alpinka",Alpinka,48.75851,21.18812
-"Košice,,Čermeľ",Čermeľ,48.74925,21.23128
+"Košice,,Čermeľ","Košice, Čermeľ",48.74942,21.23134
 "Košice,,Malá stanica","Košice, Malá stanica",48.70876,21.26549
 "Košice,,Podnikateľská","Košice, Podnikateľská",48.67155,21.27071
 "Košice,Šebastovce","Košice, Šebastovce",48.6568,21.2707
@@ -13588,12 +13588,12 @@ Bunetice,Bunetice,48.86021,21.39423
 "Žakarovce,,OcÚ","Žakarovce, OcÚ",48.87841,20.92423
 "Žakarovce,,č.d.88","Žakarovce, č.d.88",48.87802,20.91932
 "Košice,,Krajský súd","Košice, Krajský súd",48.7164,21.24947
-"Košice,,Magistrát mesta Košice",Magistrát mesta Košice,48.71341,21.23422
+"Košice,,Magistrát mesta Košice","Košice, Magistrát mesta Košice",48.71404,21.23887
 "Košice,,Hodonínska","Košice, Hodonínska",48.71343,21.22663
-"Košice,,Moskovská",Moskovská,48.71158,21.21153
+"Košice,,Moskovská","Košice, Moskovská",48.71157,21.21231
 "Košice,Myslava,Grunt","Košice, Myslava, Grunt",48.71019,21.204
 "Košice,Myslava,Pri škole","Košice, Myslava, Pri škole",48.71433,21.19641
-"Baška,,Maša",Maša,48.71698,21.18904
+"Baška,,Maša","Baška, Maša",48.72312,21.17721
 "Nižný Klátov,,mlyn","Nižný Klátov, mlyn",48.72401,21.16343
 "Nižný Klátov,,horáreň","Nižný Klátov, horáreň",48.72499,21.14582
 "Hýľov,,č.d.73","Hýľov, č.d.73",48.72962,21.10503
@@ -13670,7 +13670,7 @@ Peder,Peder,48.57903,20.95185
 "Smižany,,kult.dom","Smižany, kult.dom",48.95513,20.52285
 "Spišská N.Ves,,Telep","Spišská Nová Ves, Telep",48.95293,20.563
 "Spišská N.Ves,,Skladový areál","Spišská Nová Ves, Skladový areál",48.9542,20.55462
-"Spišská N.Ves,,sídl.Západ kostol","Sídl.Západ,kostol",48.95495,20.5318
+"Spišská N.Ves,,sídl.Západ kostol","Spišská Nová Ves, sídl.Západ kostol",48.95487,20.53171
 "Smižany,,Iliašovská č.d.414","Smižany, Iliašovská č.d.414",48.958,20.53134
 "Smižany,,rozvodňa","Smižany, rozvodňa",48.96599,20.53146
 "Iliašovce,,č.d.14","Iliašovce, č.d.14",48.98642,20.52852
@@ -13740,7 +13740,7 @@ Peder,Peder,48.57903,20.95185
 "Olcnava,,ZŠ","Olcnava, ZŠ",48.92724,20.74874
 "Olcnava,,pož.zbrojnica","Olcnava, pož.zbrojnica",48.92672,20.75351
 "Spišská N.Ves,,Zimný štadión","Spišská Nová Ves, Zimný štadión",48.94372,20.56183
-"Spišská N.Ves,,F.Urbánka",F.Urbánka,48.9378,20.55814
+"Spišská N.Ves,,F.Urbánka","Spišská Nová Ves, F.Urbánka",48.93862,20.55865
 "Spišská N.Ves,,Ferčekovce Gemerská č.d.1","Spišská Nová Ves, Ferčekovce Gemerská č.d.1",48.92776,20.54599
 "Spišská N.Ves,Novov.Huta,Poľovník","Spišská Nová Ves, Novov.Huta, Poľovník",48.90298,20.51747
 "Spišská N.Ves,Novov.Huta,Stražanská","Spišská Nová Ves, Novov.Huta, Stražanská",48.89327,20.51878
@@ -13791,13 +13791,13 @@ Nový Salaš,Nový Salaš,48.61115,21.47413
 Turnianska N.Ves,Turnianska Nová Ves,48.57786,20.88735
 "Spišská N.Ves,,Galéria","Spišská Nová Ves, Galéria",48.94428,20.5655
 "Spišská N.Ves,,Radnica","Spišská Nová Ves, Radnica",48.94452,20.567
-"Spišská N.Ves,,Madaras park-ZOO",Madaras park - ZOO,48.93591,20.5727
-"Spišská N.Ves,,ZŠ Ing.Kožucha",ZŠ Ing. Kožucha,48.94004,20.56535
+"Spišská N.Ves,,Madaras park-ZOO","Spišská Nová Ves, Madaras park-ZOO",48.93606,20.57313
+"Spišská N.Ves,,ZŠ Ing.Kožucha","Spišská Nová Ves, ZŠ Ing.Kožucha",48.94006,20.56517
 "Spišská N.Ves,,ZŠ Lipová","Spišská Nová Ves, ZŠ Lipová",48.93573,20.5644
 "Spišská N.Ves,,Správa ciest","Spišská Nová Ves, Správa ciest",48.93119,20.57735
 "Spišská N.Ves,,Podskala",Podskala,48.92863,20.58005
 "Spišská N.Ves,,Hájik","Spišská Nová Ves, Hájik",48.92341,20.57687
-"Spišská N.Ves,,Pod Tepličkou žel.zast.",Pod Tepličkou žel.zast.,48.91833,20.58347
+"Spišská N.Ves,,Pod Tepličkou žel.zast.","Spišská Nová Ves, Pod Tepličkou žel.zast.",48.91823,20.5837
 "Teplička,,č.d.18","Teplička, č.d.18",48.90937,20.58565
 "Teplička,,ZŠ",,,
 "Koceľovce,,rázc.","Koceľovce, rázc.",48.70634,20.33727
@@ -13874,7 +13874,7 @@ Malá Lodina,Malá Lodina,48.87821,21.13255
 "Nálepkovo,,rázc.Zahájnica","Nálepkovo, rázc.Zahájnica",48.83713,20.6432
 "Nálepkovo,,rázc.Závadka","Nálepkovo, rázc.Závadka",48.84748,20.61183
 "Závadka,,Jednota","Závadka, Jednota",48.86668,20.6179
-"Spišská N.Ves,,Športová hala",Športová hala,48.93812,20.56334
+"Spišská N.Ves,,Športová hala","Spišská Nová Ves, Športová hala",48.93813,20.56367
 "Spišská N.Ves,,Ferčekovce Považská č.d.3","Spišská Nová Ves, Ferčekovce Považská č.d.3",48.92629,20.54581
 "Spišská N.Ves,,Ferčekovce Nitrianska","Spišská Nová Ves, Ferčekovce Nitrianska",48.92219,20.54071
 "Spišská N.Ves,Novov.Huta,Medvedia dolka","Novov.Huta,Medvedia dolka",48.90617,20.52248
