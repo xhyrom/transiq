@@ -1,0 +1,9 @@
+{
+  "name": "@transiq/gtfs-view",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "gtfs": "^4.17.6",
+    "jszip": "^3.10.1"
+  }
+}

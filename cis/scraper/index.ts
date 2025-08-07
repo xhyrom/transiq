@@ -89,7 +89,7 @@ await processNestedPages({
           { type: "url", url: `http://portal.cp.sk/${href}` },
           join(dir, folderName, fileName),
           {
-            errorTexts: ["Chyba pri sťahovaní súboru"],
+            errorTexts: ["Chyba pri"],
             checkContentType: true,
           },
         );
