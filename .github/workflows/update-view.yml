@@ -21,11 +21,15 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "24"
+      - uses: actions/setup-go@v5
+
       - run: |
           bun install
 
           cd gtfs-view
           bun install
+
+          go install github.com/patrickbr/gtfstidy@latest
 
       - name: Setup Git
         run: |
