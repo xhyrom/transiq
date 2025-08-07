@@ -4,6 +4,7 @@
     "": {
       "name": "transport",
       "dependencies": {
+        "@cis/client": "workspace:^",
         "ora": "^8.2.0",
       },
       "devDependencies": {
