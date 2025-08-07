@@ -1,7 +1,16 @@
-import type { GtfsAgency, GtfsRoute, PartialGtfsStop } from "./gtfs/models";
-import { agencyId } from "./utils/id";
+import type {
+  GtfsAgency,
+  GtfsCalendar,
+  GtfsRoute,
+  GtfsStop,
+  GtfsStopTime,
+  GtfsTrip,
+  PartialGtfsStop,
+} from "./gtfs/models";
+import { agencyId, serviceId, tripId } from "./utils/id";
 import * as XLSX from "xlsx";
 import { cellColumn, filterCells, groupCells } from "./xlsx_helper";
+import { formatTimeToGtfs } from "./utils/time";
 
 enum Sheet {
   INBOUND = "Smer tam",
@@ -10,13 +19,41 @@ enum Sheet {
   NOTES = "Poznámky",
 }
 
-export function convertXlsxToGtfs(
+enum StaticSign {
+  WEEKDAYS_ONLY = "X",
+  SATURDAY_ONLY = "6",
+  SUNDAYS_AND_HOLIDAYS = "+",
+  REROUTED = "~",
+}
+
+const STOP_COLUMN = "B";
+
+export function collectStops(data: Buffer<ArrayBufferLike>): {
+  stops: PartialGtfsStop[];
+} {
+  const workbook = XLSX.read(data, { type: "buffer" });
+
+  const inboundSheet = workbook.Sheets[Sheet.INBOUND]! ?? [];
+  const outboundSheet = workbook.Sheets[Sheet.OUTBOUND]! ?? [];
+
+  return {
+    stops: [
+      ...convertToGtfsStop(inboundSheet),
+      ...convertToGtfsStop(outboundSheet),
+    ],
+  };
+}
+
+export function collectRouteTripsCalenddarsAndStopTimes(
   agency: GtfsAgency,
-  route: string,
+  routeFileName: string,
+  stops: Record<string, GtfsStop>,
   data: Buffer<ArrayBufferLike>,
 ): {
-  stops: PartialGtfsStop[];
   route: GtfsRoute;
+  trips: GtfsTrip[];
+  calendars: GtfsCalendar[];
+  stopTimes: GtfsStopTime[];
 } {
   const workbook = XLSX.read(data, { type: "buffer" });
 
@@ -25,16 +62,122 @@ export function convertXlsxToGtfs(
   const signExplanationSheet = workbook.Sheets[Sheet.SIGN_EXPLANATION]! ?? [];
   const notesSheet = workbook.Sheets[Sheet.NOTES]! ?? [];
 
+  const route = convertToGtfsRoute(
+    agency,
+    routeFileName,
+    signExplanationSheet || notesSheet || inboundSheet || outboundSheet,
+  );
+
+  const trips: GtfsTrip[] = [];
+  const calendars: GtfsCalendar[] = [];
+  const stopTimes: GtfsStopTime[] = [];
+
+  for (const sheet of [inboundSheet, outboundSheet]) {
+    const tripCells = filterCells(sheet, (key, cell) => {
+      return (
+        cell.t === "s" &&
+        cell.v?.toString()?.startsWith("Spoj") === true &&
+        Boolean(cell.v.toString().match(/^\s*Spoj\s+\d+/))
+      );
+    });
+
+    for (const tripCellAddress of Object.keys(tripCells)) {
+      const calendar: GtfsCalendar = {
+        service_id: serviceId(),
+        monday: 0,
+        tuesday: 0,
+        wednesday: 0,
+        thursday: 0,
+        friday: 0,
+        saturday: 0,
+        sunday: 0,
+        start_date: "",
+        end_date: "",
+      };
+
+      const trip: GtfsTrip = {
+        trip_id: tripId(),
+        route_id: route.route_id,
+        service_id: calendar.service_id,
+      };
+
+      const tripCellColumn = cellColumn(tripCellAddress);
+      const signs = sheet[`${tripCellColumn}4`].v.trim().split(" ");
+
+      console.log(signs);
+
+      let rowIndex = 5;
+      let stopSequence = 0;
+
+      while (true) {
+        const timeCell = sheet[`${tripCellColumn}${rowIndex}`];
+        const stopCell = sheet[`${STOP_COLUMN}${rowIndex}`];
+        const noteCell = sheet[`C${rowIndex}`];
+
+        if (!timeCell || !timeCell.v) {
+          break;
+        }
+
+        if (!stopCell || !stopCell.v) {
+          rowIndex++;
+          continue;
+        }
+
+        const stopName = String(stopCell.v).split(";")[0]!;
+        const timeValue = timeCell.v;
+
+        if (timeValue === StaticSign.REROUTED) {
+          rowIndex++;
+          continue;
+        }
+
+        const note = noteCell?.v ? String(noteCell.v).trim() : "";
+
+        const stopId = Object.keys(stops).find(
+          (id) =>
+            stops[id]!.stop_name === stopName ||
+            stops[id]!.cis_name === stopName,
+        );
+
+        if (!stopId) {
+          console.warn(`Stop not found: ${stopName}`);
+          rowIndex++;
+          continue;
+        }
+
+        const isArrival = note.toLowerCase().includes("príjazd") || !note;
+        const isDeparture = note.toLowerCase().includes("odjazd") || !note;
+
+        const stopTime: Partial<GtfsStopTime> = {
+          trip_id: trip.trip_id,
+          stop_id: stopId,
+          stop_sequence: stopSequence++,
+        };
+
+        if (isArrival) {
+          stopTime.arrival_time = formatTimeToGtfs(timeValue);
+        }
+
+        if (isDeparture) {
+          stopTime.departure_time = formatTimeToGtfs(timeValue);
+        }
+
+        stopTimes.push(stopTime as GtfsStopTime);
+        rowIndex++;
+      }
+
+      trips.push(trip);
+      calendars.push(calendar);
+    }
+
+    break;
+  }
+
   return {
-    stops: [
-      ...convertToGtfsStop(inboundSheet),
-      ...convertToGtfsStop(outboundSheet),
-    ],
-    route: convertToGtfsRoute(
-      agency,
-      route,
-      signExplanationSheet || notesSheet || inboundSheet || outboundSheet,
-    ),
+    route,
+    trips,
+    calendars,
+    stopTimes,
   };
 }
 
@@ -58,8 +201,6 @@ function convertToGtfsRoute(
 }
 
 function convertToGtfsStop(sheet: XLSX.WorkSheet): PartialGtfsStop[] {
-  const stopColumn = "B";
-
   let tpzColumn: string | undefined;
   const tpzCellKey = Object.entries(sheet).find(
     ([, cell]) => cell.t === "s" && cell.v === "TPZ",
@@ -71,7 +212,7 @@ function convertToGtfsStop(sheet: XLSX.WorkSheet): PartialGtfsStop[] {
     const dataCells = filterCells(sheet, (key, cell) => {
       const col = cellColumn(key);
       return (
-        (col === stopColumn || col === tpzColumn) &&
+        (col === STOP_COLUMN || col === tpzColumn) &&
         cell.v !== "TPZ" &&
         cell.v !== "Zastávka"
       );
@@ -80,9 +221,9 @@ function convertToGtfsStop(sheet: XLSX.WorkSheet): PartialGtfsStop[] {
     const groupedCells = groupCells(dataCells);
 
     return groupedCells
-      .filter((row) => row[stopColumn] && row[stopColumn].v)
+      .filter((row) => row[STOP_COLUMN] && row[STOP_COLUMN].v)
       .map((row) => ({
-        stop_name: (row[stopColumn]!.v as string).split(";")[0]!,
+        cis_name: (row[STOP_COLUMN]!.v as string).split(";")[0]!,
         zone_id:
           tpzColumn && row[tpzColumn]?.v
             ? String(row[tpzColumn]!.v).split(",")[0]
@@ -92,7 +233,7 @@ function convertToGtfsStop(sheet: XLSX.WorkSheet): PartialGtfsStop[] {
   } else {
     const stopCells = filterCells(sheet, (key, cell) => {
       return (
-        cellColumn(key) === stopColumn &&
+        cellColumn(key) === STOP_COLUMN &&
         cell.v !== "Zastávka" &&
         Boolean(cell.v)
       );
@@ -101,7 +242,7 @@ function convertToGtfsStop(sheet: XLSX.WorkSheet): PartialGtfsStop[] {
     return Object.values(stopCells)
       .filter((cell) => Boolean(cell.v))
       .map((cell) => ({
-        stop_name: (cell.v as string).split(";")[0]!,
+        cis_name: (cell.v as string).split(";")[0]!,
         location_type: 0,
       }));
   }

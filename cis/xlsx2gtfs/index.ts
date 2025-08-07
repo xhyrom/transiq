@@ -2,9 +2,21 @@ import { ensureDirectory } from "@helpers/util";
 import { Glob } from "bun";
 import { exists, readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { convertToGtfsAgency, convertXlsxToGtfs } from "./converter";
+import {
+  collectStops,
+  collectRouteTripsCalenddarsAndStopTimes,
+  convertToGtfsAgency,
+} from "./converter";
 import { arrayToCsv, objectToCsv } from "./utils/csv";
-import type { GtfsAgency, GtfsRoute, PartialGtfsStop } from "./gtfs/models";
+import type {
+  GtfsAgency,
+  GtfsCalendar,
+  GtfsRoute,
+  GtfsStop,
+  GtfsStopTime,
+  GtfsTrip,
+  PartialGtfsStop,
+} from "./gtfs/models";
 import { resolvePartialGtfsStops } from "./resolver";
 
 const dir = join(".tmp", "cp-sk");
@@ -26,18 +38,40 @@ for (const agencyFolderName of await readdir(dir)) {
   console.log(`Processing agency: ${info.agency_short} (${agencyFolderName})`);
 
   const agency: GtfsAgency = convertToGtfsAgency(info);
-  const stops: PartialGtfsStop[] = [];
+  const partialStops: PartialGtfsStop[] = [];
   const routes: GtfsRoute[] = [];
+  const trips: GtfsTrip[] = [];
+  const calendars: GtfsCalendar[] = [];
+  const stopTimes: GtfsStopTime[] = [];
 
   for await (const route of xlsxGlob.scan(agencyFolderPath)) {
-    const data = convertXlsxToGtfs(
+    const data = collectStops(await readFile(join(agencyFolderPath, route)));
+
+    partialStops.push(...data.stops);
+  }
+
+  const stops: GtfsStop[] = resolvePartialGtfsStops(partialStops);
+  const stopsByCisName: Record<string, GtfsStop> = stops.reduce(
+    (acc, stop) => {
+      acc[stop.cis_name] = stop;
+      return acc;
+    },
+    {} as Record<string, GtfsStop>,
+  );
+
+  for await (const route of xlsxGlob.scan(agencyFolderPath)) {
+    const data = collectRouteTripsCalenddarsAndStopTimes(
       agency,
       route,
+      stopsByCisName,
       await readFile(join(agencyFolderPath, route)),
     );
 
-    stops.push(...data.stops);
     routes.push(data.route);
+    trips.push(...data.trips);
+    calendars.push(...data.calendars);
+    stopTimes.push(...data.stopTimes);
+    break;
   }
 
   await Bun.write(
@@ -51,7 +85,7 @@ for (const agencyFolderName of await readdir(dir)) {
         "zone_id",
         "location_type",
       ],
-      resolvePartialGtfsStops(stops),
+      stops,
     ),
   );
 
@@ -68,6 +102,41 @@ for (const agencyFolderName of await readdir(dir)) {
         "route_text_color",
       ],
       routes,
+    ),
+  );
+
+  await Bun.write(
+    join(gtfs, "trips.txt"),
+    arrayToCsv(
+      ["trip_id", "route_id", "wheelchair_accessible", "bikes_allowed"],
+      trips,
+    ),
+  );
+
+  await Bun.write(
+    join(gtfs, "calendar.txt"),
+    arrayToCsv(
+      [
+        "service_id",
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday",
+        "sunday",
+        "start_date",
+        "end_date",
+      ],
+      calendars,
+    ),
+  );
+
+  await Bun.write(
+    join(gtfs, "stop_times.txt"),
+    arrayToCsv(
+      ["trip_id", "stop_id", "stop_sequence", "arrival_time", "departure_time"],
+      stopTimes,
     ),
   );
 
