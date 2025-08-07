@@ -13,6 +13,7 @@ async function main() {
 
   let provider = "mapycz";
   let cisName = "";
+  let customQuery = "";
   let showHelp = false;
 
   for (let i = 0; i < args.length; i++) {
@@ -26,6 +27,14 @@ async function main() {
         provider = args[++i]?.toLowerCase();
         if (provider !== "mapycz" && provider !== "osm") {
           console.error("Error: Provider must be 'mapycz' or 'osm'");
+          return 1;
+        }
+        break;
+      case "--query":
+      case "-q":
+        customQuery = args[++i] || "";
+        if (!customQuery) {
+          console.error("Error: Custom query cannot be empty");
           return 1;
         }
         break;
@@ -51,11 +60,13 @@ ARGUMENTS:
 
 OPTIONS:
   -p, --provider   Data provider to use [mapycz, osm] (default: mapycz)
+  -q, --query      Custom search query to use instead of auto-generated one
   -h, --help       Show this help message
 
 EXAMPLES:
   bun run cli.ts "Plzeň,,CAN;H WC MHD"
   bun run cli.ts "Praha,,Hlavní nádraží;U" --provider osm
+  bun run cli.ts "Prešov,,AS MHD žel.st." --query "Prešov autobusové nádražie"
     `);
     return !cisName ? 1 : 0;
   }
@@ -89,24 +100,31 @@ EXAMPLES:
 
   try {
     let items;
+    const searchQuery =
+      customQuery ||
+      `zastávka ${cisName.replace("aut.st.", "aut.stanica").replace("žel.st.", "žel.stanica")}`;
+
+    if (customQuery) {
+      console.log(`Using custom query: "${searchQuery}"`);
+    }
+
     if (provider === "osm") {
       console.log("Querying OpenStreetMap...");
       const res = await queryGeocodeNominatim({
-        query: cisName
-          .replace("aut.st.", "aut.stanica")
-          .replace("žel.st.", "žel.stanica"),
+        query: searchQuery,
       });
       items = res.items.filter((item) => item.type === "bus_stop");
     } else {
       console.log("Querying Mapy.cz...");
       const res = await queryGeocodeMapy({
-        query: `zastávka ${cisName.replace("aut.st.", "aut.stanica").replace("žel.st.", "žel.stanica")}`,
+        query: searchQuery,
       });
 
       items = res.items.filter(
         (item) =>
           item.type === "poi" &&
-          (item.label === "Zastávka autobusu" ||
+          (customQuery ||
+            item.label === "Zastávka autobusu" ||
             item.label.includes("Autobusová stanica") ||
             item.label.toLowerCase().includes("autobus")),
       );
