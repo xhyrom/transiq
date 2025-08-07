@@ -206,7 +206,7 @@ export function parseRouteTripsCalendarsAndStopTimes(
         }
 
         const stopName = stopCell.v.split(";")[0]!;
-        const stopSigns = stopCell.v.split(";")[1]!.split(" ");
+        const stopSigns = stopCell.v.split(";")?.[1]?.split(" ") || [];
         const timeValue = timeCell.v;
 
         if (
