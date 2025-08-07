@@ -13,6 +13,13 @@ export type PartialGtfsStop = Omit<
   "stop_name" | "stop_id" | "stop_lat" | "stop_lon"
 >;
 
+export enum GtfsStopAccess {
+  REGULAR = 0,
+  NONE = 1,
+  MUST_PHONE_AGENCY = 2,
+  MUST_ASK_DRIVER = 3,
+}
+
 export interface GtfsStop {
   stop_id: string;
   stop_name: string;
@@ -78,4 +85,6 @@ export interface GtfsStopTime {
   stop_sequence: number;
   arrival_time: string; // HH:MM:SS
   departure_time: string; // HH:MM:SS
+  pickup_type: GtfsStopAccess;
+  drop_off_type: GtfsStopAccess;
 }

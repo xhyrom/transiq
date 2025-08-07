@@ -1,6 +1,7 @@
 import { read, type WorkSheet } from "xlsx";
 import {
   GtfsCalendarDateException,
+  GtfsStopAccess,
   GtfsTripAccessibility,
   type GtfsAgency,
   type GtfsCalendar,
@@ -193,7 +194,8 @@ export function parseRouteTripsCalendarsAndStopTimes(
 
         if (
           timeValue === StaticSign.REROUTED ||
-          timeValue === StaticSign.PASSED_STOP
+          timeValue === StaticSign.PASSED_STOP ||
+          !timeValue.includes(":")
         ) {
           rowIndex++;
           continue;
@@ -220,6 +222,12 @@ export function parseRouteTripsCalendarsAndStopTimes(
           trip_id: trip.trip_id,
           stop_id: stopId,
           stop_sequence: stopSequence++,
+          pickup_type: timeValue.includes(StaticSign.EXIT_ONLY_STOP)
+            ? GtfsStopAccess.NONE
+            : GtfsStopAccess.REGULAR,
+          drop_off_type: timeValue.includes(StaticSign.ENTRY_ONLY_STOP)
+            ? GtfsStopAccess.NONE
+            : GtfsStopAccess.REGULAR,
         };
 
         if (isArrival) {

@@ -151,7 +151,15 @@ for (const agencyFolderName of await readdir(dir)) {
   await Bun.write(
     join(gtfs, "stop_times.txt"),
     arrayToCsv(
-      ["trip_id", "stop_id", "stop_sequence", "arrival_time", "departure_time"],
+      [
+        "trip_id",
+        "stop_id",
+        "stop_sequence",
+        "arrival_time",
+        "departure_time",
+        "pickup_type",
+        "drop_off_type",
+      ],
       stopTimes,
     ),
   );
