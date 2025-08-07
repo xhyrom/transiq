@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "cis:scrape": "bun cis/scraper/index.ts",
+    "cis:xlsx2gtfs": "bun cis/xlsx2gtfs/index.ts",
     "download": "bun scripts/download_gtfs.ts"
   },
   "devDependencies": {
@@ -21,6 +22,7 @@
   },
   "workspaces": [
     "cis/*",
+    "gtfs-view",
     "kaeru"
   ]
 }

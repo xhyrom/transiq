@@ -20,6 +20,9 @@ jobs:
       - name: CIS Scrape
         run: bun cis:scrape
 
+      - name: CIS xlsx2gtfs
+        run: bun cis:xlsx2gtfs
+
       - name: Download GTFS files
         env:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
