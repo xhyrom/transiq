@@ -128,6 +128,10 @@ export function parseRouteTripsCalendarsAndStopTimes(
         calendar.friday = 1;
       }
 
+      if (signs.includes(StaticSign.MONDAY_ONLY)) calendar.monday = 1;
+      if (signs.includes(StaticSign.TUESDAY_ONLY)) calendar.tuesday = 1;
+      if (signs.includes(StaticSign.WEDNESDAY_ONLY)) calendar.wednesday = 1;
+      if (signs.includes(StaticSign.THURSDAY_ONLY)) calendar.thursday = 1;
       if (signs.includes(StaticSign.FRIDAY_ONLY)) calendar.friday = 1;
       if (signs.includes(StaticSign.SATURDAY_ONLY)) calendar.saturday = 1;
       if (signs.includes(StaticSign.SUNDAY_ONLY)) calendar.sunday = 1;

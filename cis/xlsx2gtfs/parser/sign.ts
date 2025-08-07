@@ -3,6 +3,10 @@ import { extractDateRanges, type DateRange } from "../utils/time";
 
 export enum StaticSign {
   WEEKDAYS_ONLY = "X",
+  MONDAY_ONLY = "1",
+  TUESDAY_ONLY = "2",
+  WEDNESDAY_ONLY = "3",
+  THURSDAY_ONLY = "4",
   FRIDAY_ONLY = "5",
   SATURDAY_ONLY = "6",
   SUNDAY_ONLY = "7",

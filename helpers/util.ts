@@ -4,6 +4,10 @@ import type { Feed, FileSource } from "@types";
 export async function downloadFile(
   source: FileSource,
   fileName: string,
+  options?: {
+    errorTexts?: string[];
+    checkContentType?: boolean;
+  },
 ): Promise<void> {
   let response: Response;
 
@@ -24,6 +28,30 @@ export async function downloadFile(
 
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  if (options?.checkContentType) {
+    const responseClone = response.clone();
+    const contentType = responseClone.headers.get("content-type");
+    if (contentType?.includes("text/html")) {
+      const text = await responseClone.text();
+      if (options?.errorTexts) {
+        for (const errorText of options.errorTexts) {
+          if (text.includes(errorText)) {
+            throw new Error(`Server returned error: "${errorText}"`);
+          }
+        }
+      }
+    }
+  } else if (options?.errorTexts) {
+    const responseClone = response.clone();
+    const text = await responseClone.text();
+
+    for (const errorText of options.errorTexts) {
+      if (text.includes(errorText)) {
+        throw new Error(`Server returned error: "${errorText}"`);
+      }
+    }
   }
 
   await Bun.write(fileName, response);

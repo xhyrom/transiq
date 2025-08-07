@@ -84,10 +84,20 @@ await processNestedPages({
       const href = link.getAttribute("href")!;
       const fileName = href.slice(16);
 
-      await downloadFile(
-        { type: "url", url: `http://portal.cp.sk/${href}` },
-        join(dir, folderName, fileName),
-      );
+      try {
+        await downloadFile(
+          { type: "url", url: `http://portal.cp.sk/${href}` },
+          join(dir, folderName, fileName),
+          {
+            errorTexts: ["Chyba pri sťahovaní súboru"],
+            checkContentType: true,
+          },
+        );
+
+        console.log(`Successfully downloaded ${fileName}`);
+      } catch (error) {
+        console.error(`Failed to download ${fileName}: ${error}`);
+      }
     }
   },
 });

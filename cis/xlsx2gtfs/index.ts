@@ -165,6 +165,4 @@ for (const agencyFolderName of await readdir(dir)) {
   );
 
   await Bun.write(join(gtfs, "agency.txt"), objectToCsv(agency));
-
-  break;
 }
