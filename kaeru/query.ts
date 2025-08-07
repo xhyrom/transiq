@@ -2,7 +2,6 @@ export interface GeocodeQuery {
   query: string;
   lang?: string;
   limit?: number;
-  locality?: string;
   type?: string;
 }
 
@@ -25,7 +24,7 @@ export async function queryGeocodeMapy(
   query: GeocodeQuery,
 ): Promise<GeocodeResponse> {
   const url = new URL(
-    `geocode?query=${encodeURIComponent(query.query)}&lang=${encodeURIComponent(query.lang ?? "sk")}&limit=${encodeURIComponent(query.limit ?? 5)}&locality=${encodeURIComponent(query.locality ?? "sk")}&type=${query.type ?? "poi"}`,
+    `geocode?query=${encodeURIComponent(query.query)}&lang=${encodeURIComponent(query.lang ?? "sk")}&limit=${encodeURIComponent(query.limit ?? 5)}&type=${query.type ?? "poi"}`,
     "https://api.mapy.com/v1/",
   );
 
