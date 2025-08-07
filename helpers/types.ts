@@ -14,6 +14,10 @@ export type FileSource =
       fileId: string;
     }
   | {
+      type: "cis";
+      id: string;
+    }
+  | {
       type: "url";
       url: string;
     };

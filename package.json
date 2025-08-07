@@ -12,7 +12,8 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "ora": "^8.2.0"
+    "ora": "^8.2.0",
+    "@cis/client": "workspace:^"
   },
   "workspaces": [
     "cis/*",

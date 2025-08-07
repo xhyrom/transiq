@@ -1,5 +1,6 @@
 import { mkdir } from "node:fs/promises";
 import type { Feed, FileSource } from "@types";
+import { getGftsZip } from "cis/client";
 
 export async function downloadFile(
   source: FileSource,
@@ -17,6 +18,10 @@ export async function downloadFile(
         `https://www.googleapis.com/drive/v3/files/${source.fileId}?alt=media&key=${process.env.GOOGLE_API_KEY}`,
       );
       break;
+
+    case "cis":
+      await Bun.write(fileName, await getGftsZip(source.id));
+      return;
 
     case "url":
       response = await fetch(source.url);
