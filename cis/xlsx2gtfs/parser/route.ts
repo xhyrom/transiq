@@ -17,6 +17,7 @@ export function parseRoute(
     route_short_name: routeShortName,
     route_long_name: sheet.C1.v
       .trim()
+      .replace(/^\/\d+\s*/, "")
       .replace(/\s*\(.*?\)\s*/g, "")
       .replaceAll(" - ", "-")
       .replaceAll("-", " - "),

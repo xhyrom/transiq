@@ -111,13 +111,16 @@ export function parseRouteTripsCalendarsAndStopTimes(
       const signs: string[] = sheet[`${tripCellColumn}4`].v.trim().split(" ");
 
       const directions = route.route_long_name.split("-").map((s) => s.trim());
-      const lastStop = directions[directions.length - 1]!;
+      const headSign =
+        tripDirection === GtfsTripDirection.INBOUND
+          ? directions[directions.length - 1]!
+          : directions[0]!;
 
       const trip: GtfsTrip = {
         trip_id: tripId(),
         route_id: route.route_id,
         service_id: calendar.service_id,
-        trip_headsign: lastStop,
+        trip_headsign: headSign,
         direction_id: tripDirection,
         wheelchair_accessible: signs.includes(StaticSign.WHEELCHAIR_ACCESSIBLE)
           ? GtfsTripAccessibility.ACCESSIBLE
