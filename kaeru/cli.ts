@@ -92,14 +92,17 @@ EXAMPLES:
     if (provider === "osm") {
       console.log("Querying OpenStreetMap...");
       const res = await queryGeocodeNominatim({
-        query: cisName.replace("aut.st.", "aut.stanica"),
+        query: cisName
+          .replace("aut.st.", "aut.stanica")
+          .replace("žel.st.", "žel.stanica"),
       });
       items = res.items.filter((item) => item.type === "bus_stop");
     } else {
       console.log("Querying Mapy.cz...");
       const res = await queryGeocodeMapy({
-        query: `zastávka ${cisName}`,
+        query: `zastávka ${cisName.replace("aut.st.", "aut.stanica").replace("žel.st.", "žel.stanica")}`,
       });
+
       items = res.items.filter(
         (item) =>
           item.type === "poi" &&

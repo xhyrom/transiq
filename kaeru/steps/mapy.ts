@@ -32,7 +32,7 @@ for (const station of data) {
 
   try {
     const res = await queryGeocodeMapy({
-      query: `zastávka ${station.cis_name}`,
+      query: `zastávka ${station.cis_name.replace("aut.st.", "aut.stanica").replace("žel.st.", "žel.stanica")}`,
     });
 
     const items = res.items.filter(

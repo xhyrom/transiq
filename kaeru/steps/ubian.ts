@@ -2,7 +2,7 @@ import { exists } from "node:fs/promises";
 import { join } from "node:path";
 import { parse as parseCsv } from "csv-parse/sync";
 import { stringify as stringifyCsv } from "csv-stringify/sync";
-import { queryGeocodeMapy } from "../query";
+import { queryGeocodeNominatim, queryUbian } from "../query";
 import { log } from "../logger";
 import type { KaeruCsvItem } from "../types";
 
@@ -24,9 +24,22 @@ const data = parseCsv<KaeruCsvItem>(content, {
 const headers = ["cis_name", "name", "lat", "lon"];
 let processedCount = 0;
 
+async function confirmChange(
+  oldName: string,
+  newName: string,
+): Promise<boolean> {
+  process.stdout.write(`Apply change: ${oldName} -> ${newName}? (y/n): `);
+  const answer = await new Promise<string>((resolve) => {
+    process.stdin.once("data", (data) => {
+      resolve(data.toString().trim().toLowerCase());
+    });
+  });
+  return answer === "y";
+}
+
 for (const station of data) {
   if (!station.name) {
-    //console.log("INFO", `[fixer] Skipping unprocessed station: ${station.cis_name}`);
+    //console.log("INFO", `[step3] Skipping unprocessed station: ${station.cis_name}`);
     continue;
   }
 
@@ -34,7 +47,7 @@ for (const station of data) {
   if (!cityName) {
     /*console.log(
       "ERROR",
-      `[fixer] No city name found for station: ${station.cis_name}`,
+      `[step3] No city name found for station: ${station.cis_name}`,
     );*/
     continue;
   }
@@ -46,41 +59,45 @@ for (const station of data) {
   ) {
     /*console.log(
       "INFO",
-      `[fixer] Skipping already correctly processed station: ${station.cis_name}`,
+      `[step3] Skipping already correctly processed station: ${station.cis_name}`,
     );*/
     continue;
   }
 
-  const res = await queryGeocodeMapy({
-    query: station.cis_name,
-  });
+  const res = await queryUbian(station.cis_name);
 
-  const items = res.items.filter(
-    (item) =>
-      item.type === "poi" &&
-      item.name.startsWith(
-        cityName.split(" ")[0]!.split(",")[0]!.split(".")[0]!,
-      ) &&
-      (item.label === "Zastávka autobusu" ||
-        item.label.includes("Autobusová stanica") ||
-        item.label.toLowerCase().includes("autobus")),
+  const items = res.items.filter((item) =>
+    item.stopCity.startsWith(
+      cityName.split(" ")[0]!.split(",")[0]!.split(".")[0]!,
+    ),
   );
 
   if (items.length === 0) {
-    log("ERROR", `[fixer] No type found for station: ${station.cis_name}`);
+    log("ERROR", `[ubian] No type found for station: ${station.cis_name}`);
     continue;
   }
 
   const bestMatch = items[0]!;
+  if (station.name === bestMatch.name) {
+    log("ERROR", `[ubian] Unable to fix station: ${station.cis_name}`);
+    continue;
+  }
+
+  const confirmed = await confirmChange(
+    `(${station.cis_name}) ${station.name}`,
+    bestMatch.name,
+  );
+  if (!confirmed) {
+    log("INFO", `[ubian] Change skipped by user for: ${station.cis_name}`);
+    continue;
+  }
 
   log(
     "INFO",
-    `[fixer] (${station.cis_name}) ${station.name} -> ${bestMatch.name} (${station.lat} -> ${bestMatch.position.lat}, ${station.lon} -> ${bestMatch.position.lon})`,
+    `[ubian] (${station.cis_name}) ${station.name} -> ${bestMatch.name}`,
   );
 
   station.name = bestMatch.name;
-  station.lat = bestMatch.position.lat;
-  station.lon = bestMatch.position.lon;
 
   const csvContent = stringifyCsv([
     headers,
@@ -93,12 +110,12 @@ for (const station of data) {
   if (processedCount % 10 === 0) {
     log(
       "INFO",
-      `[fixer] Progress: Processed ${processedCount}/${data.length} stations`,
+      `[ubian] Progress: Processed ${processedCount}/${data.length} stations`,
     );
   }
 }
 
 log(
   "INFO",
-  `[fixer] Completed processing. Total stations processed: ${processedCount}`,
+  `[ubian] Completed processing. Total stations processed: ${processedCount}`,
 );

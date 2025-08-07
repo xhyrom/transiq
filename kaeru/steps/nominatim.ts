@@ -26,7 +26,7 @@ let processedCount = 0;
 
 for (const station of data) {
   if (!station.name) {
-    //console.log("INFO", `[step3] Skipping unprocessed station: ${station.cis_name}`);
+    //console.log("INFO", `[nominatim] Skipping unprocessed station: ${station.cis_name}`);
     continue;
   }
 
@@ -34,7 +34,7 @@ for (const station of data) {
   if (!cityName) {
     /*console.log(
       "ERROR",
-      `[step3] No city name found for station: ${station.cis_name}`,
+      `[nominatim] No city name found for station: ${station.cis_name}`,
     );*/
     continue;
   }
@@ -46,31 +46,33 @@ for (const station of data) {
   ) {
     /*console.log(
       "INFO",
-      `[step3] Skipping already correctly processed station: ${station.cis_name}`,
+      `[nominatim] Skipping already correctly processed station: ${station.cis_name}`,
     );*/
     continue;
   }
 
   const res = await queryGeocodeNominatim({
-    query: station.cis_name.replace("aut.st.", "aut.stanica"),
+    query: station.cis_name
+      .replace("aut.st.", "aut.stanica")
+      .replace("žel.st.", "žel.stanica"),
   });
 
   const items = res.items.filter((item) => item.type === "bus_stop");
 
   if (items.length === 0) {
-    log("ERROR", `[step3] No type found for station: ${station.cis_name}`);
+    log("ERROR", `[nominatim] No type found for station: ${station.cis_name}`);
     continue;
   }
 
   const bestMatch = items[0]!;
   if (station.name === bestMatch.name) {
-    log("ERROR", `[step3] Unable to fix station: ${station.cis_name}`);
+    log("ERROR", `[nominatim] Unable to fix station: ${station.cis_name}`);
     continue;
   }
 
   log(
     "INFO",
-    `[step3] (${station.cis_name}) ${station.name} -> ${bestMatch.name} (${station.lat} -> ${bestMatch.position.lat}, ${station.lon} -> ${bestMatch.position.lon})`,
+    `[nominatim] (${station.cis_name}) ${station.name} -> ${bestMatch.name} (${station.lat} -> ${bestMatch.position.lat}, ${station.lon} -> ${bestMatch.position.lon})`,
   );
 
   station.name = bestMatch.name;
@@ -88,12 +90,12 @@ for (const station of data) {
   if (processedCount % 10 === 0) {
     log(
       "INFO",
-      `[step3] Progress: Processed ${processedCount}/${data.length} stations`,
+      `[nominatim] Progress: Processed ${processedCount}/${data.length} stations`,
     );
   }
 }
 
 log(
   "INFO",
-  `[step3] Completed processing. Total stations processed: ${processedCount}`,
+  `[nominatim] Completed processing. Total stations processed: ${processedCount}`,
 );
