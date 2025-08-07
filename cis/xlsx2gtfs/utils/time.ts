@@ -6,15 +6,17 @@ export interface DateRange {
 export function formatTimeToGtfs(timeStr: string | number): string {
   const timeString = String(timeStr);
 
-  if (!timeString.includes(":")) {
+  const timeMatch = timeString.match(/(\d{1,2}):(\d{2})/);
+  if (!timeMatch) {
     console.warn(`Unexpected time format: ${timeString}`);
     return "00:00:00";
   }
 
-  const [hours, minutes] = timeString.split(":");
+  const hours = timeMatch[1]!.trim();
+  const minutes = timeMatch[2]!.trim();
 
-  const paddedHours = hours!.trim().padStart(2, "0");
-  const paddedMinutes = minutes ? minutes.trim().padStart(2, "0") : "00";
+  const paddedHours = hours.padStart(2, "0");
+  const paddedMinutes = minutes.padStart(2, "0");
 
   return `${paddedHours}:${paddedMinutes}:00`;
 }

@@ -52,10 +52,10 @@ export function parseRouteTripsCalendarsAndStopTimes(
 } {
   const workbook = read(data, { type: "buffer" });
 
-  const inboundSheet = workbook.Sheets[Sheet.INBOUND] ?? [];
-  const outboundSheet = workbook.Sheets[Sheet.OUTBOUND] ?? [];
-  const signExplanationSheet = workbook.Sheets[Sheet.SIGN_EXPLANATION] ?? [];
-  const notesSheet = workbook.Sheets[Sheet.NOTES] ?? [];
+  const inboundSheet = workbook.Sheets[Sheet.INBOUND];
+  const outboundSheet = workbook.Sheets[Sheet.OUTBOUND];
+  const signExplanationSheet = workbook.Sheets[Sheet.SIGN_EXPLANATION]!;
+  const notesSheet = workbook.Sheets[Sheet.NOTES];
 
   const signExplanations = parseSignExplanations(signExplanationSheet).reduce(
     (map, item) => {
@@ -77,7 +77,7 @@ export function parseRouteTripsCalendarsAndStopTimes(
   const stopTimes: GtfsStopTime[] = [];
 
   for (const sheet of [inboundSheet, outboundSheet] as WorkSheet[]) {
-    if (sheet.length === 0) continue;
+    if (!sheet) continue;
 
     const tripCells = filterCells(sheet, (key, cell) => {
       return (
@@ -240,6 +240,14 @@ export function parseRouteTripsCalendarsAndStopTimes(
           stopTime.departure_time = formatTimeToGtfs(timeValue);
         }
 
+        if (!isArrival && isDeparture) {
+          stopTime.arrival_time = stopTime.departure_time;
+        }
+
+        if (!isDeparture && isArrival) {
+          stopTime.departure_time = stopTime.arrival_time;
+        }
+
         stopTimes.push(stopTime as GtfsStopTime);
         rowIndex++;
       }
@@ -247,8 +255,6 @@ export function parseRouteTripsCalendarsAndStopTimes(
       trips.push(trip);
       calendars.push(calendar);
     }
-
-    break;
   }
 
   return {
