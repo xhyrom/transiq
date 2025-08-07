@@ -2,9 +2,9 @@ import { exists } from "node:fs/promises";
 import { join } from "node:path";
 import { parse as parseCsv } from "csv-parse/sync";
 import { stringify as stringifyCsv } from "csv-stringify/sync";
-import { queryGeocode } from "./query";
-import { log } from "./logger";
-import type { KaeruCsvItem } from "./types";
+import { queryGeocodeNominatim } from "../query";
+import { log } from "../logger";
+import type { KaeruCsvItem } from "../types";
 
 const csvPath = join(".transiq", "kaeru.csv");
 if (!(await exists(csvPath))) {
@@ -26,7 +26,7 @@ let processedCount = 0;
 
 for (const station of data) {
   if (!station.name) {
-    //console.log("INFO", `Skipping unprocessed station: ${station.cis_name}`);
+    //console.log("INFO", `[step3] Skipping unprocessed station: ${station.cis_name}`);
     continue;
   }
 
@@ -34,7 +34,7 @@ for (const station of data) {
   if (!cityName) {
     /*console.log(
       "ERROR",
-      `[fixer] No city name found for station: ${station.cis_name}`,
+      `[step3] No city name found for station: ${station.cis_name}`,
     );*/
     continue;
   }
@@ -46,36 +46,31 @@ for (const station of data) {
   ) {
     /*console.log(
       "INFO",
-      `Skipping already correctly processed station: ${station.cis_name}`,
+      `[step3] Skipping already correctly processed station: ${station.cis_name}`,
     );*/
     continue;
   }
 
-  const res = await queryGeocode({
-    query: station.cis_name,
+  const res = await queryGeocodeNominatim({
+    query: station.cis_name.replace("aut.st.", "aut.stanica"),
   });
 
-  const items = res.items.filter(
-    (item) =>
-      item.type === "poi" &&
-      item.name.startsWith(
-        cityName.split(" ")[0]!.split(",")[0]!.split(".")[0]!,
-      ) &&
-      (item.label === "Zastávka autobusu" ||
-        item.label.includes("Autobusová stanica") ||
-        item.label.toLowerCase().includes("autobus")),
-  );
+  const items = res.items.filter((item) => item.type === "bus_stop");
 
   if (items.length === 0) {
-    log("ERROR", `[fixer] No type found for station: ${station.cis_name}`);
+    log("ERROR", `[step3] No type found for station: ${station.cis_name}`);
     continue;
   }
 
   const bestMatch = items[0]!;
+  if (station.name === bestMatch.name) {
+    log("ERROR", `[step3] Unable to fix station: ${station.cis_name}`);
+    continue;
+  }
 
   log(
     "INFO",
-    `[fixer] (${station.cis_name}) ${station.name} -> ${bestMatch.name} (${station.lat} -> ${bestMatch.position.lat}, ${station.lon} -> ${bestMatch.position.lon})`,
+    `[step3] (${station.cis_name}) ${station.name} -> ${bestMatch.name} (${station.lat} -> ${bestMatch.position.lat}, ${station.lon} -> ${bestMatch.position.lon})`,
   );
 
   station.name = bestMatch.name;
@@ -93,12 +88,12 @@ for (const station of data) {
   if (processedCount % 10 === 0) {
     log(
       "INFO",
-      `[fixer] Progress: Processed ${processedCount}/${data.length} stations`,
+      `[step3] Progress: Processed ${processedCount}/${data.length} stations`,
     );
   }
 }
 
 log(
   "INFO",
-  `[fixer] Completed processing. Total stations processed: ${processedCount}`,
+  `[step3] Completed processing. Total stations processed: ${processedCount}`,
 );

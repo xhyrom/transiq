@@ -21,7 +21,7 @@ export interface GeocodeResponse {
   items: GeocodeItemEntry[];
 }
 
-export async function queryGeocode(
+export async function queryGeocodeMapy(
   query: GeocodeQuery,
 ): Promise<GeocodeResponse> {
   const url = new URL(
@@ -36,4 +36,73 @@ export async function queryGeocode(
       },
     })
   ).json();
+}
+
+export async function queryGeocodeNominatim(
+  query: GeocodeQuery,
+): Promise<GeocodeResponse> {
+  const url = new URL("https://nominatim.openstreetmap.org/search");
+
+  url.searchParams.set("q", query.query);
+  url.searchParams.set("format", "json");
+  url.searchParams.set("addressdetails", "1");
+  url.searchParams.set("limit", String(query.limit ?? 5));
+  url.searchParams.set("accept-language", query.lang ?? "en");
+
+  const response = await fetch(url.toString(), {
+    headers: {
+      "User-Agent": "kaeru/1.0 (contact@xhyrom.dev)",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Nominatim request failed with status ${response.status}`);
+  }
+
+  const data = await response.json();
+
+  const items: GeocodeItemEntry[] = data.map((entry: any) => ({
+    name: entry.alt_name
+      ? entry.alt_name.split(";")[entry.alt_name.split(";").length - 1]
+      : entry.name,
+    label: entry.display_name,
+    position: {
+      lat: parseFloat(entry.lat),
+      lon: parseFloat(entry.lon),
+    },
+    type: entry.type,
+    location: entry.display_name,
+  }));
+
+  return { items };
+}
+
+export interface UbianStop {
+  name: string;
+  id: number;
+  stopCity: string;
+}
+
+export async function queryUbian(
+  query: string,
+): Promise<{ items: UbianStop[] }> {
+  const url = new URL(
+    "https://ubian.azet.sk/navigation/autocomplete?lat=0&lng=0&filter=bus&cityID=",
+  );
+
+  url.searchParams.set("query", query);
+
+  const response = await fetch(url.toString());
+  if (!response.ok) {
+    throw new Error(`Ubian request failed with status ${response.status}`);
+  }
+
+  const data = await response.json();
+  const items = data.results.map((item: any) => ({
+    name: item.name,
+    id: item.id,
+    stopCity: item.stopCity,
+  }));
+
+  return { items };
 }

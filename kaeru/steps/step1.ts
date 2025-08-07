@@ -2,9 +2,9 @@ import { exists } from "node:fs/promises";
 import { join } from "node:path";
 import { parse as parseCsv } from "csv-parse/sync";
 import { stringify as stringifyCsv } from "csv-stringify/sync";
-import { queryGeocode } from "./query";
-import { log } from "./logger";
-import type { KaeruCsvItem } from "./types";
+import { queryGeocodeMapy } from "../query";
+import { log } from "../logger";
+import type { KaeruCsvItem } from "../types";
 
 const csvPath = join(".transiq", "kaeru.csv");
 if (!(await exists(csvPath))) {
@@ -31,7 +31,7 @@ for (const station of data) {
   }
 
   try {
-    const res = await queryGeocode({
+    const res = await queryGeocodeMapy({
       query: station.cis_name,
     });
 
