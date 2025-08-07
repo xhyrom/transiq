@@ -205,7 +205,8 @@ export function parseRouteTripsCalendarsAndStopTimes(
           continue;
         }
 
-        const stopName = String(stopCell.v).split(";")[0]!;
+        const stopName = stopCell.v.split(";")[0]!;
+        const stopSigns = stopCell.v.split(";")[1]!.split(" ");
         const timeValue = timeCell.v;
 
         if (
@@ -236,12 +237,16 @@ export function parseRouteTripsCalendarsAndStopTimes(
           trip_id: trip.trip_id,
           stop_id: stopId,
           stop_sequence: stopSequence++,
-          pickup_type: timeValue.includes(StaticSign.EXIT_ONLY_STOP)
+          pickup_type: stopSigns.includes(StaticSign.BORDER_CONTROL_ONLY)
             ? GtfsStopAccess.NONE
-            : GtfsStopAccess.REGULAR,
-          drop_off_type: timeValue.includes(StaticSign.ENTRY_ONLY_STOP)
+            : timeValue.includes(StaticSign.EXIT_ONLY_STOP)
+              ? GtfsStopAccess.NONE
+              : GtfsStopAccess.REGULAR,
+          drop_off_type: stopSigns.includes(StaticSign.BORDER_CONTROL_ONLY)
             ? GtfsStopAccess.NONE
-            : GtfsStopAccess.REGULAR,
+            : timeValue.includes(StaticSign.ENTRY_ONLY_STOP)
+              ? GtfsStopAccess.NONE
+              : GtfsStopAccess.REGULAR,
         };
 
         if (isArrival) {

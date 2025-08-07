@@ -15,6 +15,7 @@ export enum StaticSign {
   PASSED_STOP = "|",
   EXIT_ONLY_STOP = "(",
   ENTRY_ONLY_STOP = ")",
+  BORDER_CONTROL_ONLY = "CLO",
   WHEELCHAIR_ACCESSIBLE = "BB",
 }
 

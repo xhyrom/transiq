@@ -1,10 +1,10 @@
 import type { Feed, FileSource } from "@types";
 
 export default {
-  id: "arrivatt",
-  name: "ARRIVA Trnava, a.s.",
+  id: "slovak-lines-express-as",
+  name: "Slovak Lines Express, a.s.",
   getLatestSource: async (): Promise<FileSource> => ({
     type: "cis",
-    id: "arriva-trnava-as",
+    id: "slovak-lines-express-as",
   }),
 } satisfies Feed;

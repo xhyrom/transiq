@@ -1,13 +1,36 @@
 import gtfsToHtml from "gtfs-to-html";
 import { join } from "node:path";
+import { glob, mkdir } from "node:fs/promises";
+import { exec as _exec } from "node:child_process";
+import { promisify } from "node:util";
 
-const gtfs = await Array.fromAsync(new Bun.Glob("**/*.zip").scan("gtfs"));
-console.log(gtfs);
+const exec = promisify(_exec);
+
+const gtfs = await Array.fromAsync(glob(join("gtfs", "**/*.zip")));
+
+await mkdir(join(".tmp", "tidy-gtfs"), { recursive: true });
+
+const tidyGtfs = [];
+
+for (const gtf of gtfs) {
+  if (gtf.includes("dpb")) continue; // too large, skip for now
+
+  const agencyKey = gtf
+    .split("/")
+    .pop()
+    .replace(/\.zip$/, "");
+  const tidyGtfPath = join(".tmp", "tidy-gtfs", gtf.split("/").pop());
+
+  console.log(`Tidy GTFS: ${gtf} -> ${tidyGtfPath}`);
+  await exec(`gtfstidy -SCRmTcdsOeD ${gtf} -o ${tidyGtfPath}`);
+
+  tidyGtfs.push({ agencyKey, path: tidyGtfPath });
+}
 
 await gtfsToHtml({
-  agencies: gtfs.map((gtf) => ({
-    agencyKey: gtf.replace(/\.zip$/, ""),
-    path: join("gtfs", gtf),
+  agencies: tidyGtfs.map((gtf) => ({
+    agencyKey: gtf.agencyKey,
+    path: gtf.path,
   })),
   allowEmptyTimetables: false,
   beautify: false,
@@ -38,7 +61,7 @@ await gtfsToHtml({
   noServiceText: "No service at this stop",
   outputFormat: "html",
   overwriteExistingFiles: true,
-  outputPath: "custom/output/path",
+  outputPath: ".tmp/build/gtfs-view",
   requestDropoffSymbol: "†",
   requestDropoffText: "Must request drop off",
   requestPickupSymbol: "***",
@@ -58,6 +81,7 @@ await gtfsToHtml({
   sortingAlgorithm: "common",
   timeFormat: "h:mma",
   useParentStation: true,
+  ignoreDuplicates: true,
   verbose: true,
   zipOutput: false,
 });

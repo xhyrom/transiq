@@ -24,8 +24,5 @@
     "cis/*",
     "gtfs-view",
     "kaeru"
-  ],
-  "patchedDependencies": {
-    "gtfs@4.17.6": "patches/gtfs@4.17.6.patch"
-  }
+  ]
 }
