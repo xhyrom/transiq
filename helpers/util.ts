@@ -59,7 +59,7 @@ export async function downloadFile(
     }
   }
 
-  await Bun.write(fileName, response);
+  await Bun.write(fileName, await response.arrayBuffer());
 }
 
 export async function ensureDirectory(path: string): Promise<void> {

@@ -17,10 +17,13 @@ jobs:
       - uses: oven-sh/setup-bun@v1
       - run: bun install
 
+      - name: CIS Scrape
+        run: bun cis:scrape
+
       - name: Download GTFS files
         env:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-        run: bun run scripts/download_gtfs.ts
+        run: bun download
 
       - name: Setup Git
         run: |
