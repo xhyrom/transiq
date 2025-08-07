@@ -15,9 +15,15 @@ export function resolvePartialGtfsStop(stop: PartialGtfsStop): GtfsStop {
     throw new Error(`Stop ${stop.cis_name} does not exist in Kaeru database`);
   }
 
+  if (!kaeruStop.name) {
+    console.warn(
+      `Stop ${kaeruStop.cis_name} has no name in Kaeru database, falling back to cis_name`,
+    );
+  }
+
   return {
     stop_id: stopId(),
-    stop_name: kaeruStop.name,
+    stop_name: kaeruStop.name || stop.cis_name,
     cis_name: stop.cis_name,
     stop_lat: kaeruStop.lat,
     stop_lon: kaeruStop.lon,

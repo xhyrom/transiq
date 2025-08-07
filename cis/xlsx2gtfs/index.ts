@@ -2,15 +2,11 @@ import { ensureDirectory } from "@helpers/util";
 import { Glob } from "bun";
 import { exists, readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
-import {
-  collectStops,
-  collectRouteTripsCalenddarsAndStopTimes,
-  convertToGtfsAgency,
-} from "./converter";
 import { arrayToCsv, objectToCsv } from "./utils/csv";
 import type {
   GtfsAgency,
   GtfsCalendar,
+  GtfsCalendarDate,
   GtfsRoute,
   GtfsStop,
   GtfsStopTime,
@@ -18,6 +14,11 @@ import type {
   PartialGtfsStop,
 } from "./gtfs/models";
 import { resolvePartialGtfsStops } from "./resolver";
+import {
+  parseAgency,
+  parseRouteTripsCalendarsAndStopTimes,
+  parseStops,
+} from "./parser";
 
 const dir = join(".tmp", "cp-sk");
 if (!(await exists(dir))) {
@@ -37,17 +38,18 @@ for (const agencyFolderName of await readdir(dir)) {
 
   console.log(`Processing agency: ${info.agency_short} (${agencyFolderName})`);
 
-  const agency: GtfsAgency = convertToGtfsAgency(info);
+  const agency: GtfsAgency = parseAgency(info);
   const partialStops: PartialGtfsStop[] = [];
   const routes: GtfsRoute[] = [];
   const trips: GtfsTrip[] = [];
   const calendars: GtfsCalendar[] = [];
+  const calendarDates: GtfsCalendarDate[] = [];
   const stopTimes: GtfsStopTime[] = [];
 
   for await (const route of xlsxGlob.scan(agencyFolderPath)) {
-    const data = collectStops(await readFile(join(agencyFolderPath, route)));
-
-    partialStops.push(...data.stops);
+    partialStops.push(
+      ...parseStops(await readFile(join(agencyFolderPath, route))),
+    );
   }
 
   const stops: GtfsStop[] = resolvePartialGtfsStops(partialStops);
@@ -60,7 +62,9 @@ for (const agencyFolderName of await readdir(dir)) {
   );
 
   for await (const route of xlsxGlob.scan(agencyFolderPath)) {
-    const data = collectRouteTripsCalenddarsAndStopTimes(
+    console.log(`Processing route: ${route}`);
+
+    const data = parseRouteTripsCalendarsAndStopTimes(
       agency,
       route,
       stopsByCisName,
@@ -70,8 +74,8 @@ for (const agencyFolderName of await readdir(dir)) {
     routes.push(data.route);
     trips.push(...data.trips);
     calendars.push(...data.calendars);
+    calendarDates.push(...data.calendarDates);
     stopTimes.push(...data.stopTimes);
-    break;
   }
 
   await Bun.write(
@@ -108,7 +112,14 @@ for (const agencyFolderName of await readdir(dir)) {
   await Bun.write(
     join(gtfs, "trips.txt"),
     arrayToCsv(
-      ["trip_id", "route_id", "wheelchair_accessible", "bikes_allowed"],
+      [
+        "trip_id",
+        "route_id",
+        "service_id",
+        "trip_headsign",
+        "wheelchair_accessible",
+        "bikes_allowed",
+      ],
       trips,
     ),
   );
@@ -130,6 +141,11 @@ for (const agencyFolderName of await readdir(dir)) {
       ],
       calendars,
     ),
+  );
+
+  await Bun.write(
+    join(gtfs, "calendar_dates.txt"),
+    arrayToCsv(["service_id", "date", "exception_type"], calendarDates),
   );
 
   await Bun.write(

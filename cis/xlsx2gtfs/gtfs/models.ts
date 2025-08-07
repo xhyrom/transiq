@@ -33,12 +33,19 @@ export interface GtfsRoute {
   route_text_color?: string;
 }
 
+export enum GtfsTripAccessibility {
+  NO_INFORMATION = 0,
+  ACCESSIBLE = 1,
+  NOT_ACCESSIBLE = 2,
+}
+
 export interface GtfsTrip {
   trip_id: string;
   route_id: string;
   service_id: string;
-  wheelchair_accessible?: number;
-  bikes_allowed?: number;
+  trip_headsign: string;
+  wheelchair_accessible?: GtfsTripAccessibility;
+  bikes_allowed?: GtfsTripAccessibility;
 }
 
 export interface GtfsCalendar {
@@ -50,8 +57,19 @@ export interface GtfsCalendar {
   friday: number;
   saturday: number;
   sunday: number;
-  start_date: string; // YYYYMMDD
-  end_date: string; // YYYYMMDD
+  start_date: number; // YYYYMMDD
+  end_date: number; // YYYYMMDD
+}
+
+export enum GtfsCalendarDateException {
+  SERVICE_ADDED = 1,
+  SERVICE_REMOVED = 2,
+}
+
+export interface GtfsCalendarDate {
+  service_id: string;
+  date: number; // YYYYMMDD format
+  exception_type: GtfsCalendarDateException;
 }
 
 export interface GtfsStopTime {
