@@ -1,3 +1,5 @@
+import type { GtfsStopTime } from "../gtfs/models";
+
 export interface DateRange {
   from: string;
   to: string;
@@ -60,4 +62,79 @@ export function extractDateRanges(explanation: string): DateRange[] {
   }
 
   return dateRanges;
+}
+
+export function adjustTimesForOvernight(
+  stopTimes: GtfsStopTime[],
+): GtfsStopTime[] {
+  if (stopTimes.length === 0) return stopTimes;
+
+  const tripGroups: Record<string, GtfsStopTime[]> = {};
+  for (const stopTime of stopTimes) {
+    if (!tripGroups[stopTime.trip_id]) {
+      tripGroups[stopTime.trip_id] = [];
+    }
+
+    tripGroups[stopTime.trip_id]!.push(stopTime);
+  }
+
+  for (const tripStopTimes of Object.values(tripGroups)) {
+    tripStopTimes.sort((a, b) => a.stop_sequence - b.stop_sequence);
+
+    let lastTimeMinutes = -1;
+    let dayOffset = 0;
+
+    for (const stopTime of tripStopTimes) {
+      if (stopTime.arrival_time) {
+        const arrivalMinutes = timeToMinutes(stopTime.arrival_time);
+
+        if (
+          arrivalMinutes < lastTimeMinutes &&
+          lastTimeMinutes - arrivalMinutes > 60
+        ) {
+          dayOffset += 24;
+        }
+
+        if (dayOffset > 0) {
+          stopTime.arrival_time = minutesToTime(
+            arrivalMinutes + dayOffset * 60,
+          );
+        }
+
+        lastTimeMinutes = arrivalMinutes;
+      }
+
+      if (stopTime.departure_time) {
+        const departureMinutes = timeToMinutes(stopTime.departure_time);
+
+        if (
+          departureMinutes < lastTimeMinutes &&
+          lastTimeMinutes - departureMinutes > 60
+        ) {
+          dayOffset += 24;
+        }
+
+        if (dayOffset > 0) {
+          stopTime.departure_time = minutesToTime(
+            departureMinutes + dayOffset * 60,
+          );
+        }
+
+        lastTimeMinutes = departureMinutes;
+      }
+    }
+  }
+
+  return stopTimes;
+}
+
+function timeToMinutes(time: string): number {
+  const [hours, minutes, _] = time.split(":").map(Number);
+  return hours! * 60 + minutes!;
+}
+
+function minutesToTime(totalMinutes: number): string {
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+  return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:00`;
 }

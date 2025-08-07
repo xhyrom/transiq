@@ -15,7 +15,11 @@ import {
 import { parseRoute } from "./route";
 import { serviceId, tripId } from "../utils/id";
 import { cellColumn, filterCells } from "../xlsx_helper";
-import { formatTimeToGtfs, type DateRange } from "../utils/time";
+import {
+  adjustTimesForOvernight,
+  formatTimeToGtfs,
+  type DateRange,
+} from "../utils/time";
 import {
   parseSignExplanations,
   SignType,
@@ -270,7 +274,7 @@ export function parseRouteTripsCalendarsAndStopTimes(
     trips,
     calendars,
     calendarDates,
-    stopTimes,
+    stopTimes: adjustTimesForOvernight(stopTimes),
   };
 }
 
