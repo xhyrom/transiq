@@ -35,14 +35,27 @@ export function parseDateToGtfs(dateStr: string): string {
 export function extractDateRanges(explanation: string): DateRange[] {
   const dateRanges: DateRange[] = [];
 
-  const dateRangeRegex =
+  const rangeRegex =
     /od\s+(\d{1,2}\.\d{1,2}\.\d{1,2})\s+do\s+(\d{1,2}\.\d{1,2}\.\d{1,2})/g;
-  let match;
+  let rangeMatch;
 
-  while ((match = dateRangeRegex.exec(explanation)) !== null) {
+  while ((rangeMatch = rangeRegex.exec(explanation)) !== null) {
     dateRanges.push({
-      from: parseDateToGtfs(match[1]!),
-      to: parseDateToGtfs(match[2]!),
+      from: parseDateToGtfs(rangeMatch[1]!),
+      to: parseDateToGtfs(rangeMatch[2]!),
+    });
+  }
+
+  let tempExplanation = explanation.replace(rangeRegex, "");
+
+  const singleDateRegex = /(\d{1,2}\.\d{1,2}\.\d{2,4})/g;
+  let dateMatch;
+
+  while ((dateMatch = singleDateRegex.exec(tempExplanation)) !== null) {
+    const date = parseDateToGtfs(dateMatch[1]!);
+    dateRanges.push({
+      from: date,
+      to: date,
     });
   }
 
