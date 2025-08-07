@@ -207,11 +207,9 @@ export function parseRouteTripsCalendarsAndStopTimes(
 
         const note = noteCell?.v ? String(noteCell.v).trim() : "";
 
-        const stopId = Object.keys(stops).find(
-          (id) =>
-            stops[id]!.stop_name === stopName ||
-            stops[id]!.cis_name === stopName,
-        );
+        const stopId = Object.values(stops).find(
+          (stop) => stop.cis_name === stopName,
+        )?.stop_id;
 
         if (!stopId) {
           console.warn(`Stop not found: ${stopName}`);
