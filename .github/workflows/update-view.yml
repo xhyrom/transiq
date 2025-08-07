@@ -21,7 +21,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "24"
-      - run: bun install
+      - run: |
+          bun install
+
+          cd gtfs-view
+          bun install
 
       - name: Setup Git
         run: |
