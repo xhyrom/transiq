@@ -3,6 +3,7 @@ import {
   GtfsCalendarDateException,
   GtfsStopAccess,
   GtfsTripAccessibility,
+  GtfsTripDirection,
   type GtfsAgency,
   type GtfsCalendar,
   type GtfsCalendarDate,
@@ -76,7 +77,10 @@ export function parseRouteTripsCalendarsAndStopTimes(
   const calendarDates: GtfsCalendarDate[] = [];
   const stopTimes: GtfsStopTime[] = [];
 
-  for (const sheet of [inboundSheet, outboundSheet] as WorkSheet[]) {
+  for (const [sheet, tripDirection] of [
+    [inboundSheet, GtfsTripDirection.INBOUND],
+    [outboundSheet, GtfsTripDirection.OUTBOUND],
+  ] as const) {
     if (!sheet) continue;
 
     const tripCells = filterCells(sheet, (key, cell) => {
@@ -114,6 +118,7 @@ export function parseRouteTripsCalendarsAndStopTimes(
         route_id: route.route_id,
         service_id: calendar.service_id,
         trip_headsign: lastStop,
+        direction_id: tripDirection,
         wheelchair_accessible: signs.includes(StaticSign.WHEELCHAIR_ACCESSIBLE)
           ? GtfsTripAccessibility.ACCESSIBLE
           : GtfsTripAccessibility.NOT_ACCESSIBLE,
@@ -177,7 +182,7 @@ export function parseRouteTripsCalendarsAndStopTimes(
       }
 
       let rowIndex = 5;
-      let stopSequence = 0;
+      let stopSequence = 1;
 
       while (true) {
         const timeCell = sheet[`${tripCellColumn}${rowIndex}`];

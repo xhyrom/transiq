@@ -117,6 +117,7 @@ for (const agencyFolderName of await readdir(dir)) {
         "route_id",
         "service_id",
         "trip_headsign",
+        "direction_id",
         "wheelchair_accessible",
         "bikes_allowed",
       ],

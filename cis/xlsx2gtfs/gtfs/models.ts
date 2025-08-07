@@ -46,11 +46,17 @@ export enum GtfsTripAccessibility {
   NOT_ACCESSIBLE = 2,
 }
 
+export enum GtfsTripDirection {
+  OUTBOUND = 0,
+  INBOUND = 1,
+}
+
 export interface GtfsTrip {
   trip_id: string;
   route_id: string;
   service_id: string;
   trip_headsign: string;
+  direction_id: GtfsTripDirection;
   wheelchair_accessible?: GtfsTripAccessibility;
   bikes_allowed?: GtfsTripAccessibility;
 }
