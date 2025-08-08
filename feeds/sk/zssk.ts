@@ -2,7 +2,7 @@ import type { Feed, FileSource } from "@types";
 
 export default {
   id: "zssk",
-  name: "Žeľezničná spoločnosť Slovensko, a.s.",
+  name: "Železničná spoločnosť Slovensko, a.s.",
   license: {
     type: "CC0-1.0",
     url: "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
