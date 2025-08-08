@@ -27,6 +27,7 @@ import {
   type SignExplanation,
 } from "./sign";
 import { parseCalendarRange } from "./calendar";
+import { HOLIDAYS } from "../utils/holidays";
 
 export const STOP_COLUMN = "B";
 
@@ -147,7 +148,30 @@ export function parseRouteTripsCalendarsAndStopTimes(
       if (signs.includes(StaticSign.FRIDAY_ONLY)) calendar.friday = 1;
       if (signs.includes(StaticSign.SATURDAY_ONLY)) calendar.saturday = 1;
       if (signs.includes(StaticSign.SUNDAY_ONLY)) calendar.sunday = 1;
-      if (signs.includes(StaticSign.SUNDAYS_AND_HOLIDAYS)) calendar.sunday = 1;
+
+      if (signs.includes(StaticSign.SUNDAYS_AND_HOLIDAYS)) {
+        calendar.sunday = 1;
+
+        for (const holiday of HOLIDAYS) {
+          if (holiday >= calendarRange.from && holiday <= calendarRange.to) {
+            calendarDates.push({
+              service_id: calendar.service_id,
+              date: Number(holiday),
+              exception_type: GtfsCalendarDateException.SERVICE_ADDED,
+            });
+          }
+        }
+      } else {
+        for (const holiday of HOLIDAYS) {
+          if (holiday >= calendarRange.from && holiday <= calendarRange.to) {
+            calendarDates.push({
+              service_id: calendar.service_id,
+              date: Number(holiday),
+              exception_type: GtfsCalendarDateException.SERVICE_REMOVED,
+            });
+          }
+        }
+      }
 
       for (const sign of signs) {
         const explanation = signExplanations[sign];
