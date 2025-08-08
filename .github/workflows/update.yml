@@ -13,6 +13,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Maximize build space
+        uses: easimon/maximize-build-space@master
+        with:
+          root-reserve-mb: 512
+          swap-size-mb: 1024
+          remove-dotnet: "true"
+
       - uses: actions/checkout@v3
         with:
           submodules: "recursive"
@@ -28,6 +35,13 @@ jobs:
         env:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
         run: bun feeds:run
+
+      - name: Cache OSM data
+        id: cache-osm
+        uses: actions/cache@v3
+        with:
+          path: .tmp/morph/osm/latest.osm.bz2
+          key: ${{ runner.os }}-osm-data-${{ hashFiles('transiq/morph/shapes') }}-v1
 
       - name: Morph
         run: bun morph:run

@@ -50,21 +50,32 @@ build_pfaedle() {
 download_osm() {
     mkdir -p "$OSM_DIR"
 
-    local countries=(
-        "slovakia-latest.osm.bz2"
-        "czech-republic-latest.osm.bz2"
-        "austria-latest.osm.bz2"
-        "poland-latest.osm.bz2"
-        "hungary-latest.osm.bz2"
-    )
-
     local merged_file="$OSM_DIR/latest.osm"
-    local osmconvert_path="$OSM_DIR/osmconvert64"
+    local merged_file_compressed="$OSM_DIR/latest.osm.bz2"
+
+    if [ -f "$merged_file_compressed" ] && [ ! -f "$merged_file" ]; then
+        echo -e "${BLUE}Found cached compressed OSM data. Decompressing...${NC}"
+        bzip2 -dk "$merged_file_compressed"
+        if [ $? -eq 0 ]; then
+            echo -e "${GREEN}Successfully decompressed cached OSM data${NC}"
+            return
+        else
+            echo -e "${RED}Failed to decompress cached OSM data, downloading fresh copy${NC}"
+        fi
+    fi
 
     if [ -f "$merged_file" ]; then
         echo -e "${GREEN}Merged OSM data already exists${NC}"
         return
     fi
+
+    local countries=(
+        "slovakia-latest.osm.bz2"
+        "czech-republic-latest.osm.bz2"
+        "hungary-latest.osm.bz2"
+    )
+
+    local osmconvert_path="$OSM_DIR/osmconvert64"
 
     if [ ! -f "$osmconvert_path" ]; then
         echo -e "${BLUE}Downloading osmconvert...${NC}"
@@ -108,6 +119,12 @@ download_osm() {
     else
         echo -e "${RED}Failed to merge OSM files${NC}"
         exit 1
+    fi
+
+    if [ -f "$merged_file" ] && [ ! -f "$merged_file_compressed" ]; then
+        echo -e "${BLUE}Compressing OSM data for caching...${NC}"
+        bzip2 -zk "$merged_file"
+        echo -e "${GREEN}OSM data compressed successfully${NC}"
     fi
 }
 
