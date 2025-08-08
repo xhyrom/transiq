@@ -25,6 +25,9 @@ jobs:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
         run: bun feeds:run
 
+      - name: Morph
+        run: bun morph:run
+
       - name: Setup Git
         run: |
           git config --global user.name 'github-actions[bot]'

@@ -6,7 +6,8 @@
     "cis:scrape": "bun cis/scraper/index.ts",
     "cis:xlsx2gtfs": "bun cis/xlsx2gtfs/index.ts",
     "cis:run": "bun cis:scrape && bun cis:xlsx2gtfs",
-    "feeds:run": "bun feeds/index.ts"
+    "feeds:run": "bun feeds/index.ts",
+    "morph:run": "morph/shapes init && morph/shapes all --overwrite"
   },
   "devDependencies": {
     "@types/bun": "latest",
