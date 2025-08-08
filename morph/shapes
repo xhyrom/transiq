@@ -89,8 +89,10 @@ download_osm() {
         local osm_file="${osm_file_zip%.bz2}"
 
         if [ ! -f "$osm_file" ]; then
-            echo -e "${BLUE}Downloading OSM data for ${country%.osm.bz2}...${NC}"
-            wget --show-progress --timeout=60 --tries=2 --retry-connrefused "https://download.geofabrik.de/europe/$country" -O "$osm_file_zip"
+            if [ ! -f "$osm_file_zip" ]; then
+                echo -e "${BLUE}Downloading OSM data for ${country%.osm.bz2}...${NC}"
+                wget --show-progress --timeout=60 --tries=2 --retry-connrefused "https://download.geofabrik.de/europe/$country" -O "$osm_file_zip"
+            fi
 
             echo -e "${BLUE}Unzipping OSM data for ${country%.osm.bz2}...${NC}"
             bzip2 -d "$osm_file_zip"
