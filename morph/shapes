@@ -48,25 +48,66 @@ build_pfaedle() {
 }
 
 download_osm() {
-    local osm_file_zip="$OSM_DIR/slovakia-latest.osm.bz2"
-    local osm_file="$OSM_DIR/slovakia-latest.osm"
+    mkdir -p "$OSM_DIR"
 
-    if [ ! -f "$osm_file" ]; then
-        echo -e "${BLUE}Downloading OSM data for Slovakia...${NC}"
-        mkdir -p "$OSM_DIR"
-        wget -q --show-progress https://download.geofabrik.de/europe/slovakia-latest.osm.bz2 -O "$osm_file_zip"
-        echo -e "${GREEN}OSM data downloaded${NC}"
+    local countries=(
+        "slovakia-latest.osm.bz2"
+        "czech-republic-latest.osm.bz2"
+        "austria-latest.osm.bz2"
+        "poland-latest.osm.bz2"
+        "hungary-latest.osm.bz2"
+    )
 
-        echo -e "${BLUE}Unzipping OSM data...${NC}"
-        bzip2 -d "$osm_file_zip"
-        if [ $? -eq 0 ]; then
-            echo -e "${GREEN}OSM data unzipped successfully${NC}"
+    local merged_file="$OSM_DIR/latest.osm"
+    local osmconvert_path="$OSM_DIR/osmconvert64"
+
+    if [ -f "$merged_file" ]; then
+        echo -e "${GREEN}Merged OSM data already exists${NC}"
+        return
+    fi
+
+    if [ ! -f "$osmconvert_path" ]; then
+        echo -e "${BLUE}Downloading osmconvert...${NC}"
+        wget -q --show-progress "http://m.m.i24.cc/osmconvert64" -O "$osmconvert_path"
+        chmod +x "$osmconvert_path"
+        echo -e "${GREEN}osmconvert downloaded${NC}"
+    fi
+
+    local osm_files=()
+
+    for country in "${countries[@]}"; do
+        local osm_file_zip="$OSM_DIR/$country"
+        local osm_file="${osm_file_zip%.bz2}"
+
+        if [ ! -f "$osm_file" ]; then
+            echo -e "${BLUE}Downloading OSM data for ${country%.osm.bz2}...${NC}"
+            wget -q --show-progress "https://download.geofabrik.de/europe/$country" -O "$osm_file_zip"
+
+            echo -e "${BLUE}Unzipping OSM data for ${country%.osm.bz2}...${NC}"
+            bzip2 -d "$osm_file_zip"
+            if [ $? -eq 0 ]; then
+                echo -e "${GREEN}OSM data for ${country%.osm.bz2} unzipped successfully${NC}"
+                osm_files+=("$osm_file")
+            else
+                echo -e "${RED}Failed to unzip OSM data for ${country%.osm.bz2}${NC}"
+                continue
+            fi
         else
-            echo -e "${RED}Failed to unzip OSM data${NC}"
-            exit 1
+            echo -e "${GREEN}OSM data for ${country%.osm.bz2} already exists${NC}"
+            osm_files+=("$osm_file")
         fi
+    done
+
+    echo -e "${BLUE}Merging OSM files...${NC}"
+    "$osmconvert_path" "${osm_files[@]}" -o="$merged_file"
+
+    if [ $? -eq 0 ]; then
+        echo -e "${GREEN}OSM files merged successfully into $merged_file${NC}"
+
+        echo -e "${BLUE}Setting merged file as default for shape generation${NC}"
     else
-        echo -e "${GREEN}OSM data already exists${NC}"
+        echo -e "${RED}Failed to merge OSM files${NC}"
+        exit 1
     fi
 }
 
@@ -97,7 +138,7 @@ add_shapes() {
     fi
 
     if [ -z "$osm_file" ]; then
-        osm_file="$OSM_DIR/slovakia-latest.osm"
+        osm_file="$OSM_DIR/latest.osm"
     elif [ ! -f "$osm_file" ] && [ -f "$OSM_DIR/$(basename "$osm_file")" ]; then
         osm_file="$OSM_DIR/$(basename "$osm_file")"
     fi
@@ -158,7 +199,7 @@ process_all_gtfs() {
         fi
     done
 
-    local osm_file="$OSM_DIR/slovakia-latest.osm"
+    local osm_file="$OSM_DIR/latest.osm"
     local total_files=$(find "$GTFS_DIR" -type f -name "*.zip" | wc -l)
 
     if [ "$total_files" -eq 0 ]; then
