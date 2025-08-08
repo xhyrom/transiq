@@ -14,6 +14,7 @@ async function main() {
   let provider = "mapycz";
   let cisName = "";
   let customQuery = "";
+  let queryTemplate = "";
   let showHelp = false;
 
   for (let i = 0; i < args.length; i++) {
@@ -35,6 +36,14 @@ async function main() {
         customQuery = args[++i] || "";
         if (!customQuery) {
           console.error("Error: Custom query cannot be empty");
+          return 1;
+        }
+        break;
+      case "--template":
+      case "-t":
+        queryTemplate = args[++i] || "";
+        if (!queryTemplate) {
+          console.error("Error: Query template cannot be empty");
           return 1;
         }
         break;
@@ -61,14 +70,40 @@ ARGUMENTS:
 OPTIONS:
   -p, --provider   Data provider to use [mapycz, osm] (default: mapycz)
   -q, --query      Custom search query to use instead of auto-generated one
+  -t, --template   Query template with $1, $2, $3 placeholders for CIS name parts
   -h, --help       Show this help message
 
 EXAMPLES:
   bun run cli.ts "Plzeň,,CAN;H WC MHD"
   bun run cli.ts "Praha,,Hlavní nádraží;U" --provider osm
   bun run cli.ts "Prešov,,AS MHD žel.st." --query "Prešov autobusové nádražie"
+  bun run cli.ts "Lipt.Michal,,Jednota" --template "Liptovský $2, $3"
     `);
     return !cisName ? 1 : 0;
+  }
+
+  if (queryTemplate && !customQuery) {
+    const cisParts = cisName.split(",");
+
+    const firstPart = cisParts[0] || "";
+    const dotMatch = firstPart.match(/([^.]+)\.(.+)/);
+    const afterDot = dotMatch ? dotMatch[2] : "";
+
+    customQuery = queryTemplate.replace(/\$(\d)/g, (_, index) => {
+      const num = parseInt(index, 10);
+      switch (num) {
+        case 1:
+          return firstPart!;
+        case 2:
+          return afterDot!;
+        case 3:
+          return cisParts[2] || "";
+        default:
+          return cisParts[num - 1] || "";
+      }
+    });
+
+    console.log(`Generated query from template: "${customQuery}"`);
   }
 
   if (!(await exists(csvPath))) {

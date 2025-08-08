@@ -11,8 +11,6 @@ const gtfs = await Array.fromAsync(glob(join("gtfs", "**/*.zip")));
 await mkdir(join(".tmp", "tidy-gtfs"), { recursive: true });
 
 for (const gtf of gtfs) {
-  if (gtf.includes("dpb")) continue;
-
   const agencyKey = gtf
     .split("/")
     .pop()
