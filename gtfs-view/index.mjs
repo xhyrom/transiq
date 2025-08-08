@@ -149,13 +149,6 @@ const indexHtmlContent = `
         background-size: 15px 15px;
       }
 
-      .content {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-        flex: 1;
-      }
-
       h1 {
         text-align: center;
         margin-bottom: 30px;
@@ -298,38 +291,36 @@ const indexHtmlContent = `
     </style>
 </head>
 <body>
-    <div class="content">
-        <header>
-            <h1>Transit GTFS Viewer</h1>
-            <p class="subtitle">Interactive transit schedule and map viewer</p>
-        </header>
+    <header>
+        <h1>Transit GTFS Viewer</h1>
+        <p class="subtitle">Interactive transit schedule and map viewer</p>
+    </header>
 
-        <p class="agency-count">${agencies.length} transit ${agencies.length === 1 ? "agency" : "agencies"} available</p>
+    <p class="agency-count">${agencies.length} transit ${agencies.length === 1 ? "agency" : "agencies"} available</p>
 
-        <div class="agencies-container">
-            ${agencies
-              .map(
-                (agency) => `
-                <div class="agency-card">
-                    <div class="agency-name">${agency.agency_name || agency.agency_key}</div>
-                    <div class="agency-info">
-                        ${agency.agency_url ? `<div>Website: <a href="${agency.agency_url}" target="_blank">${agency.agency_url}</a></div>` : ""}
-                        ${agency.agency_phone ? `<div>Phone: ${agency.agency_phone}</div>` : ""}
-                        ${agency.agency_timezone ? `<div>Timezone: ${agency.agency_timezone}</div>` : ""}
-                    </div>
-                    <div class="button-group">
-                        <a href="./${agency.agency_key}/" class="view-button">
-                            View Schedules
-                        </a>
-                        <a href="/gtfs/${agency.agency_lang}/${agency.agency_key}.zip" class="download-button" download>
-                            Download GTFS
-                        </a>
-                    </div>
+    <div class="agencies-container">
+        ${agencies
+          .map(
+            (agency) => `
+            <div class="agency-card">
+                <div class="agency-name">${agency.agency_name || agency.agency_key}</div>
+                <div class="agency-info">
+                    ${agency.agency_url ? `<div>Website: <a href="${agency.agency_url}" target="_blank">${agency.agency_url}</a></div>` : ""}
+                    ${agency.agency_phone ? `<div>Phone: ${agency.agency_phone}</div>` : ""}
+                    ${agency.agency_timezone ? `<div>Timezone: ${agency.agency_timezone}</div>` : ""}
                 </div>
-            `,
-              )
-              .join("")}
-        </div>
+                <div class="button-group">
+                    <a href="./${agency.agency_key}/" class="view-button">
+                        View Schedules
+                    </a>
+                    <a href="/gtfs/${agency.agency_lang}/${agency.agency_key}.zip" class="download-button" download>
+                        Download GTFS
+                    </a>
+                </div>
+            </div>
+        `,
+          )
+          .join("")}
     </div>
 
     <footer>
