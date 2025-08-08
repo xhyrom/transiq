@@ -87,7 +87,7 @@ for (const gtf of gtfs) {
     showMap: true,
     showOnlyTimepoint: true,
     showRouteTitle: true,
-    showStopCity: true,
+    showStopCity: false,
     showStopDescription: true,
     showStoptimesForRequestStops: true,
     skipImport: false,
