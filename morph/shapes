@@ -71,7 +71,6 @@ download_osm() {
 
     local countries=(
         "slovakia-latest.osm.bz2"
-        "czech-republic-latest.osm.bz2"
     )
 
     local osmconvert_path="$OSM_DIR/osmconvert64"
@@ -91,7 +90,7 @@ download_osm() {
 
         if [ ! -f "$osm_file" ]; then
             echo -e "${BLUE}Downloading OSM data for ${country%.osm.bz2}...${NC}"
-            wget -q --show-progress "https://download.geofabrik.de/europe/$country" -O "$osm_file_zip"
+            wget --show-progress --timeout=60 --tries=2 --retry-connrefused "https://download.geofabrik.de/europe/$country" -O "$osm_file_zip"
 
             echo -e "${BLUE}Unzipping OSM data for ${country%.osm.bz2}...${NC}"
             bzip2 -d "$osm_file_zip"
