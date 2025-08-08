@@ -13,7 +13,7 @@ for (const feed of feeds) {
   const spinner = ora(`[${countryCode}] Downloading ${feed.name}`).start();
 
   try {
-    await ensureDirectory(join(gtfsDir, feed.country!));
+    await mkdir(join(gtfsDir, feed.country!), { recursive: true });
 
     const source = await feed.getLatestSource();
     const fileName = join(gtfsDir, feed.country!, `${feed.id}.zip`);
