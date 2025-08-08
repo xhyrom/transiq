@@ -18,7 +18,10 @@ jobs:
         with:
           root-reserve-mb: 512
           swap-size-mb: 1024
-          remove-dotnet: "true"
+          remove-android: "true"
+          remove-codeql: "true"
+          remove-haskell: "true"
+          remove-docker-images: "true"
 
       - uses: actions/checkout@v3
         with:
@@ -41,7 +44,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: .tmp/morph/osm/latest.osm.bz2
-          key: ${{ runner.os }}-osm-data-${{ hashFiles('transiq/morph/shapes') }}-v1
+          key: ${{ runner.os }}-osm-data-${{ hashFiles('morph/shapes') }}-v1
 
       - name: Morph
         run: bun morph:run
