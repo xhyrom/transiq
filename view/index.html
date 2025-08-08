@@ -47,13 +47,6 @@
         background-size: 15px 15px;
       }
 
-      .content {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-        flex: 1;
-      }
-
       h1 {
         text-align: center;
         margin-bottom: 30px;
@@ -196,153 +189,151 @@
     </style>
 </head>
 <body>
-    <div class="content">
-        <header>
-            <h1>Transit GTFS Viewer</h1>
-            <p class="subtitle">Interactive transit schedule and map viewer</p>
-        </header>
+    <header>
+        <h1>Transit GTFS Viewer</h1>
+        <p class="subtitle">Interactive transit schedule and map viewer</p>
+    </header>
 
-        <p class="agency-count">8 transit agencies available</p>
+    <p class="agency-count">8 transit agencies available</p>
 
-        <div class="agencies-container">
-            
-                <div class="agency-card">
-                    <div class="agency-name">A-EXPRESS s.r.o.</div>
-                    <div class="agency-info">
-                        <div>Website: <a href="https://www.aexpress.cz" target="_blank">https://www.aexpress.cz</a></div>
-                        <div>Phone: +420 606 619 913</div>
-                        <div>Timezone: Europe/Bratislava</div>
-                    </div>
-                    <div class="button-group">
-                        <a href="./a-express-sro/" class="view-button">
-                            View Schedules
-                        </a>
-                        <a href="/gtfs/sk/a-express-sro.zip" class="download-button" download>
-                            Download GTFS
-                        </a>
-                    </div>
+    <div class="agencies-container">
+        
+            <div class="agency-card">
+                <div class="agency-name">A-EXPRESS s.r.o.</div>
+                <div class="agency-info">
+                    <div>Website: <a href="https://www.aexpress.cz" target="_blank">https://www.aexpress.cz</a></div>
+                    <div>Phone: +420 606 619 913</div>
+                    <div>Timezone: Europe/Bratislava</div>
                 </div>
-            
-                <div class="agency-card">
-                    <div class="agency-name">ARRIVA Liorbus, a.s.</div>
-                    <div class="agency-info">
-                        <div>Website: <a href="https://www.arriva.sk" target="_blank">https://www.arriva.sk</a></div>
-                        <div>Phone: 0915 733 733</div>
-                        <div>Timezone: Europe/Bratislava</div>
-                    </div>
-                    <div class="button-group">
-                        <a href="./arriva-liorbus-as/" class="view-button">
-                            View Schedules
-                        </a>
-                        <a href="/gtfs/sk/arriva-liorbus-as.zip" class="download-button" download>
-                            Download GTFS
-                        </a>
-                    </div>
+                <div class="button-group">
+                    <a href="./a-express-sro/" class="view-button">
+                        View Schedules
+                    </a>
+                    <a href="/gtfs/sk/a-express-sro.zip" class="download-button" download>
+                        Download GTFS
+                    </a>
                 </div>
-            
-                <div class="agency-card">
-                    <div class="agency-name">ARRIVA Trnava, a.s.</div>
-                    <div class="agency-info">
-                        <div>Website: <a href="https://www.arrivatrnava.sk" target="_blank">https://www.arrivatrnava.sk</a></div>
-                        <div>Phone: 0915 733 733</div>
-                        <div>Timezone: Europe/Bratislava</div>
-                    </div>
-                    <div class="button-group">
-                        <a href="./arriva-trnava-as/" class="view-button">
-                            View Schedules
-                        </a>
-                        <a href="/gtfs/sk/arriva-trnava-as.zip" class="download-button" download>
-                            Download GTFS
-                        </a>
-                    </div>
+            </div>
+        
+            <div class="agency-card">
+                <div class="agency-name">ARRIVA Liorbus, a.s.</div>
+                <div class="agency-info">
+                    <div>Website: <a href="https://www.arriva.sk" target="_blank">https://www.arriva.sk</a></div>
+                    <div>Phone: 0915 733 733</div>
+                    <div>Timezone: Europe/Bratislava</div>
                 </div>
-            
-                <div class="agency-card">
-                    <div class="agency-name">DOMINIQ s.r.o.</div>
-                    <div class="agency-info">
-                        <div>Website: <a href="https://dominiq.sk/" target="_blank">https://dominiq.sk/</a></div>
-                        
-                        <div>Timezone: Europe/Bratislava</div>
-                    </div>
-                    <div class="button-group">
-                        <a href="./ids-bk_regional/" class="view-button">
-                            View Schedules
-                        </a>
-                        <a href="/gtfs/sk/ids-bk_regional.zip" class="download-button" download>
-                            Download GTFS
-                        </a>
-                    </div>
+                <div class="button-group">
+                    <a href="./arriva-liorbus-as/" class="view-button">
+                        View Schedules
+                    </a>
+                    <a href="/gtfs/sk/arriva-liorbus-as.zip" class="download-button" download>
+                        Download GTFS
+                    </a>
                 </div>
-            
-                <div class="agency-card">
-                    <div class="agency-name">SAD Lučenec a.s.</div>
-                    <div class="agency-info">
-                        <div>Website: <a href="http://www.sadlc.sk/" target="_blank">http://www.sadlc.sk/</a></div>
-                        <div>Phone: +421 650 958 958</div>
-                        <div>Timezone: Europe/Bratislava</div>
-                    </div>
-                    <div class="button-group">
-                        <a href="./sadlc/" class="view-button">
-                            View Schedules
-                        </a>
-                        <a href="/gtfs/sk/sadlc.zip" class="download-button" download>
-                            Download GTFS
-                        </a>
-                    </div>
+            </div>
+        
+            <div class="agency-card">
+                <div class="agency-name">ARRIVA Trnava, a.s.</div>
+                <div class="agency-info">
+                    <div>Website: <a href="https://www.arrivatrnava.sk" target="_blank">https://www.arrivatrnava.sk</a></div>
+                    <div>Phone: 0915 733 733</div>
+                    <div>Timezone: Europe/Bratislava</div>
                 </div>
-            
-                <div class="agency-card">
-                    <div class="agency-name">SAD Prievidza a.s., prev. Partizánske</div>
-                    <div class="agency-info">
-                        <div>Website: <a href="https://www.sadpd.sk/" target="_blank">https://www.sadpd.sk/</a></div>
-                        <div>Phone: +421 46 5426777</div>
-                        <div>Timezone: Europe/Bratislava</div>
-                    </div>
-                    <div class="button-group">
-                        <a href="./sadpd/" class="view-button">
-                            View Schedules
-                        </a>
-                        <a href="/gtfs/sk/sadpd.zip" class="download-button" download>
-                            Download GTFS
-                        </a>
-                    </div>
+                <div class="button-group">
+                    <a href="./arriva-trnava-as/" class="view-button">
+                        View Schedules
+                    </a>
+                    <a href="/gtfs/sk/arriva-trnava-as.zip" class="download-button" download>
+                        Download GTFS
+                    </a>
                 </div>
-            
-                <div class="agency-card">
-                    <div class="agency-name">SAD Žilina, a.s.,prev.Čadca</div>
-                    <div class="agency-info">
-                        <div>Website: <a href="https://www.sadza.sk/" target="_blank">https://www.sadza.sk/</a></div>
-                        <div>Phone: .0911511071</div>
-                        <div>Timezone: Europe/Bratislava</div>
-                    </div>
-                    <div class="button-group">
-                        <a href="./sadza/" class="view-button">
-                            View Schedules
-                        </a>
-                        <a href="/gtfs/sk/sadza.zip" class="download-button" download>
-                            Download GTFS
-                        </a>
-                    </div>
+            </div>
+        
+            <div class="agency-card">
+                <div class="agency-name">ARRIVA Mobility Solutions, s.r.o.</div>
+                <div class="agency-info">
+                    <div>Website: <a href="https://arriva.sk/" target="_blank">https://arriva.sk/</a></div>
+                    <div>Phone: +421 915 733 733</div>
+                    <div>Timezone: Europe/Bratislava</div>
                 </div>
-            
-                <div class="agency-card">
-                    <div class="agency-name">Slovak Lines Express, a.s.</div>
-                    <div class="agency-info">
-                        <div>Website: <a href="https://www.slovaklines.sk" target="_blank">https://www.slovaklines.sk</a></div>
-                        <div>Phone: +421 255 422 734</div>
-                        <div>Timezone: Europe/Bratislava</div>
-                    </div>
-                    <div class="button-group">
-                        <a href="./slovak-lines-express-as/" class="view-button">
-                            View Schedules
-                        </a>
-                        <a href="/gtfs/sk/slovak-lines-express-as.zip" class="download-button" download>
-                            Download GTFS
-                        </a>
-                    </div>
+                <div class="button-group">
+                    <a href="./ids-bk_regional/" class="view-button">
+                        View Schedules
+                    </a>
+                    <a href="/gtfs/sk/ids-bk_regional.zip" class="download-button" download>
+                        Download GTFS
+                    </a>
                 </div>
-            
-        </div>
+            </div>
+        
+            <div class="agency-card">
+                <div class="agency-name">SAD Lučenec a.s., OZ Rimavská Sobota</div>
+                <div class="agency-info">
+                    <div>Website: <a href="http://www.sadlc.sk/" target="_blank">http://www.sadlc.sk/</a></div>
+                    <div>Phone: +421 650 958 958</div>
+                    <div>Timezone: Europe/Bratislava</div>
+                </div>
+                <div class="button-group">
+                    <a href="./sadlc/" class="view-button">
+                        View Schedules
+                    </a>
+                    <a href="/gtfs/sk/sadlc.zip" class="download-button" download>
+                        Download GTFS
+                    </a>
+                </div>
+            </div>
+        
+            <div class="agency-card">
+                <div class="agency-name">SAD Prievidza a.s., prev. Partizánske</div>
+                <div class="agency-info">
+                    <div>Website: <a href="https://www.sadpd.sk/" target="_blank">https://www.sadpd.sk/</a></div>
+                    <div>Phone: +421 46 5426777</div>
+                    <div>Timezone: Europe/Bratislava</div>
+                </div>
+                <div class="button-group">
+                    <a href="./sadpd/" class="view-button">
+                        View Schedules
+                    </a>
+                    <a href="/gtfs/sk/sadpd.zip" class="download-button" download>
+                        Download GTFS
+                    </a>
+                </div>
+            </div>
+        
+            <div class="agency-card">
+                <div class="agency-name">SAD Žilina a.s., prev. Žilina</div>
+                <div class="agency-info">
+                    <div>Website: <a href="https://www.sadza.sk/" target="_blank">https://www.sadza.sk/</a></div>
+                    <div>Phone: .0911511056</div>
+                    <div>Timezone: Europe/Bratislava</div>
+                </div>
+                <div class="button-group">
+                    <a href="./sadza/" class="view-button">
+                        View Schedules
+                    </a>
+                    <a href="/gtfs/sk/sadza.zip" class="download-button" download>
+                        Download GTFS
+                    </a>
+                </div>
+            </div>
+        
+            <div class="agency-card">
+                <div class="agency-name">Slovak Lines Express, a.s.</div>
+                <div class="agency-info">
+                    <div>Website: <a href="https://www.slovaklines.sk" target="_blank">https://www.slovaklines.sk</a></div>
+                    <div>Phone: +421 255 422 734</div>
+                    <div>Timezone: Europe/Bratislava</div>
+                </div>
+                <div class="button-group">
+                    <a href="./slovak-lines-express-as/" class="view-button">
+                        View Schedules
+                    </a>
+                    <a href="/gtfs/sk/slovak-lines-express-as.zip" class="download-button" download>
+                        Download GTFS
+                    </a>
+                </div>
+            </div>
+        
     </div>
 
     <footer>
