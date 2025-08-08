@@ -1,11 +1,12 @@
 {
-  "name": "transport",
+  "name": "transiq",
   "type": "module",
   "private": true,
   "scripts": {
     "cis:scrape": "bun cis/scraper/index.ts",
     "cis:xlsx2gtfs": "bun cis/xlsx2gtfs/index.ts",
-    "download": "bun feeds/cli.ts"
+    "cis:run": "bun cis:scrape && bun cis:xlsx2gtfs",
+    "feeds:run": "bun feeds/index.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",
@@ -16,12 +17,9 @@
   "peerDependencies": {
     "typescript": "^5"
   },
-  "dependencies": {
-    "ora": "^8.2.0",
-    "@cis/client": "workspace:^"
-  },
   "workspaces": [
     "cis/*",
+    "feeds",
     "gtfs-view",
     "kaeru"
   ],

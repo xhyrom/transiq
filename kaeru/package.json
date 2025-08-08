@@ -1,9 +1,8 @@
 {
-  "name": "kaeru",
+  "name": "@transiq/kaeru",
   "type": "module",
   "private": true,
   "dependencies": {
-    "@cis/xlsx2gtfs": "workspace:*",
     "csv-parse": "^6.1.0",
     "csv-stringify": "^6.6.0"
   }

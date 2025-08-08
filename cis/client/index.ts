@@ -6,7 +6,9 @@ export async function getGftsZip(id: string) {
   const gtfsDir = join(".tmp", "cp-sk", id, "gtfs");
 
   if (!(await exists(gtfsDir))) {
-    throw new Error(`GTFS directory not found: ${gtfsDir}`);
+    throw new Error(
+      `GTFS directory not found: ${gtfsDir}. Make sure to run the cis:run script first.`,
+    );
   }
 
   const zipPath = join(gtfsDir, "gtfs.zip");

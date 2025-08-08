@@ -1,16 +1,54 @@
-name: Update View for GTFS Data
+name: Update GTFS Data and View
 
 on:
   schedule:
-    - cron: "30 0 * * *"
+    - cron: "0 0 * * *"
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
+  update-gtfs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: oven-sh/setup-bun@v1
+      - run: bun install
+
+      - name: CIS
+        run: bun cis:run
+
+      - name: Feeds
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        run: bun feeds:run
+
+      - name: Setup Git
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+      - name: Checkout gtfs branch
+        run: |
+          rm -rf gtfs-branch
+
+          git clone --branch gtfs --single-branch https://github.com/${{ github.repository }}.git gtfs-branch
+
+      - name: Copy and commit GTFS files
+        run: |
+          cd gtfs-branch
+
+          cp -r ../gtfs .
+
+          git add -A
+          git commit -m "📦 Update GTFS data $(date +'%Y-%m-%d')" || echo "No changes to commit"
+          git push https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git gtfs
+
   update-view:
     runs-on: ubuntu-latest
+    needs: [update-gtfs]
 
     steps:
       - uses: actions/checkout@v3

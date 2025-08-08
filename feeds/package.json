@@ -1,0 +1,9 @@
+{
+  "name": "@transiq/feeds",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "ora": "^8.2.0",
+    "@cis/client": "workspace:^"
+  }
+}

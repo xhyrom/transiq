@@ -1,7 +1,7 @@
 import type { GtfsStop, PartialGtfsStop } from "./gtfs/models";
 import { stopId } from "./utils/id";
 import { removeDuplicates } from "./utils/list";
-import { queryStopByCisName } from "kaeru/client";
+import { queryStopByCisName } from "@transiq/kaeru/client";
 
 export function resolvePartialGtfsStops(stops: PartialGtfsStop[]): GtfsStop[] {
   return removeDuplicates(stops, (stop) => stop.cis_name).map(

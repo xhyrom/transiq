@@ -3,10 +3,6 @@
   "workspaces": {
     "": {
       "name": "transport",
-      "dependencies": {
-        "@cis/client": "workspace:^",
-        "ora": "^8.2.0",
-      },
       "devDependencies": {
         "@types/bun": "latest",
         "eslint": "^9.32.0",
@@ -17,14 +13,14 @@
         "typescript": "^5",
       },
     },
-    "cis/cis2gtfs": {
-      "name": "@cis/cis2gtfs",
-    },
     "cis/client": {
       "name": "@cis/client",
       "dependencies": {
         "jszip": "^3.10.1",
       },
+    },
+    "cis/jdf2gtfs": {
+      "name": "@cis/jdf2gtfs",
     },
     "cis/scraper": {
       "name": "@cis/scraper",
@@ -35,9 +31,16 @@
     "cis/xlsx2gtfs": {
       "name": "@cis/xlsx2gtfs",
       "dependencies": {
+        "@transiq/kaeru": "workspace:*",
         "csv-parse": "^6.1.0",
-        "kaeru": "workspace:*",
         "xlsx": "^0.18.5",
+      },
+    },
+    "feeds": {
+      "name": "@transiq/feeds",
+      "dependencies": {
+        "@cis/client": "workspace:^",
+        "ora": "^8.2.0",
       },
     },
     "gtfs-view": {
@@ -48,9 +51,8 @@
       },
     },
     "kaeru": {
-      "name": "kaeru",
+      "name": "@transiq/kaeru",
       "dependencies": {
-        "@cis/xlsx2gtfs": "workspace:*",
         "csv-parse": "^6.1.0",
         "csv-stringify": "^6.6.0",
       },
@@ -70,9 +72,9 @@
 
     "@babel/types": ["@babel/types@7.28.2", "", { "dependencies": { "@babel/helper-string-parser": "^7.27.1", "@babel/helper-validator-identifier": "^7.27.1" } }, "sha512-ruv7Ae4J5dUYULmeXw1gmb7rYRz57OWCPM57pHojnLq/3Z1CK2lNSLTCVjxVk1F/TZHwOZZrOWi0ur95BbLxNQ=="],
 
-    "@cis/cis2gtfs": ["@cis/cis2gtfs@workspace:cis/cis2gtfs"],
-
     "@cis/client": ["@cis/client@workspace:cis/client"],
+
+    "@cis/jdf2gtfs": ["@cis/jdf2gtfs@workspace:cis/jdf2gtfs"],
 
     "@cis/scraper": ["@cis/scraper@workspace:cis/scraper"],
 
@@ -142,7 +144,11 @@
 
     "@tootallnate/quickjs-emscripten": ["@tootallnate/quickjs-emscripten@0.23.0", "", {}, "sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA=="],
 
+    "@transiq/feeds": ["@transiq/feeds@workspace:feeds"],
+
     "@transiq/gtfs-view": ["@transiq/gtfs-view@workspace:gtfs-view"],
+
+    "@transiq/kaeru": ["@transiq/kaeru@workspace:kaeru"],
 
     "@turf/clean-coords": ["@turf/clean-coords@7.2.0", "", { "dependencies": { "@turf/helpers": "^7.2.0", "@turf/invariant": "^7.2.0", "@types/geojson": "^7946.0.10", "tslib": "^2.8.1" } }, "sha512-+5+J1+D7wW7O/RDXn46IfCHuX1gIV1pIAQNSA7lcDbr3HQITZj334C4mOGZLEcGbsiXtlHWZiBtm785Vg8i+QQ=="],
 
@@ -627,8 +633,6 @@
     "jstransformer": ["jstransformer@1.0.0", "", { "dependencies": { "is-promise": "^2.0.0", "promise": "^7.0.1" } }, "sha512-C9YK3Rf8q6VAPDCCU9fnqo3mAfOH6vUGnMcP4AQAYIEpWtfGLpwOTmZ+igtdK5y+VvI2n3CyYSzy4Qh34eq24A=="],
 
     "jszip": ["jszip@3.10.1", "", { "dependencies": { "lie": "~3.3.0", "pako": "~1.0.2", "readable-stream": "~2.3.6", "setimmediate": "^1.0.5" } }, "sha512-xXDvecyTpGLrqFrvkrUSoxxfJI5AH7U8zxxtVclpsUtMCq4JQ290LY8AW5c7Ggnr/Y/oK+bQMbqK2qmtk3pN4g=="],
-
-    "kaeru": ["kaeru@workspace:kaeru"],
 
     "keyv": ["keyv@4.5.4", "", { "dependencies": { "json-buffer": "3.0.1" } }, "sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw=="],
 
