@@ -2,5 +2,5 @@
 
 ### morph.shapes
 
-Generates `shapes.txt` using [ad-freiburg/pfaedle](./pfaedle) data and stop sequences.
+Generates `shapes.txt` using [ad-freiburg/pfaedle](https://github.com/ad-freiburg/pfaedle) data and stop sequences.
 Useful when the original feed doesn’t include shapes or they are inaccurate.
