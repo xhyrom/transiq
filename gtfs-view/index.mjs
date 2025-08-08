@@ -23,7 +23,7 @@ for (const gtf of gtfs) {
   const tidyGtfPath = join(".tmp", "tidy-gtfs", agencyKey);
 
   console.log(`Tidy GTFS: ${gtf} -> ${tidyGtfPath}`);
-  await exec(`gtfstidy -SCRmTcdsOeD ${gtf} -o ${tidyGtfPath}`);
+  await exec(`gtfsclean -SCRmTcdsOeD ${gtf} -o ${tidyGtfPath}`);
 
   const agencyCsv = parse(
     await readFile(join(tidyGtfPath, "agency.txt"), "utf8"),

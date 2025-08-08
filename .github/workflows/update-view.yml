@@ -26,7 +26,7 @@ jobs:
           cd gtfs-view
           bun install
 
-          go install github.com/patrickbr/gtfstidy@latest
+          go install github.com/public-transport/gtfsclean@latest
 
       - name: Setup Git
         run: |
