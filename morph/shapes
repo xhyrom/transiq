@@ -1,0 +1,147 @@
+#!/bin/bash
+
+SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+MORPH_DIR="$SCRIPT_DIR"
+PFAEDLE_DIR="$MORPH_DIR/pfaedle"
+TMP_DIR="$MORPH_DIR/../.tmp/morph"
+OSM_DIR="$TMP_DIR/osm"
+CONFIG_PATH="$MORPH_DIR/pfaedle.cfg"
+GTFS_DIR="$MORPH_DIR/../gtfs"
+
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+show_help() {
+    echo -e "${BLUE}TransIQ GTFS Shape Generator${NC}"
+    echo ""
+    echo "Usage: shapes.sh [command] [options]"
+    echo ""
+    echo "Commands:"
+    echo "  init              Build pfaedle and download OSM data"
+    echo "  add [gtfs] [osm]  Add shapes to a GTFS file"
+    echo "  all               Process all GTFS files"
+    echo ""
+    echo "Options for 'add':"
+    echo "  [gtfs]            Path to GTFS file"
+    echo "  [osm]             Path to OSM file (default: .tmp/morph/osm/slovakia-latest.osm.bz2)"
+}
+
+build_pfaedle() {
+    if [ ! -f "$PFAEDLE_DIR/build/pfaedle" ]; then
+        echo -e "${BLUE}Building pfaedle...${NC}"
+        mkdir -p "$PFAEDLE_DIR/build"
+        cd "$PFAEDLE_DIR/build" || exit 1
+        cmake ..
+        make -j
+        cd - > /dev/null || exit 1
+        echo -e "${GREEN}pfaedle built successfully${NC}"
+    else
+        echo -e "${GREEN}pfaedle already built${NC}"
+    fi
+}
+
+download_osm() {
+    local osm_file="$OSM_DIR/slovakia-latest.osm.bz2"
+
+    if [ ! -f "$osm_file" ]; then
+        echo -e "${BLUE}Downloading OSM data for Slovakia...${NC}"
+        mkdir -p "$OSM_DIR"
+        wget -q --show-progress https://download.geofabrik.de/europe/slovakia-latest.osm.bz2 -O "$osm_file"
+        echo -e "${GREEN}OSM data downloaded${NC}"
+    else
+        echo -e "${GREEN}OSM data already exists${NC}"
+    fi
+}
+
+add_shapes() {
+    local gtfs_file="$1"
+    local osm_file="$2"
+
+    if [ -z "$gtfs_file" ]; then
+        echo -e "${RED}Error: GTFS file not specified${NC}"
+        show_help
+        exit 1
+    fi
+
+    if [ ! -f "$gtfs_file" ]; then
+        echo -e "${RED}Error: GTFS file not found: $gtfs_file${NC}"
+        exit 1
+    fi
+
+    if [ -z "$osm_file" ]; then
+        osm_file="$OSM_DIR/slovakia-latest.osm.bz2"
+    elif [ ! -f "$osm_file" ] && [ -f "$OSM_DIR/$(basename "$osm_file")" ]; then
+        osm_file="$OSM_DIR/$(basename "$osm_file")"
+    fi
+
+    if [ ! -f "$osm_file" ]; then
+        echo -e "${RED}Error: OSM file not found: $osm_file${NC}"
+        exit 1
+    fi
+
+    echo -e "${BLUE}Adding shapes to $gtfs_file using OSM data from $osm_file${NC}"
+    "$PFAEDLE_DIR/build/pfaedle" -c "$CONFIG_PATH" -x "$osm_file" -m bus "$gtfs_file"
+
+    if [ $? -eq 0 ]; then
+        echo -e "${GREEN}Shapes added to $gtfs_file${NC}"
+    else
+        echo -e "${RED}Failed to add shapes to $gtfs_file${NC}"
+        exit 1
+    fi
+}
+
+process_all_gtfs() {
+    if [ ! -d "$GTFS_DIR" ]; then
+        echo -e "${RED}Error: GTFS directory not found: $GTFS_DIR${NC}"
+        exit 1
+    fi
+
+    local osm_file="$OSM_DIR/slovakia-latest.osm.bz2"
+    local total_files=0
+    local processed_files=0
+
+    echo -e "${BLUE}Scanning for GTFS files...${NC}"
+    total_files=$(find "$GTFS_DIR" -type f -name "*.zip" | wc -l)
+
+    if [ "$total_files" -eq 0 ]; then
+        echo -e "${RED}No GTFS files found in $GTFS_DIR${NC}"
+        exit 1
+    fi
+
+    echo -e "${BLUE}Processing $total_files GTFS files...${NC}"
+
+    find "$GTFS_DIR" -type f -name "*.zip" | while read -r gtfs_file; do
+        processed_files=$((processed_files + 1))
+        echo -e "${BLUE}[$processed_files/$total_files] Processing $(basename "$gtfs_file")${NC}"
+        add_shapes "$gtfs_file" "$osm_file"
+    done
+
+    echo -e "${GREEN}All $total_files GTFS files processed successfully${NC}"
+}
+
+case "$1" in
+    init)
+        build_pfaedle
+        download_osm
+        ;;
+    add)
+        build_pfaedle
+        download_osm
+        add_shapes "$2" "$3"
+        ;;
+    all)
+        build_pfaedle
+        download_osm
+        process_all_gtfs
+        ;;
+    -h|--help|help)
+        show_help
+        ;;
+    *)
+        echo -e "${RED}Error: Unknown command '$1'${NC}"
+        show_help
+        exit 1
+        ;;
+esac
