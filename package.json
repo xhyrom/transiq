@@ -24,5 +24,8 @@
     "cis/*",
     "gtfs-view",
     "kaeru"
-  ]
+  ],
+  "patchedDependencies": {
+    "gtfs-to-html@2.10.15": "patches/gtfs-to-html@2.10.15.patch"
+  }
 }

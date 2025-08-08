@@ -1,0 +1,12 @@
+diff --git a/dist/app/index.js b/dist/app/index.js
+index 87bdd9861d57acd9242247c6c73dbbc2c8cac0b0..dfa0ec3f017ab9652785be76a47a19521c3d523e 100644
+--- a/dist/app/index.js
++++ b/dist/app/index.js
+@@ -293,6 +293,7 @@ function generateFileName(timetable, config2, extension = "html") {
+   if (!isNullOrEmpty(timetable.direction_id)) {
+     filename += `_${timetable.direction_id}`;
+   }
++  filename += `_${Date.now().toString()}`;
+   filename += `_${formatDays(timetable, config2).replace(/\s/g, "")}.${extension}`;
+   return sanitize(filename).toLowerCase();
+ }
