@@ -26,6 +26,7 @@ show_help() {
     echo ""
     echo "Options for 'add' and 'all':"
     echo "  --overwrite       Replace the original GTFS file with the shaped version"
+    echo "  --jobs=N          Number of parallel jobs to run (default: number of CPU cores)"
     echo ""
     echo "Arguments:"
     echo "  [gtfs]            Path to GTFS file"
@@ -47,13 +48,23 @@ build_pfaedle() {
 }
 
 download_osm() {
-    local osm_file="$OSM_DIR/slovakia-latest.osm.bz2"
+    local osm_file_zip="$OSM_DIR/slovakia-latest.osm.bz2"
+    local osm_file="$OSM_DIR/slovakia-latest.osm"
 
     if [ ! -f "$osm_file" ]; then
         echo -e "${BLUE}Downloading OSM data for Slovakia...${NC}"
         mkdir -p "$OSM_DIR"
-        wget -q --show-progress https://download.geofabrik.de/europe/slovakia-latest.osm.bz2 -O "$osm_file"
+        wget -q --show-progress https://download.geofabrik.de/europe/slovakia-latest.osm.bz2 -O "$osm_file_zip"
         echo -e "${GREEN}OSM data downloaded${NC}"
+
+        echo -e "${BLUE}Unzipping OSM data...${NC}"
+        bzip2 -d "$osm_file_zip"
+        if [ $? -eq 0 ]; then
+            echo -e "${GREEN}OSM data unzipped successfully${NC}"
+        else
+            echo -e "${RED}Failed to unzip OSM data${NC}"
+            exit 1
+        fi
     else
         echo -e "${GREEN}OSM data already exists${NC}"
     fi
@@ -86,7 +97,7 @@ add_shapes() {
     fi
 
     if [ -z "$osm_file" ]; then
-        osm_file="$OSM_DIR/slovakia-latest.osm.bz2"
+        osm_file="$OSM_DIR/slovakia-latest.osm"
     elif [ ! -f "$osm_file" ] && [ -f "$OSM_DIR/$(basename "$osm_file")" ]; then
         osm_file="$OSM_DIR/$(basename "$osm_file")"
     fi
@@ -137,40 +148,77 @@ process_all_gtfs() {
     fi
 
     local overwrite=false
+    local max_parallel=$(nproc 2>/dev/null || echo 4)
 
     for arg in "$@"; do
         if [ "$arg" = "--overwrite" ]; then
             overwrite=true
-            break
+        elif [[ "$arg" =~ ^--jobs=([0-9]+)$ ]]; then
+            max_parallel="${BASH_REMATCH[1]}"
         fi
     done
 
-    local osm_file="$OSM_DIR/slovakia-latest.osm.bz2"
-    local total_files=0
-    local processed_files=0
-
-    echo -e "${BLUE}Scanning for GTFS files...${NC}"
-    total_files=$(find "$GTFS_DIR" -type f -name "*.zip" | wc -l)
+    local osm_file="$OSM_DIR/slovakia-latest.osm"
+    local total_files=$(find "$GTFS_DIR" -type f -name "*.zip" | wc -l)
 
     if [ "$total_files" -eq 0 ]; then
         echo -e "${RED}No GTFS files found in $GTFS_DIR${NC}"
         exit 1
     fi
 
-    echo -e "${BLUE}Processing $total_files GTFS files...${NC}"
+    echo -e "${BLUE}Processing $total_files GTFS files with up to $max_parallel parallel jobs...${NC}"
 
-    find "$GTFS_DIR" -type f -name "*.zip" | while read -r gtfs_file; do
-        processed_files=$((processed_files + 1))
-        echo -e "${BLUE}[$processed_files/$total_files] Processing $(basename "$gtfs_file")${NC}"
+    local tmp_dir=$(mktemp -d)
+    local sem="$tmp_dir/semaphore"
 
-        if [ "$overwrite" = true ]; then
-            add_shapes "--overwrite" "$gtfs_file" "$osm_file"
-        else
-            add_shapes "$gtfs_file" "$osm_file"
-        fi
+    mkfifo "$sem"
+    exec 3<>"$sem"
+    rm "$sem"
+
+    for ((i=0; i<max_parallel; i++)); do
+        echo >&3
     done
 
-    echo -e "${GREEN}All $total_files GTFS files processed successfully${NC}"
+    pids=()
+
+    while read -r gtfs_file; do
+        read -u 3
+
+        {
+            local basename_file=$(basename "$gtfs_file")
+            echo -e "${BLUE} Processing $basename_file${NC}"
+
+            local log_file="/tmp/pfaedle_${basename_file}.log"
+
+            if [ "$overwrite" = true ]; then
+                add_shapes "--overwrite" "$gtfs_file" "$osm_file" > "$log_file" 2>&1
+            else
+                add_shapes "$gtfs_file" "$osm_file" > "$log_file" 2>&1
+            fi
+
+            local status=$?
+            if [ $status -eq 0 ]; then
+                echo -e "${GREEN}Successfully processed $basename_file${NC}"
+            else
+                echo -e "${RED}Failed to process $basename_file${NC}"
+                echo -e "${RED}See log at $log_file${NC}"
+            fi
+
+            echo >&3
+        } &
+
+        pids+=($!)
+
+    done < <(find "$GTFS_DIR" -type f -name "*.zip")
+
+    for pid in "${pids[@]}"; do
+        wait $pid
+    done
+
+    exec 3>&-
+    rmdir "$tmp_dir"
+
+    echo -e "${GREEN}All $total_files GTFS files processed${NC}"
 }
 
 case "$1" in
