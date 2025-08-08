@@ -1,10 +1,10 @@
-import { loadFeeds } from "@feeds";
-import { downloadFile, ensureDirectory, generateLicenseFile } from "@utils";
+import { mkdir } from "node:fs/promises";
+import { downloadFile, generateLicenseFile, loadFeeds } from "./index";
 import { join } from "node:path";
 import ora from "ora";
 
 const gtfsDir = join(process.cwd(), "gtfs");
-await ensureDirectory(gtfsDir);
+await mkdir(gtfsDir, { recursive: true });
 
 const feeds = await loadFeeds();
 

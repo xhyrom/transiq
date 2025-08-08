@@ -1,14 +1,9 @@
-import {
-  downloadFile,
-  ensureDirectory,
-  sanitizeFolderName,
-} from "@helpers/util";
-import { processNestedPages } from "@helpers/pager";
+import { processNestedPages } from "./pager";
 import { parseHTML } from "linkedom";
 import { exists, mkdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 
-await ensureDirectory(".tmp");
+await mkdir(".tmp", { recursive: true });
 
 const dir = join(".tmp", "cp-sk");
 await mkdir(dir, { recursive: true });
@@ -86,7 +81,7 @@ await processNestedPages({
 
       try {
         await downloadFile(
-          { type: "url", url: `http://portal.cp.sk/${href}` },
+          `http://portal.cp.sk/${href}`,
           join(dir, folderName, fileName),
           {
             errorTexts: ["Chyba pri"],
@@ -101,3 +96,55 @@ await processNestedPages({
     }
   },
 });
+
+async function downloadFile(
+  url: string,
+  fileName: string,
+  options?: {
+    errorTexts?: string[];
+    checkContentType?: boolean;
+  },
+): Promise<void> {
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  if (options?.checkContentType) {
+    const responseClone = response.clone();
+    const contentType = responseClone.headers.get("content-type");
+    if (contentType?.includes("text/html")) {
+      const text = await responseClone.text();
+      if (options?.errorTexts) {
+        for (const errorText of options.errorTexts) {
+          if (text.includes(errorText)) {
+            throw new Error(`Server returned error: "${errorText}"`);
+          }
+        }
+      }
+    }
+  } else if (options?.errorTexts) {
+    const responseClone = response.clone();
+    const text = await responseClone.text();
+
+    for (const errorText of options.errorTexts) {
+      if (text.includes(errorText)) {
+        throw new Error(`Server returned error: "${errorText}"`);
+      }
+    }
+  }
+
+  await Bun.write(fileName, await response.arrayBuffer());
+}
+
+function sanitizeFolderName(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[\.,:;'"!?()[\]{}\/\\+*=&%$#@^|<>]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/--+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}

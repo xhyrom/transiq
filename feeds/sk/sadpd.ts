@@ -1,4 +1,4 @@
-import type { Feed, FileSource } from "@types";
+import type { Feed, FileSource } from "@feeds/types";
 
 export default {
   id: "sadpd",

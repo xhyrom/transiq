@@ -20,7 +20,7 @@ To add a new GTFS feed:
 2. Implement the feed definition following this structure:
 
 ```typescript
-import type { Feed, FileSource } from "@types";
+import type { Feed, FileSource } from "@feeds/types";
 
 export default {
   id: "unique-id",

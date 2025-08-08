@@ -17,7 +17,6 @@
     // Path aliases
     "baseUrl": ".",
     "paths": {
-      "@helpers/*": ["./helpers/*"],
       "@feeds": ["./feeds"],
       "@feeds/*": ["./feeds/*"],
       "@scripts/*": ["./scripts/*"],

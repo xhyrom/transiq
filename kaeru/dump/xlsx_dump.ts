@@ -1,10 +1,9 @@
 // dump stations to .transiq/kaeru.tsv
 
-import { ensureDirectory } from "@helpers/util";
 import { Glob } from "bun";
-import { exists, readdir, readFile } from "node:fs/promises";
+import { exists, mkdir, readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { convertXlsxToGtfs } from "@cis/xlsx2gtfs/converter";
+import { parseStops } from "@cis/xlsx2gtfs/parser";
 import { arrayToCsv } from "@cis/xlsx2gtfs/utils/csv";
 import { parse as parseCsv } from "csv-parse/sync";
 import type { PartialGtfsStop } from "@cis/xlsx2gtfs/gtfs/models";
@@ -23,13 +22,10 @@ const stops: PartialGtfsStop[] = [];
 for (const agencyFolderName of await readdir(dir)) {
   const agencyFolderPath = join(dir, agencyFolderName);
   const gtfs = join(agencyFolderPath, "gtfs");
-  await ensureDirectory(gtfs);
+  await mkdir(gtfs, { recursive: true });
 
   for await (const route of xlsxGlob.scan(agencyFolderPath)) {
-    const data = convertXlsxToGtfs(
-      await readFile(join(agencyFolderPath, route)),
-    );
-    stops.push(...data.stops);
+    stops.push(...parseStops(await readFile(join(agencyFolderPath, route))));
   }
 }
 

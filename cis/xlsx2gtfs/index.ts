@@ -1,6 +1,5 @@
-import { ensureDirectory } from "@helpers/util";
 import { Glob } from "bun";
-import { exists, readdir, readFile } from "node:fs/promises";
+import { exists, mkdir, readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { arrayToCsv, objectToCsv } from "./utils/csv";
 import type {
@@ -30,7 +29,7 @@ const xlsxGlob = new Glob("*.xlsx");
 for (const agencyFolderName of await readdir(dir)) {
   const agencyFolderPath = join(dir, agencyFolderName);
   const gtfs = join(agencyFolderPath, "gtfs");
-  await ensureDirectory(gtfs);
+  await mkdir(gtfs, { recursive: true });
 
   const info = JSON.parse(
     await readFile(join(agencyFolderPath, "info.json"), "utf-8"),
