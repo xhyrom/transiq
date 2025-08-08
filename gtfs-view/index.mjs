@@ -108,148 +108,242 @@ const indexHtmlContent = `
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transit GTFS Viewer</title>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f7;
-            color: #333;
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #333;
-            font-size: 2.5rem;
-        }
-        .agencies-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 10px;
-        }
-        .agency-card {
-            background-color: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .agency-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-        }
-        .agency-name {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #222;
-        }
-        .agency-info {
-            font-size: 0.9rem;
-            color: #555;
-            margin-bottom: 15px;
-            flex-grow: 1;
-        }
-        .button-group {
-            display: flex;
-            gap: 10px;
-            margin-top: auto;
-        }
-        .view-button, .download-button {
-            padding: 10px 16px;
-            border-radius: 6px;
-            border: none;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.15s ease;
-            font-size: 0.9rem;
-            text-align: center;
-            flex: 1;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .view-button {
-            background-color: #0066cc;
-            color: white;
-        }
-        .download-button {
-            background-color: #34c759;
-            color: white;
-        }
-        .view-button:hover {
-            background-color: #004d99;
-        }
-        .download-button:hover {
-            background-color: #28a745;
-        }
-        .agency-count {
-            text-align: center;
-            color: #666;
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-        }
-        header {
-            margin-bottom: 40px;
-            text-align: center;
-        }
-        .subtitle {
-            color: #666;
-            font-size: 1.2rem;
-            margin-top: -15px;
-        }
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
-            color: #666;
-            font-size: 0.9rem;
-        }
-        .icon {
-            margin-right: 6px;
-        }
+      :root {
+        --primary-color: #0066cc;
+        --primary-hover: #004d99;
+        --secondary-color: #34c759;
+        --secondary-hover: #28a745;
+        --text-color: #333;
+        --text-light: #666;
+        --border-color: #ddd;
+      }
+
+      :host,
+      html {
+        line-height: 1.5;
+        -webkit-text-size-adjust: 100%;
+        font-family:
+          ui-sans-serif,
+          system-ui,
+          sans-serif,
+          Apple Color Emoji,
+          Segoe UI Emoji,
+          Segoe UI Symbol,
+          Noto Color Emoji;
+        font-feature-settings: normal;
+        font-variation-settings: normal;
+        -moz-tab-size: 4;
+        -o-tab-size: 4;
+        tab-size: 4;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        color: var(--text-color);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background-image: radial-gradient(#e6e6d1 1px, #f9f9f1 0);
+        background-size: 15px 15px;
+      }
+
+      .content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        flex: 1;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: var(--text-color);
+        font-size: 2.5rem;
+      }
+
+      .agencies-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        padding: 10px;
+      }
+
+      .agency-card {
+        background-color: white;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        display: flex;
+        flex-direction: column;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .agency-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      }
+
+      .agency-name {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #222;
+      }
+
+      .agency-info {
+        font-size: 0.9rem;
+        color: var(--text-light);
+        margin-bottom: 15px;
+        flex-grow: 1;
+      }
+
+      .button-group {
+        display: flex;
+        gap: 10px;
+        margin-top: auto;
+      }
+
+      .view-button,
+      .download-button {
+        padding: 10px 16px;
+        border-radius: 6px;
+        border: none;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        font-size: 0.9rem;
+        text-align: center;
+        flex: 1;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .view-button {
+        background-color: var(--primary-color);
+        color: white;
+      }
+
+      .download-button {
+        background-color: var(--secondary-color);
+        color: white;
+      }
+
+      .view-button:hover {
+        background-color: var(--primary-hover);
+      }
+
+      .download-button:hover {
+        background-color: var(--secondary-hover);
+      }
+
+      .agency-count {
+        text-align: center;
+        color: var(--text-light);
+        margin-bottom: 20px;
+        font-size: 1.1rem;
+      }
+
+      header {
+        margin-bottom: 40px;
+        text-align: center;
+      }
+
+      .subtitle {
+        color: var(--text-light);
+        font-size: 1.2rem;
+        margin-top: -15px;
+      }
+
+      footer {
+        display: flex;
+        height: 6rem;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-image: radial-gradient(#d5d5b8 1px, #ecece2 0);
+        background-size: 15px 15px;
+        margin-top: auto;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .text-primary {
+        color: var(--text-light);
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+      }
+
+      .font-bold {
+        font-weight: bold;
+      }
+
+      .text-primary a {
+        color: #000;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .text-primary a:hover {
+        text-decoration: none;
+      }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Transit GTFS Viewer</h1>
-        <p class="subtitle">Interactive transit schedule and map viewer</p>
-    </header>
+    <div class="content">
+        <header>
+            <h1>Transit GTFS Viewer</h1>
+            <p class="subtitle">Interactive transit schedule and map viewer</p>
+        </header>
 
-    <p class="agency-count">${agencies.length} transit ${agencies.length === 1 ? "agency" : "agencies"} available</p>
+        <p class="agency-count">${agencies.length} transit ${agencies.length === 1 ? "agency" : "agencies"} available</p>
 
-    <div class="agencies-container">
-        ${agencies
-          .map(
-            (agency) => `
-            <div class="agency-card">
-                <div class="agency-name">${agency.agency_name || agency.agency_key}</div>
-                <div class="agency-info">
-                    ${agency.agency_url ? `<div>Website: <a href="${agency.agency_url}" target="_blank">${agency.agency_url}</a></div>` : ""}
-                    ${agency.agency_phone ? `<div>Phone: ${agency.agency_phone}</div>` : ""}
-                    ${agency.agency_timezone ? `<div>Timezone: ${agency.agency_timezone}</div>` : ""}
+        <div class="agencies-container">
+            ${agencies
+              .map(
+                (agency) => `
+                <div class="agency-card">
+                    <div class="agency-name">${agency.agency_name || agency.agency_key}</div>
+                    <div class="agency-info">
+                        ${agency.agency_url ? `<div>Website: <a href="${agency.agency_url}" target="_blank">${agency.agency_url}</a></div>` : ""}
+                        ${agency.agency_phone ? `<div>Phone: ${agency.agency_phone}</div>` : ""}
+                        ${agency.agency_timezone ? `<div>Timezone: ${agency.agency_timezone}</div>` : ""}
+                    </div>
+                    <div class="button-group">
+                        <a href="./${agency.agency_key}/" class="view-button">
+                            View Schedules
+                        </a>
+                        <a href="/gtfs/${agency.agency_lang}/${agency.agency_key}.zip" class="download-button" download>
+                            Download GTFS
+                        </a>
+                    </div>
                 </div>
-                <div class="button-group">
-                    <a href="./${agency.agency_key}/" class="view-button">
-                        <span class="icon">📊</span> View Schedules
-                    </a>
-                    <a href="/gtfs/${agency.agency_lang}/${agency.agency_key}.zip" class="download-button" download>
-                        <span class="icon">💾</span> Download GTFS
-                    </a>
-                </div>
-            </div>
-        `,
-          )
-          .join("")}
+            `,
+              )
+              .join("")}
+        </div>
     </div>
 
     <footer>
-        <p>GTFS data visualized with gtfs-to-html | Data updates automatically at midnight UTC</p>
+        <p class="text-primary">
+            Made with ❤️ by
+            <a class="hover:text-primaryLight font-bold" href="https://xhyrom.dev" target="_blank" rel="noopener noreferrer">
+                @xHyroM
+            </a>
+        </p>
+        <p class="text-primary">
+            <a class="hover:text-primaryLight font-bold" href="https://github.com/xhyrom/transiq" target="_blank" rel="noopener noreferrer">
+                View Source
+            </a>
+        </p>
     </footer>
 </body>
 </html>
