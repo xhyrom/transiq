@@ -5,7 +5,7 @@ on:
     branches:
       - gtfs
     paths:
-      - "gtfs/**"
+      - "gtfs/"
   workflow_dispatch:
 
 permissions:
