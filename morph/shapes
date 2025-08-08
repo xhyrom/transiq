@@ -179,9 +179,11 @@ case "$1" in
         download_osm
         ;;
     add)
+        shift
         add_shapes "$@"
         ;;
     all)
+        shift
         process_all_gtfs "$@"
         ;;
     -h|--help|help)
