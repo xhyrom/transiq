@@ -1,4 +1,4 @@
-import { read, type WorkSheet } from "xlsx";
+import { read } from "xlsx";
 import {
   GtfsCalendarDateException,
   GtfsStopAccess,
