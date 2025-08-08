@@ -12,7 +12,7 @@ permissions:
   contents: write
 
 jobs:
-  update-gtfs:
+  update-view:
     runs-on: ubuntu-latest
 
     steps:
