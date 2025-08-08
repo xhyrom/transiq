@@ -49,7 +49,9 @@ jobs:
 
           cd gtfs-branch
 
+          rm -rf view || true
           mkdir -p view
+
           cp -r ../.tmp/build/gtfs-view/* view/
 
           git add -A
