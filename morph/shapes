@@ -3,8 +3,9 @@
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 MORPH_DIR="$SCRIPT_DIR"
 PFAEDLE_DIR="$MORPH_DIR/pfaedle"
-TMP_DIR="$MORPH_DIR/../.tmp/morph"
-OSM_DIR="$TMP_DIR/osm"
+MORPH_TMP_DIR="$MORPH_DIR/../.tmp/morph"
+OSM_DIR="$MORPH_TMP_DIR/osm"
+GTFS_SHAPED_DIR="$MORPH_TMP_DIR/shaped"
 CONFIG_PATH="$MORPH_DIR/pfaedle.cfg"
 GTFS_DIR="$MORPH_DIR/../gtfs"
 
@@ -14,16 +15,19 @@ RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 show_help() {
-    echo -e "${BLUE}TransIQ GTFS Shape Generator${NC}"
+    echo -e "${BLUE}Morph GTFS Shape Generator${NC}"
     echo ""
-    echo "Usage: shapes.sh [command] [options]"
+    echo "Usage: shapes [command] [options]"
     echo ""
     echo "Commands:"
     echo "  init              Build pfaedle and download OSM data"
-    echo "  add [gtfs] [osm]  Add shapes to a GTFS file"
-    echo "  all               Process all GTFS files"
+    echo "  add [options] [gtfs] [osm]  Add shapes to a GTFS file"
+    echo "  all [options]     Process all GTFS files"
     echo ""
-    echo "Options for 'add':"
+    echo "Options for 'add' and 'all':"
+    echo "  --overwrite       Replace the original GTFS file with the shaped version"
+    echo ""
+    echo "Arguments:"
     echo "  [gtfs]            Path to GTFS file"
     echo "  [osm]             Path to OSM file (default: .tmp/morph/osm/slovakia-latest.osm.bz2)"
 }
@@ -56,8 +60,19 @@ download_osm() {
 }
 
 add_shapes() {
-    local gtfs_file="$1"
-    local osm_file="$2"
+    local overwrite=false
+    local args=()
+
+    for arg in "$@"; do
+        if [ "$arg" = "--overwrite" ]; then
+            overwrite=true
+        else
+            args+=("$arg")
+        fi
+    done
+
+    local gtfs_file="${args[0]}"
+    local osm_file="${args[1]}"
 
     if [ -z "$gtfs_file" ]; then
         echo -e "${RED}Error: GTFS file not specified${NC}"
@@ -81,11 +96,34 @@ add_shapes() {
         exit 1
     fi
 
+    local agency=$(basename "$gtfs_file" .zip)
+    local output_dir="$GTFS_SHAPED_DIR/$agency"
+    local temp_zip="$GTFS_SHAPED_DIR/${agency}.zip"
+
+    mkdir -p "$GTFS_SHAPED_DIR"
+
     echo -e "${BLUE}Adding shapes to $gtfs_file using OSM data from $osm_file${NC}"
-    "$PFAEDLE_DIR/build/pfaedle" -c "$CONFIG_PATH" -x "$osm_file" -m bus "$gtfs_file"
+    "$PFAEDLE_DIR/build/pfaedle" -c "$CONFIG_PATH" -x "$osm_file" -m bus "$gtfs_file" -o "$output_dir"
 
     if [ $? -eq 0 ]; then
-        echo -e "${GREEN}Shapes added to $gtfs_file${NC}"
+        if [ "$overwrite" = true ]; then
+            echo -e "${YELLOW}Creating zip file from shaped GTFS...${NC}"
+
+            [ -f "$temp_zip" ] && rm "$temp_zip"
+
+            (cd "$output_dir" && zip -r "$temp_zip" .)
+
+            if [ $? -eq 0 ]; then
+                echo -e "${YELLOW}Overwriting original GTFS file...${NC}"
+                cp "$temp_zip" "$gtfs_file"
+                echo -e "${GREEN}Successfully overwrote $gtfs_file with shaped version${NC}"
+            else
+                echo -e "${RED}Failed to create zip file from shaped GTFS${NC}"
+                exit 1
+            fi
+        else
+            echo -e "${GREEN}New GTFS with shapes saved to $output_dir${NC}"
+        fi
     else
         echo -e "${RED}Failed to add shapes to $gtfs_file${NC}"
         exit 1
@@ -97,6 +135,15 @@ process_all_gtfs() {
         echo -e "${RED}Error: GTFS directory not found: $GTFS_DIR${NC}"
         exit 1
     fi
+
+    local overwrite=false
+
+    for arg in "$@"; do
+        if [ "$arg" = "--overwrite" ]; then
+            overwrite=true
+            break
+        fi
+    done
 
     local osm_file="$OSM_DIR/slovakia-latest.osm.bz2"
     local total_files=0
@@ -115,7 +162,12 @@ process_all_gtfs() {
     find "$GTFS_DIR" -type f -name "*.zip" | while read -r gtfs_file; do
         processed_files=$((processed_files + 1))
         echo -e "${BLUE}[$processed_files/$total_files] Processing $(basename "$gtfs_file")${NC}"
-        add_shapes "$gtfs_file" "$osm_file"
+
+        if [ "$overwrite" = true ]; then
+            add_shapes "--overwrite" "$gtfs_file" "$osm_file"
+        else
+            add_shapes "$gtfs_file" "$osm_file"
+        fi
     done
 
     echo -e "${GREEN}All $total_files GTFS files processed successfully${NC}"
@@ -127,14 +179,10 @@ case "$1" in
         download_osm
         ;;
     add)
-        build_pfaedle
-        download_osm
-        add_shapes "$2" "$3"
+        add_shapes "$@"
         ;;
     all)
-        build_pfaedle
-        download_osm
-        process_all_gtfs
+        process_all_gtfs "$@"
         ;;
     -h|--help|help)
         show_help
