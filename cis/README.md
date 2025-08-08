@@ -5,4 +5,4 @@ The official _Celoštátny informačný systém o cestovných poriadkoch_ (CIS C
 When I contacted several companies and public transport operators that have access to GTFS or JDF data, they told me that I would need to request the data **from each individual operator separately**.
 As a single person, I simply do not have the capacity to contact dozens of operators, and even if I did, some — such as [_Dopravný podnik mesta Košice (DPMK)_](https://www.dpmk.sk/), refused to provide the data.
 
-**Big shout-out** to [Bratislava](https://bratislava.sk) and [IDS BK](http://idsbk.sk/), who do provide these data in GTFS format publicly.
+**Big shout-out** to [Bratislava](https://bratislava.sk), [IDS BK](https://idsbk.sk/) and [ZSSK](https://zssk.org) ([ZSR](https://zsr.sk)), who do provide these data in GTFS format publicly.
