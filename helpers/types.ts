@@ -1,7 +1,7 @@
 export type CountryCode = string;
 
 export type License = {
-  type: string;
+  type?: string;
   url?: string;
   attribution?: string;
   notes?: string;

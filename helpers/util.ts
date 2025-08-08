@@ -87,7 +87,10 @@ export async function generateLicenseFile(
 
   let licenseContent = "";
   licenseContent += `Data source: ${feed.name}\n`;
-  licenseContent += `License: ${feed.license.type}\n`;
+
+  if (feed.license.type) {
+    licenseContent += `License: ${feed.license.type}\n`;
+  }
 
   if (feed.license.url) {
     licenseContent += `License URL: ${feed.license.url}\n`;
