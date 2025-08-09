@@ -31,7 +31,7 @@ jobs:
       - run: |
           export PUPPETEER_SKIP_DOWNLOAD=true
           bun install
-          sudo apt-get update && sudo apt-get install -y libzip-dev libbz2-dev
+          sudo apt-get update && sudo apt-get install -y libzip-dev libbz2-dev pbzip2
 
       - name: CIS
         run: bun cis:run
