@@ -48,6 +48,12 @@ jobs:
           path: .tmp/morph/osm/latest.osm.bz2
           key: ${{ runner.os }}-osm-data-v1
 
+      - name: Install OSM Convert
+        run: |
+          mkdir -p .tmp/morph/osm
+          curl -L http://m.m.i24.cc/osmconvert64 -o .tmp/morph/osm/osmconvert64
+          chmod +x .tmp/morph/osm/osmconvert64
+
       - name: Install Slovakia OSM data
         if: steps.cache-osm.outputs.cache-hit != 'true'
         run: |
@@ -58,25 +64,37 @@ jobs:
         if: steps.cache-osm.outputs.cache-hit != 'true'
         run: |
           mkdir -p .tmp/morph/osm
-          curl -L https://download.geofabrik.de/europe/czech-republic-latest.osm.bz2 -o .tmp/morph/osm/czech-republic-latest.osm.bz2
+          curl -L http://download.geofabrik.de/europe/czech-republic-latest.osm.pbf -o .tmp/morph/osm/czech-republic-latest.osm.pbf
+
+          .tmp/morph/osm/osmconvert64 .tmp/morph/osm/czech-republic-latest.osm.pbf -o=.tmp/morph/osm/czech-republic-latest.osm.bz2
+          rm .tmp/morph/osm/czech-republic-latest.osm.pbf
 
       - name: Install Austria OSM data
         if: steps.cache-osm.outputs.cache-hit != 'true'
         run: |
           mkdir -p .tmp/morph/osm
-          curl -L https://download.geofabrik.de/europe/austria-latest.osm.bz2 -o .tmp/morph/osm/austria-latest.osm.bz2
+          curl -L https://download.openstreetmap.fr/extracts/europe/austria-latest.osm.pbf -o .tmp/morph/osm/austria-latest.osm.pbf
+
+          .tmp/morph/osm/osmconvert64 .tmp/morph/osm/austria-latest.osm.pbf -o=.tmp/morph/osm/austria-latest.osm.bz2
+          rm .tmp/morph/osm/austria-latest.osm.pbf
 
       - name: Install Poland OSM data
         if: steps.cache-osm.outputs.cache-hit != 'true'
         run: |
           mkdir -p .tmp/morph/osm
-          curl -L https://download.geofabrik.de/europe/poland-latest.osm.bz2 -o .tmp/morph/osm/poland-latest.osm.bz2
+          curl -L https://download.openstreetmap.fr/extracts/europe/poland-latest.osm.pbf -o .tmp/morph/osm/poland-latest.osm.pbf
+
+          .tmp/morph/osm/osmconvert64 .tmp/morph/osm/poland-latest.osm.pbf -o=.tmp/morph/osm/poland-latest.osm.bz2
+          rm .tmp/morph/osm/poland-latest.osm.pbf
 
       - name: Install Hungary OSM data
         if: steps.cache-osm.outputs.cache-hit != 'true'
         run: |
           mkdir -p .tmp/morph/osm
-          curl -L https://download.geofabrik.de/europe/hungary-latest.osm.bz2 -o .tmp/morph/osm/hungary-latest.osm.bz2
+          curl -L http://download.geofabrik.de/europe/hungary-latest.osm.pbf -o .tmp/morph/osm/hungary-latest.osm.pbf
+
+          .tmp/morph/osm/osmconvert64 .tmp/morph/osm/hungary-latest.osm.pbf -o=.tmp/morph/osm/hungary-latest.osm.bz2
+          rm .tmp/morph/osm/hungary-latest.osm.pbf
 
       - name: Morph
         run: bun morph:run
