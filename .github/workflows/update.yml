@@ -49,7 +49,9 @@ jobs:
           rm .tmp/morph/osm/latest.osm.lz4
 
       - name: Morph
-        run: bun morph:run
+        run: |
+          export TMPDIR=.tmp
+          bun morph:run
 
       - name: Setup Git
         run: |
