@@ -46,6 +46,7 @@ jobs:
           mkdir -p .tmp/morph/osm
           curl -L https://spseh-transiq.xhyrom.dev/merged-2025-08-09.osm.lz4 -o .tmp/morph/osm/latest.osm.lz4
           lz4 -d .tmp/morph/osm/latest.osm.lz4 .tmp/morph/osm/latest.osm
+          rm .tmp/morph/osm/latest.osm.lz4
 
       - name: Morph
         run: bun morph:run
