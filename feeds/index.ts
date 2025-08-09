@@ -1,9 +1,10 @@
-import type { Feed, FileSource } from "@feeds/types";
+import type { Feed, FeedFix, FileSource } from "@feeds/types";
 import { getGftsZip } from "cis/client";
 import { mkdir, readdir } from "node:fs/promises";
 import { join } from "node:path";
 
 import ora from "ora";
+import { applyFixesToZip } from "./utils";
 
 const gtfsDir = join(process.cwd(), "gtfs");
 await mkdir(gtfsDir, { recursive: true });
@@ -20,7 +21,12 @@ for (const feed of feeds) {
     const source = await feed.getLatestSource();
     const fileName = join(gtfsDir, feed.country!, `${feed.id}.zip`);
 
-    await downloadFile(source, fileName);
+    let buffer = await downloadFile(source);
+    if (feed.fixes) {
+      buffer = await applyFixesToZip(buffer, feed.fixes);
+    }
+
+    await Bun.write(fileName, buffer);
 
     if (feed.license?.type) {
       await generateLicenseFile(feed, fileName);
@@ -64,64 +70,37 @@ export async function loadFeeds(): Promise<Feed[]> {
   return feeds;
 }
 
-export async function downloadFile(
-  source: FileSource,
-  fileName: string,
-  options?: {
-    errorTexts?: string[];
-    checkContentType?: boolean;
-  },
-): Promise<void> {
-  let response: Response;
+export async function downloadFile(source: FileSource): Promise<ArrayBuffer> {
+  let buffer: ArrayBuffer;
 
   switch (source.type) {
     case "google_drive":
-      response = await fetch(
+      const driveResponse = await fetch(
         `https://www.googleapis.com/drive/v3/files/${source.fileId}?alt=media&key=${process.env.GOOGLE_API_KEY}`,
       );
+      if (!driveResponse.ok) {
+        throw new Error(`HTTP error! status: ${driveResponse.status}`);
+      }
+      buffer = await driveResponse.arrayBuffer();
       break;
 
     case "cis":
-      await Bun.write(fileName, await getGftsZip(source.id));
-      return;
+      buffer = await getGftsZip(source.id);
+      break;
 
     case "url":
-      response = await fetch(source.url);
+      const urlResponse = await fetch(source.url);
+      if (!urlResponse.ok) {
+        throw new Error(`HTTP error! status: ${urlResponse.status}`);
+      }
+      buffer = await urlResponse.arrayBuffer();
       break;
 
     default:
       throw new Error(`Unsupported source type: ${(source as any).type}`);
   }
 
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
-
-  if (options?.checkContentType) {
-    const responseClone = response.clone();
-    const contentType = responseClone.headers.get("content-type");
-    if (contentType?.includes("text/html")) {
-      const text = await responseClone.text();
-      if (options?.errorTexts) {
-        for (const errorText of options.errorTexts) {
-          if (text.includes(errorText)) {
-            throw new Error(`Server returned error: "${errorText}"`);
-          }
-        }
-      }
-    }
-  } else if (options?.errorTexts) {
-    const responseClone = response.clone();
-    const text = await responseClone.text();
-
-    for (const errorText of options.errorTexts) {
-      if (text.includes(errorText)) {
-        throw new Error(`Server returned error: "${errorText}"`);
-      }
-    }
-  }
-
-  await Bun.write(fileName, await response.arrayBuffer());
+  return buffer;
 }
 
 export async function generateLicenseFile(

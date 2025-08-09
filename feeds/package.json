@@ -3,7 +3,9 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "ora": "^8.2.0",
-    "@cis/client": "workspace:^"
+    "@cis/client": "workspace:^",
+    "csv-parse": "^6.1.0",
+    "csv-stringify": "^6.6.0",
+    "ora": "^8.2.0"
   }
 }

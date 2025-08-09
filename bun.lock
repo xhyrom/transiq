@@ -41,6 +41,8 @@
       "name": "@transiq/feeds",
       "dependencies": {
         "@cis/client": "workspace:^",
+        "csv-parse": "^6.1.0",
+        "csv-stringify": "^6.6.0",
         "ora": "^8.2.0",
       },
     },

@@ -2,7 +2,7 @@ import { join } from "node:path";
 import { exists, readdir, readFile } from "node:fs/promises";
 import JSZip from "jszip";
 
-export async function getGftsZip(id: string) {
+export async function getGftsZip(id: string): Promise<ArrayBuffer> {
   const gtfsDir = join(".tmp", "cp-sk", id, "gtfs");
 
   if (!(await exists(gtfsDir))) {
@@ -36,5 +36,5 @@ export async function getGftsZip(id: string) {
     },
   });
 
-  return zipBuffer.buffer;
+  return zipBuffer.buffer as ArrayBuffer;
 }
