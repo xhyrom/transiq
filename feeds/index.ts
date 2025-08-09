@@ -22,7 +22,7 @@ for (const feed of feeds) {
 
     await downloadFile(source, fileName);
 
-    if (feed.license) {
+    if (feed.license?.type) {
       await generateLicenseFile(feed, fileName);
       spinner.succeed(
         `[${countryCode}] Successfully downloaded ${feed.name} data with ${feed.license.type} license`,

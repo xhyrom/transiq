@@ -8,6 +8,7 @@ OSM_DIR="$MORPH_TMP_DIR/osm"
 GTFS_SHAPED_DIR="$MORPH_TMP_DIR/shaped"
 CONFIG_PATH="$MORPH_DIR/pfaedle.cfg"
 GTFS_DIR="$MORPH_DIR/../gtfs"
+PREVIOUS_GTFS_DIR="$MORPH_DIR/../.tmp/previous-gtfs"
 
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
@@ -27,6 +28,7 @@ show_help() {
     echo "Options for 'add' and 'all':"
     echo "  --overwrite       Replace the original GTFS file with the shaped version"
     echo "  --backup          Replace the original GTFS file but save a copy as [filename].lite.zip"
+    echo "  --force           Force shape generation even if file hasn't changed"
     echo "  --jobs=N          Number of parallel jobs to run (default: number of CPU cores)"
     echo ""
     echo "Arguments:"
@@ -135,6 +137,7 @@ download_osm() {
 add_shapes() {
     local overwrite=false
     local backup=false
+    local force=false
     local args=()
 
     for arg in "$@"; do
@@ -142,6 +145,8 @@ add_shapes() {
             overwrite=true
         elif [ "$arg" = "--backup" ]; then
             backup=true
+        elif [ "$arg" = "--force" ]; then
+            force=true
         else
             args+=("$arg")
         fi
@@ -159,6 +164,28 @@ add_shapes() {
     if [ ! -f "$gtfs_file" ]; then
         echo -e "${RED}Error: GTFS file not found: $gtfs_file${NC}"
         exit 1
+    fi
+
+    local filename=$(basename "$gtfs_file")
+    local country_code_id=${filename%.zip}
+
+    mkdir -p "$PREVIOUS_GTFS_DIR"
+
+    local previous_lite_file="$PREVIOUS_GTFS_DIR/${country_code_id}.lite.zip"
+
+    if [ -f "$previous_lite_file" ] && [ "$force" = false ]; then
+        echo -e "${BLUE}Found previous lite version. Comparing checksums...${NC}"
+
+        local current_checksum=$(md5sum "$gtfs_file" | cut -d ' ' -f 1)
+        local previous_checksum=$(md5sum "$previous_lite_file" | cut -d ' ' -f 1)
+
+        if [ "$current_checksum" = "$previous_checksum" ]; then
+            echo -e "${GREEN}Checksums match. Skipping shape generation.${NC}"
+            echo -e "${BLUE}Use --force flag to generate shapes anyway.${NC}"
+            return 0
+        else
+            echo -e "${BLUE}Checksums differ. Proceeding with shape generation.${NC}"
+        fi
     fi
 
     if [ -z "$osm_file" ]; then
@@ -221,6 +248,7 @@ process_all_gtfs() {
 
     local overwrite=false
     local backup=false
+    local force=false
     local max_parallel=$(nproc 2>/dev/null || echo 4)
 
     for arg in "$@"; do
@@ -228,6 +256,8 @@ process_all_gtfs() {
             overwrite=true
         elif [ "$arg" = "--backup" ]; then
             backup=true
+        elif [ "$arg" = "--force" ]; then
+            force=true
         elif [[ "$arg" =~ ^--jobs=([0-9]+)$ ]]; then
             max_parallel="${BASH_REMATCH[1]}"
         fi
@@ -263,22 +293,21 @@ process_all_gtfs() {
             local basename_file=$(basename "$gtfs_file")
             echo -e "${BLUE} Processing $basename_file${NC}"
 
+            local cmd_args=""
             if [ "$overwrite" = true ]; then
-                add_shapes "--overwrite" "$gtfs_file" "$osm_file" 2>&1 | while IFS= read -r line; do
-                    echo -e "${BLUE}[${basename_file}]${NC} $line"
-                done
-                status=${PIPESTATUS[0]}
-            elif [ "$backup" = true ]; then
-                add_shapes "--backup" "$gtfs_file" "$osm_file" 2>&1 | while IFS= read -r line; do
-                    echo -e "${BLUE}[${basename_file}]${NC} $line"
-                done
-                status=${PIPESTATUS[0]}
-            else
-                add_shapes "$gtfs_file" "$osm_file" 2>&1 | while IFS= read -r line; do
-                    echo -e "${BLUE}[${basename_file}]${NC} $line"
-                done
-                status=${PIPESTATUS[0]}
+                cmd_args="--overwrite"
             fi
+            if [ "$backup" = true ]; then
+                cmd_args="--backup"
+            fi
+            if [ "$force" = true ]; then
+                cmd_args="$cmd_args --force"
+            fi
+
+            add_shapes $cmd_args "$gtfs_file" "$osm_file" 2>&1 | while IFS= read -r line; do
+                echo -e "${BLUE}[${basename_file}]${NC} $line"
+            done
+            status=${PIPESTATUS[0]}
 
             local status=$?
             if [ $status -eq 0 ]; then
