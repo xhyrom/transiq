@@ -264,7 +264,7 @@ process_all_gtfs() {
     done
 
     local osm_file="$OSM_DIR/latest.osm"
-    local total_files=$(find "$GTFS_DIR" -type f -name "*.zip" | wc -l)
+    local total_files=$(find "$GTFS_DIR" -type f -name "*.zip" -not -name "*.lite.zip" | wc -l)
 
     if [ "$total_files" -eq 0 ]; then
         echo -e "${RED}No GTFS files found in $GTFS_DIR${NC}"
@@ -273,8 +273,18 @@ process_all_gtfs() {
 
     echo -e "${BLUE}Processing $total_files GTFS files with up to $max_parallel parallel jobs...${NC}"
 
+    local status_dir="$MORPH_TMP_DIR/status"
+    mkdir -p "$status_dir"
+
+    rm -f "$status_dir/all_checksums_match"
+    rm -f "$status_dir/files_processed"
+
     local tmp_dir=$(mktemp -d)
     local sem="$tmp_dir/semaphore"
+    local result_file="$tmp_dir/results"
+
+    echo "$total_files" > "$result_file"
+    echo "0" >> "$result_file"
 
     mkfifo "$sem"
     exec 3<>"$sem"
@@ -304,17 +314,24 @@ process_all_gtfs() {
                 cmd_args="$cmd_args --force"
             fi
 
-            add_shapes $cmd_args "$gtfs_file" "$osm_file" 2>&1 | while IFS= read -r line; do
+            local output=$(add_shapes $cmd_args "$gtfs_file" "$osm_file" 2>&1)
+            local status=$?
+
+            echo "$output" | while IFS= read -r line; do
                 echo -e "${BLUE}[${basename_file}]${NC} $line"
             done
-            status=${PIPESTATUS[0]}
 
-            local status=$?
+            if echo "$output" | grep -q "Checksums match. Skipping shape generation"; then
+                local skipped_files=$(tail -n 1 "$result_file")
+                skipped_files=$((skipped_files + 1))
+                sed -i '$d' "$result_file"
+                echo "$skipped_files" >> "$result_file"
+            fi
+
             if [ $status -eq 0 ]; then
                 echo -e "${GREEN}Successfully processed $basename_file${NC}"
             else
                 echo -e "${RED}Failed to process $basename_file${NC}"
-                echo -e "${RED}See log at $log_file${NC}"
             fi
 
             echo >&3
@@ -322,14 +339,28 @@ process_all_gtfs() {
 
         pids+=($!)
 
-    done < <(find "$GTFS_DIR" -type f -name "*.zip")
+    done < <(find "$GTFS_DIR" -type f -name "*.zip" -not -name "*.lite.zip")
 
     for pid in "${pids[@]}"; do
         wait $pid
     done
 
     exec 3>&-
-    rmdir "$tmp_dir"
+
+    local total_count=$(head -n 1 "$result_file")
+    local skipped_count=$(tail -n 1 "$result_file")
+
+    echo -e "${BLUE}Files processed: $total_count, Files skipped due to checksums: $skipped_count${NC}"
+
+    if [ "$total_count" -eq "$skipped_count" ]; then
+        echo "true" > "$status_dir/all_checksums_match"
+        echo -e "${GREEN}All files had matching checksums. No shape generation was needed.${NC}"
+    else
+        echo "skipped_count of $total_count files skipped due to matching checksums" > "$status_dir/files_processed"
+        echo -e "${GREEN}Shapes were generated for $((total_count - skipped_count)) files.${NC}"
+    fi
+
+    rm -rf "$tmp_dir"
 
     echo -e "${GREEN}All $total_files GTFS files processed${NC}"
 }
