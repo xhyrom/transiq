@@ -16,7 +16,7 @@ jobs:
       - name: Maximize build space
         uses: easimon/maximize-build-space@master
         with:
-          root-reserve-mb: 512
+          root-reserve-mb: 2048
           swap-size-mb: 1024
           remove-dotnet: "true"
           remove-android: "true"
@@ -31,7 +31,7 @@ jobs:
       - run: |
           export PUPPETEER_SKIP_DOWNLOAD=true
           bun install
-          sudo apt-get update && sudo apt-get install -y libzip-dev libbz2-dev pbzip2
+          sudo apt-get update && sudo apt-get install -y libzip-dev libbz2-dev pbzip2 lz4
 
       - name: CIS
         run: bun cis:run
@@ -41,42 +41,11 @@ jobs:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
         run: bun feeds:run
 
-      - name: Cache OSM data
-        id: cache-osm
-        uses: actions/cache@v3
-        with:
-          path: .tmp/morph/osm/latest.osm.bz2
-          key: ${{ runner.os }}-osm-data-v1
-
-      - name: Install OSM Convert
+      - name: Install OSM data
         run: |
           mkdir -p .tmp/morph/osm
-          curl -L http://m.m.i24.cc/osmconvert64 -o .tmp/morph/osm/osmconvert64
-          chmod +x .tmp/morph/osm/osmconvert64
-
-      - name: Install Slovakia OSM data
-        if: steps.cache-osm.outputs.cache-hit != 'true'
-        run: |
-          mkdir -p .tmp/morph/osm
-          curl -L https://download.geofabrik.de/europe/slovakia-latest.osm.bz2 -o .tmp/morph/osm/slovakia-latest.osm.bz2
-
-      - name: Install Czech Republic OSM data
-        if: steps.cache-osm.outputs.cache-hit != 'true'
-        run: |
-          mkdir -p .tmp/morph/osm
-          curl -L http://download.geofabrik.de/europe/czech-republic-latest.osm.pbf -o .tmp/morph/osm/czech-republic-latest.osm.pbf
-
-          .tmp/morph/osm/osmconvert64 .tmp/morph/osm/czech-republic-latest.osm.pbf -o=.tmp/morph/osm/czech-republic-latest.osm
-          rm .tmp/morph/osm/czech-republic-latest.osm.pbf
-
-      - name: Install Austria OSM data
-        if: steps.cache-osm.outputs.cache-hit != 'true'
-        run: |
-          mkdir -p .tmp/morph/osm
-          curl -L https://download.openstreetmap.fr/extracts/europe/austria-latest.osm.pbf -o .tmp/morph/osm/austria-latest.osm.pbf
-
-          .tmp/morph/osm/osmconvert64 .tmp/morph/osm/austria-latest.osm.pbf -o=.tmp/morph/osm/austria-latest.osm
-          rm .tmp/morph/osm/austria-latest.osm.pbf
+          curl -L https://spseh-transiq.xhyrom.dev/merged-2025-08-09.osm.lz4 -o .tmp/morph/osm/latest.osm.lz4
+          lz4 -d .tmp/morph/osm/latest.osm.lz4 .tmp/morph/osm/latest.osm
 
       - name: Morph
         run: bun morph:run
