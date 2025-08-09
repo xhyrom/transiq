@@ -28,3 +28,10 @@ export function id(data: string) {
   hasher.update(data);
   return hasher.digest("hex");
 }
+
+export function resetIds() {
+  $agencyId = 0;
+  $stopId = 0;
+  $tripId = 0;
+  $serviceId = 0;
+}

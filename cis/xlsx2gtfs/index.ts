@@ -18,6 +18,7 @@ import {
   parseRouteTripsCalendarsAndStopTimes,
   parseStops,
 } from "./parser";
+import { resetIds } from "./utils/id";
 
 const dir = join(".tmp", "cp-sk");
 if (!(await exists(dir))) {
@@ -165,4 +166,9 @@ for (const agencyFolderName of await readdir(dir)) {
   );
 
   await Bun.write(join(gtfs, "agency.txt"), objectToCsv(agency));
+
+  resetIds();
+  console.log(
+    `Timetable conversion to GTFS format completed for ${agency.agency_name} (${agencyFolderName})`,
+  );
 }

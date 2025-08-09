@@ -26,6 +26,7 @@ show_help() {
     echo ""
     echo "Options for 'add' and 'all':"
     echo "  --overwrite       Replace the original GTFS file with the shaped version"
+    echo "  --backup          Replace the original GTFS file but save a copy as [filename].lite.zip"
     echo "  --jobs=N          Number of parallel jobs to run (default: number of CPU cores)"
     echo ""
     echo "Arguments:"
@@ -133,11 +134,14 @@ download_osm() {
 
 add_shapes() {
     local overwrite=false
+    local backup=false
     local args=()
 
     for arg in "$@"; do
         if [ "$arg" = "--overwrite" ]; then
             overwrite=true
+        elif [ "$arg" = "--backup" ]; then
+            backup=true
         else
             args+=("$arg")
         fi
@@ -178,7 +182,7 @@ add_shapes() {
     "$PFAEDLE_DIR/build/pfaedle" -c "$CONFIG_PATH" -x "$osm_file" -m bus "$gtfs_file" -o "$output_dir"
 
     if [ $? -eq 0 ]; then
-        if [ "$overwrite" = true ]; then
+        if [ "$overwrite" = true ] || [ "$backup" = true ]; then
             echo -e "${YELLOW}Creating zip file from shaped GTFS...${NC}"
 
             [ -f "$temp_zip" ] && rm "$temp_zip"
@@ -186,13 +190,20 @@ add_shapes() {
             (cd "$output_dir" && zip -r "$temp_zip" .)
 
             if [ $? -eq 0 ]; then
+                 if [ "$backup" = true ]; then
+                    echo -e "${YELLOW}Backing up original GTFS file...${NC}"
+                    local backup_file="${gtfs_file%.zip}.lite.zip"
+                    cp "$gtfs_file" "$backup_file"
+                    echo -e "${GREEN}Original GTFS backed up to $backup_file${NC}"
+                 fi
+
                 echo -e "${YELLOW}Overwriting original GTFS file...${NC}"
                 cp "$temp_zip" "$gtfs_file"
                 echo -e "${GREEN}Successfully overwrote $gtfs_file with shaped version${NC}"
-            else
+             else
                 echo -e "${RED}Failed to create zip file from shaped GTFS${NC}"
                 exit 1
-            fi
+             fi
         else
             echo -e "${GREEN}New GTFS with shapes saved to $output_dir${NC}"
         fi
@@ -209,11 +220,14 @@ process_all_gtfs() {
     fi
 
     local overwrite=false
+    local backup=false
     local max_parallel=$(nproc 2>/dev/null || echo 4)
 
     for arg in "$@"; do
         if [ "$arg" = "--overwrite" ]; then
             overwrite=true
+        elif [ "$arg" = "--backup" ]; then
+            backup=true
         elif [[ "$arg" =~ ^--jobs=([0-9]+)$ ]]; then
             max_parallel="${BASH_REMATCH[1]}"
         fi
@@ -251,6 +265,11 @@ process_all_gtfs() {
 
             if [ "$overwrite" = true ]; then
                 add_shapes "--overwrite" "$gtfs_file" "$osm_file" 2>&1 | while IFS= read -r line; do
+                    echo -e "${BLUE}[${basename_file}]${NC} $line"
+                done
+                status=${PIPESTATUS[0]}
+            elif [ "$backup" = true ]; then
+                add_shapes "--backup" "$gtfs_file" "$osm_file" 2>&1 | while IFS= read -r line; do
                     echo -e "${BLUE}[${basename_file}]${NC} $line"
                 done
                 status=${PIPESTATUS[0]}
