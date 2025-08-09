@@ -66,7 +66,7 @@ jobs:
           mkdir -p .tmp/morph/osm
           curl -L http://download.geofabrik.de/europe/czech-republic-latest.osm.pbf -o .tmp/morph/osm/czech-republic-latest.osm.pbf
 
-          .tmp/morph/osm/osmconvert64 .tmp/morph/osm/czech-republic-latest.osm.pbf -o=.tmp/morph/osm/czech-republic-latest.osm.bz2
+          .tmp/morph/osm/osmconvert64 .tmp/morph/osm/czech-republic-latest.osm.pbf -o=.tmp/morph/osm/czech-republic-latest.osm
           rm .tmp/morph/osm/czech-republic-latest.osm.pbf
 
       - name: Install Austria OSM data
@@ -75,7 +75,7 @@ jobs:
           mkdir -p .tmp/morph/osm
           curl -L https://download.openstreetmap.fr/extracts/europe/austria-latest.osm.pbf -o .tmp/morph/osm/austria-latest.osm.pbf
 
-          .tmp/morph/osm/osmconvert64 .tmp/morph/osm/austria-latest.osm.pbf -o=.tmp/morph/osm/austria-latest.osm.bz2
+          .tmp/morph/osm/osmconvert64 .tmp/morph/osm/austria-latest.osm.pbf -o=.tmp/morph/osm/austria-latest.osm
           rm .tmp/morph/osm/austria-latest.osm.pbf
 
       - name: Install Poland OSM data
@@ -84,7 +84,7 @@ jobs:
           mkdir -p .tmp/morph/osm
           curl -L https://download.openstreetmap.fr/extracts/europe/poland-latest.osm.pbf -o .tmp/morph/osm/poland-latest.osm.pbf
 
-          .tmp/morph/osm/osmconvert64 .tmp/morph/osm/poland-latest.osm.pbf -o=.tmp/morph/osm/poland-latest.osm.bz2
+          .tmp/morph/osm/osmconvert64 .tmp/morph/osm/poland-latest.osm.pbf -o=.tmp/morph/osm/poland-latest.osm
           rm .tmp/morph/osm/poland-latest.osm.pbf
 
       - name: Install Hungary OSM data
@@ -93,7 +93,7 @@ jobs:
           mkdir -p .tmp/morph/osm
           curl -L http://download.geofabrik.de/europe/hungary-latest.osm.pbf -o .tmp/morph/osm/hungary-latest.osm.pbf
 
-          .tmp/morph/osm/osmconvert64 .tmp/morph/osm/hungary-latest.osm.pbf -o=.tmp/morph/osm/hungary-latest.osm.bz2
+          .tmp/morph/osm/osmconvert64 .tmp/morph/osm/hungary-latest.osm.pbf -o=.tmp/morph/osm/hungary-latest.osm
           rm .tmp/morph/osm/hungary-latest.osm.pbf
 
       - name: Morph
