@@ -46,7 +46,37 @@ jobs:
         uses: actions/cache@v3
         with:
           path: .tmp/morph/osm/latest.osm.bz2
-          key: ${{ runner.os }}-osm-data-${{ hashFiles('morph/shapes') }}-v1
+          key: ${{ runner.os }}-osm-data-v1
+
+      - name: Install Slovakia OSM data
+        if: steps.cache-osm.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p .tmp/morph/osm
+          curl -L https://download.geofabrik.de/europe/slovakia-latest.osm.bz2 -o .tmp/morph/osm/slovakia-latest.osm.bz2
+
+      - name: Install Czech Republic OSM data
+        if: steps.cache-osm.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p .tmp/morph/osm
+          curl -L https://download.geofabrik.de/europe/czech-republic-latest.osm.bz2 -o .tmp/morph/osm/czech-republic-latest.osm.bz2
+
+      - name: Install Austria OSM data
+        if: steps.cache-osm.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p .tmp/morph/osm
+          curl -L https://download.geofabrik.de/europe/austria-latest.osm.bz2 -o .tmp/morph/osm/austria-latest.osm.bz2
+
+      - name: Install Poland OSM data
+        if: steps.cache-osm.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p .tmp/morph/osm
+          curl -L https://download.geofabrik.de/europe/poland-latest.osm.bz2 -o .tmp/morph/osm/poland-latest.osm.bz2
+
+      - name: Install Hungary OSM data
+        if: steps.cache-osm.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p .tmp/morph/osm
+          curl -L https://download.geofabrik.de/europe/hungary-latest.osm.bz2 -o .tmp/morph/osm/hungary-latest.osm.bz2
 
       - name: Morph
         run: bun morph:run
@@ -103,11 +133,13 @@ jobs:
 
           git clone --branch gtfs --single-branch https://github.com/${{ github.repository }}.git gtfs-branch
 
-      - name: Copy and commit GTFS files
+      - name: GTFS View
         run: |
           cp -r gtfs-branch/gtfs gtfs
           NODE_OPTIONS=--max_old_space_size=8000 node gtfs-view/index.mjs
 
+      - name: Copy and commit GTFS files
+        run: |
           cd gtfs-branch
 
           rm -rf view || true
