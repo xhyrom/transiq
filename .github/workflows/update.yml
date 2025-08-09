@@ -78,24 +78,6 @@ jobs:
           .tmp/morph/osm/osmconvert64 .tmp/morph/osm/austria-latest.osm.pbf -o=.tmp/morph/osm/austria-latest.osm
           rm .tmp/morph/osm/austria-latest.osm.pbf
 
-      - name: Install Poland OSM data
-        if: steps.cache-osm.outputs.cache-hit != 'true'
-        run: |
-          mkdir -p .tmp/morph/osm
-          curl -L https://download.openstreetmap.fr/extracts/europe/poland-latest.osm.pbf -o .tmp/morph/osm/poland-latest.osm.pbf
-
-          .tmp/morph/osm/osmconvert64 .tmp/morph/osm/poland-latest.osm.pbf -o=.tmp/morph/osm/poland-latest.osm
-          rm .tmp/morph/osm/poland-latest.osm.pbf
-
-      - name: Install Hungary OSM data
-        if: steps.cache-osm.outputs.cache-hit != 'true'
-        run: |
-          mkdir -p .tmp/morph/osm
-          curl -L http://download.geofabrik.de/europe/hungary-latest.osm.pbf -o .tmp/morph/osm/hungary-latest.osm.pbf
-
-          .tmp/morph/osm/osmconvert64 .tmp/morph/osm/hungary-latest.osm.pbf -o=.tmp/morph/osm/hungary-latest.osm
-          rm .tmp/morph/osm/hungary-latest.osm.pbf
-
       - name: Morph
         run: bun morph:run
 

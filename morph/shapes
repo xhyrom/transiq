@@ -73,8 +73,6 @@ download_osm() {
         "slovakia-latest.osm.bz2"
         "czech-republic-latest.osm.bz2"
         "austria-latest.osm.bz2"
-        "poland-latest.osm.bz2"
-        "hungary-latest.osm.bz2"
     )
 
     local osmconvert_path="$OSM_DIR/osmconvert64"
