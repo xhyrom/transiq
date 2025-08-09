@@ -122,12 +122,6 @@ download_osm() {
         echo -e "${RED}Failed to merge OSM files${NC}"
         exit 1
     fi
-
-    if [ -f "$merged_file" ] && [ ! -f "$merged_file_compressed" ]; then
-        echo -e "${BLUE}Compressing OSM data for caching...${NC}"
-        pbzip2 -zk "$merged_file"
-        echo -e "${GREEN}OSM data compressed successfully${NC}"
-    fi
 }
 
 add_shapes() {
@@ -248,12 +242,16 @@ process_all_gtfs() {
             local basename_file=$(basename "$gtfs_file")
             echo -e "${BLUE} Processing $basename_file${NC}"
 
-            local log_file="/tmp/pfaedle_${basename_file}.log"
-
             if [ "$overwrite" = true ]; then
-                add_shapes "--overwrite" "$gtfs_file" "$osm_file" > "$log_file" 2>&1
+                add_shapes "--overwrite" "$gtfs_file" "$osm_file" 2>&1 | while IFS= read -r line; do
+                    echo -e "${BLUE}[${basename_file}]${NC} $line"
+                done
+                status=${PIPESTATUS[0]}
             else
-                add_shapes "$gtfs_file" "$osm_file" > "$log_file" 2>&1
+                add_shapes "$gtfs_file" "$osm_file" 2>&1 | while IFS= read -r line; do
+                    echo -e "${BLUE}[${basename_file}]${NC} $line"
+                done
+                status=${PIPESTATUS[0]}
             fi
 
             local status=$?
