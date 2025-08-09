@@ -27,7 +27,7 @@ await processNestedPages({
       "Žiadny záznam nevyhovuje aktuálne nastavenej kombinácii typov liniek.",
     ),
   shouldStopOuter: (_, body) => body.includes("Chyba spracovania dotazu"),
-  encodings: ["windows-1252"],
+  encodings: ["windows-1250"],
 
   // Process the first inner page to get agency information
   processOuterPage: async (page) => {

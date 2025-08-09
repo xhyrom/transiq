@@ -1,4 +1,5 @@
 import type { Encoding } from "bun";
+import iconv from "iconv-lite";
 
 export interface PagerOptions {
   baseUrl: string;
@@ -41,7 +42,11 @@ async function decodeResponseBody(
     try {
       return new TextDecoder(encoding as Encoding).decode(buffer);
     } catch (e) {
-      console.warn(`Failed to decode using ${encoding}`);
+      try {
+        return iconv.decode(Buffer.from(buffer), encoding);
+      } catch (iconvError) {
+        console.warn(`Failed to decode using ${encoding}: ${iconvError}`);
+      }
     }
   }
 
