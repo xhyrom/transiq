@@ -27,7 +27,7 @@ if (!(await exists(dir))) {
 
 const xlsxGlob = new Glob("*.xlsx");
 
-for (const agencyFolderName of await readdir(dir)) {
+for (const agencyFolderName of (await readdir(dir)).sort()) {
   const agencyFolderPath = join(dir, agencyFolderName);
   const gtfs = join(agencyFolderPath, "gtfs");
   await mkdir(gtfs, { recursive: true });
@@ -46,7 +46,10 @@ for (const agencyFolderName of await readdir(dir)) {
   const calendarDates: GtfsCalendarDate[] = [];
   const stopTimes: GtfsStopTime[] = [];
 
-  for await (const route of xlsxGlob.scan(agencyFolderPath)) {
+  const xlsxFiles = (
+    await Array.fromAsync(xlsxGlob.scan(agencyFolderPath))
+  ).sort();
+  for await (const route of xlsxFiles) {
     partialStops.push(
       ...parseStops(await readFile(join(agencyFolderPath, route))),
     );
@@ -61,7 +64,7 @@ for (const agencyFolderName of await readdir(dir)) {
     {} as Record<string, GtfsStop>,
   );
 
-  for await (const route of xlsxGlob.scan(agencyFolderPath)) {
+  for await (const route of xlsxFiles) {
     console.log(`Processing route: ${route}`);
 
     const data = parseRouteTripsCalendarsAndStopTimes(

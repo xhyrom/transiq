@@ -134,6 +134,27 @@ download_osm() {
     done
 }
 
+compare_gtfs_content() {
+    local file1="$1"
+    local file2="$2"
+    local tmp_dir1=$(mktemp -d)
+    local tmp_dir2=$(mktemp -d)
+
+    unzip -qq "$file1" -d "$tmp_dir1"
+    unzip -qq "$file2" -d "$tmp_dir2"
+
+    local content_checksum1=$(find "$tmp_dir1" -type f -name "*.txt" | sort | xargs md5sum 2>/dev/null | awk '{print $1}' | md5sum | cut -d ' ' -f 1)
+    local content_checksum2=$(find "$tmp_dir2" -type f -name "*.txt" | sort | xargs md5sum 2>/dev/null | awk '{print $1}' | md5sum | cut -d ' ' -f 1)
+
+    rm -rf "$tmp_dir1" "$tmp_dir2"
+
+    if [ "$content_checksum1" = "$content_checksum2" ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
 add_shapes() {
     local overwrite=false
     local backup=false
@@ -174,17 +195,15 @@ add_shapes() {
     local previous_lite_file="$PREVIOUS_GTFS_DIR/${country_code_id}.lite.zip"
 
     if [ -f "$previous_lite_file" ] && [ "$force" = false ]; then
-        echo -e "${BLUE}Found previous lite version. Comparing checksums...${NC}"
+        echo -e "${BLUE}Found previous lite version. Comparing GTFS content...${NC}"
 
-        local current_checksum=$(md5sum "$gtfs_file" | cut -d ' ' -f 1)
-        local previous_checksum=$(md5sum "$previous_lite_file" | cut -d ' ' -f 1)
-
-        if [ "$current_checksum" = "$previous_checksum" ]; then
-            echo -e "${GREEN}Checksums match. Skipping shape generation.${NC}"
+        if compare_gtfs_content "$gtfs_file" "$previous_lite_file"; then
+            echo -e "${GREEN}GTFS content matches. Skipping shape generation.${NC}"
             echo -e "${BLUE}Use --force flag to generate shapes anyway.${NC}"
+            cp "$gtfs_file" "$previous_lite_file"
             return 0
         else
-            echo -e "${BLUE}Checksums differ. Proceeding with shape generation.${NC}"
+            echo -e "${BLUE}GTFS content differs. Proceeding with shape generation.${NC}"
         fi
     fi
 
