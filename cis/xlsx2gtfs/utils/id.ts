@@ -1,16 +1,12 @@
-let $agencyId = 0;
-let $stopId = 0;
 let $tripId = 0;
 let $serviceId = 0;
 
-export function agencyId(): string {
-  $agencyId++;
-  return `A-${$agencyId}`;
+export function agencyId(name: string): string {
+  return `A-${id(serializeAgencyName(name)).slice(0, 8)}`;
 }
 
-export function stopId(): string {
-  $stopId++;
-  return `S-${$stopId}`;
+export function stopId(name: string): string {
+  return `S-${id(name).slice(0, 8)}`;
 }
 
 export function tripId(): string {
@@ -30,8 +26,13 @@ export function id(data: string) {
 }
 
 export function resetIds() {
-  $agencyId = 0;
-  $stopId = 0;
   $tripId = 0;
   $serviceId = 0;
+}
+
+function serializeAgencyName(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }

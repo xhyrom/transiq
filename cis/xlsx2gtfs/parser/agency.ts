@@ -6,7 +6,7 @@ export function parseAgency(info: {
   agency_full: string[];
 }): GtfsAgency {
   const data: GtfsAgency = {
-    agency_id: agencyId(),
+    agency_id: agencyId(info.agency_short),
     agency_name: info.agency_short,
     agency_timezone: "Europe/Bratislava",
     agency_lang: "sk",
