@@ -74,24 +74,59 @@ await processNestedPages({
 
     const links = document.querySelectorAll('a[href^="Down.aspx?f=xls/"]');
 
+    const routeFiles = new Map<string, { href: string; date: Date }[]>();
+
     // @ts-expect-error it's possible to iterate over NodeList
     for (const link of links) {
       const href = link.getAttribute("href")!;
       const fileName = href.slice(16);
 
-      try {
-        await downloadFile(
-          `http://portal.cp.sk/${href}`,
-          join(dir, folderName, fileName),
-          {
-            errorTexts: ["Chyba pri"],
-            checkContentType: true,
-          },
-        );
+      const match = fileName.match(/^L(\d+)_(\d{6})_/);
+      if (match) {
+        const routeNumber = match[1];
+        const dateStr = match[2];
 
-        console.log(`Successfully downloaded ${fileName}`);
-      } catch (error) {
-        console.error(`Failed to download ${fileName}: ${error}`);
+        const year = 2000 + parseInt(dateStr.substring(0, 2));
+        const month = parseInt(dateStr.substring(2, 4)) - 1;
+        const day = parseInt(dateStr.substring(4, 6));
+        const date = new Date(year, month, day);
+
+        if (!routeFiles.has(routeNumber)) {
+          routeFiles.set(routeNumber, []);
+        }
+        routeFiles.get(routeNumber)!.push({ href, date });
+      } else {
+        if (!routeFiles.has(fileName)) {
+          routeFiles.set(fileName, []);
+        }
+        routeFiles.get(fileName)!.push({ href, date: new Date(0) });
+      }
+    }
+
+    for (const [route, files] of routeFiles.entries()) {
+      files.sort((a, b) => b.date.getTime() - a.date.getTime());
+
+      const newestFile = files[0];
+      if (newestFile) {
+        const href = newestFile.href;
+        const fileName = href.slice(16);
+
+        try {
+          await downloadFile(
+            `http://portal.cp.sk/${href}`,
+            join(dir, folderName, fileName),
+            {
+              errorTexts: ["Chyba pri"],
+              checkContentType: true,
+            },
+          );
+
+          console.log(
+            `Successfully downloaded ${fileName} (newest version for route ${route})`,
+          );
+        } catch (error) {
+          console.error(`Failed to download ${fileName}: ${error}`);
+        }
       }
     }
   },
