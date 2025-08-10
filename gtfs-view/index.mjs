@@ -15,6 +15,7 @@ const agencies = [];
 
 for (const gtf of gtfs) {
   if (gtf.includes("dpb")) continue;
+  if (gtf.endsWith(".lite.zip")) continue;
 
   const agencyKey = gtf
     .split("/")
