@@ -33,7 +33,7 @@ show_help() {
     echo ""
     echo "Arguments:"
     echo "  [gtfs]            Path to GTFS file"
-    echo "  [osm]             Path to OSM file (default: .tmp/morph/osm/slovakia-latest.osm.bz2)"
+    echo "  [osm]             Path to OSM file (default: .tmp/morph/osm/latest.osm)"
 }
 
 build_pfaedle() {
