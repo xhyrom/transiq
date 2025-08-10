@@ -105,3 +105,31 @@ export async function queryUbian(
 
   return { items };
 }
+
+export async function reverseGeocode(
+  lat: number,
+  lon: number,
+): Promise<{ district?: string; region?: string }> {
+  const url = new URL("https://nominatim.openstreetmap.org/reverse");
+  url.searchParams.set("lat", String(lat));
+  url.searchParams.set("lon", String(lon));
+  url.searchParams.set("format", "json");
+  url.searchParams.set("addressdetails", "1");
+  url.searchParams.set("accept-language", "sk");
+
+  const response = await fetch(url.toString(), {
+    headers: {
+      "User-Agent": "kaeru/1.0 (contact@xhyrom.dev)",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Reverse geocoding request failed: ${response.status}`);
+  }
+
+  const data = await response.json();
+  return {
+    district: data.address.county || data.address.district,
+    region: data.address.state || data.address.region,
+  };
+}

@@ -3,4 +3,6 @@ export interface KaeruCsvItem {
   name: string;
   lat: number;
   lon: number;
+  region?: string;
+  district?: string;
 }
