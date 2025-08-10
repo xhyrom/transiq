@@ -193,15 +193,61 @@ add_shapes() {
     mkdir -p "$PREVIOUS_GTFS_DIR"
 
     local previous_lite_file="$PREVIOUS_GTFS_DIR/${country_code_id}.lite.zip"
+    local previous_shaped_file="$PREVIOUS_GTFS_DIR/${country_code_id}.zip"
 
     if [ -f "$previous_lite_file" ] && [ "$force" = false ]; then
         echo -e "${BLUE}Found previous lite version. Comparing GTFS content...${NC}"
 
         if compare_gtfs_content "$gtfs_file" "$previous_lite_file"; then
             echo -e "${GREEN}GTFS content matches. Skipping shape generation.${NC}"
-            echo -e "${BLUE}Use --force flag to generate shapes anyway.${NC}"
-            cp "$gtfs_file" "$previous_lite_file"
-            return 0
+
+            if [ "$overwrite" = true ] || [ "$backup" = true ]; then
+                if [ -f "$previous_shaped_file" ]; then
+                    echo -e "${BLUE}Applying previously generated shapes to current file...${NC}"
+
+                    local tmp_current=$(mktemp -d)
+                    local tmp_shaped=$(mktemp -d)
+                    local tmp_output=$(mktemp -d)
+                    local tmp_zip="$tmp_output/shaped.zip"
+
+                    unzip -qq "$gtfs_file" -d "$tmp_current"
+                    unzip -qq "$previous_shaped_file" -d "$tmp_shaped"
+
+                    cp -r "$tmp_current"/* "$tmp_output/"
+
+                    if [ -f "$tmp_shaped/shapes.txt" ]; then
+                        cp "$tmp_shaped/shapes.txt" "$tmp_output/"
+                        echo -e "${GREEN}Successfully copied shapes.txt from previous shaped version${NC}"
+                    else
+                        echo -e "${YELLOW}No shapes.txt found in previous shaped version${NC}"
+                    fi
+
+                    (cd "$tmp_output" && find . -type f | sort | zip -X "$tmp_zip" -@)
+
+                    if [ "$backup" = true ]; then
+                        echo -e "${YELLOW}Backing up original GTFS file...${NC}"
+                        local backup_file="${gtfs_file%.zip}.lite.zip"
+                        cp "$gtfs_file" "$backup_file"
+                        echo -e "${GREEN}Original GTFS backed up to $backup_file${NC}"
+                    fi
+
+                    cp "$tmp_zip" "$gtfs_file"
+                    echo -e "${GREEN}Successfully applied shapes to $gtfs_file${NC}"
+
+                    cp "$gtfs_file" "$previous_lite_file"
+                    cp "$tmp_zip" "$previous_shaped_file"
+
+                    rm -rf "$tmp_current" "$tmp_shaped" "$tmp_output"
+
+                    return 0
+                else
+                    echo -e "${YELLOW}No previous shaped file found, proceeding with shape generation despite matching content${NC}"
+                fi
+            else
+                echo -e "${BLUE}Use --force flag to generate shapes anyway.${NC}"
+                cp "$gtfs_file" "$previous_lite_file"
+                return 0
+            fi
         else
             echo -e "${BLUE}GTFS content differs. Proceeding with shape generation.${NC}"
         fi
