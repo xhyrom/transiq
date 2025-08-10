@@ -47,7 +47,8 @@ jobs:
 
           git clone --branch gtfs --single-branch https://github.com/${{ github.repository }}.git gtfs-branch
 
-          cp -r gtfs-branch/gtfs .tmp/previous-gtfs
+          mkdir -p .tmp/previous-gtfs
+          cp -r gtfs-branch/gtfs/* .tmp/previous-gtfs
 
       - name: Install OSM data
         run: |
