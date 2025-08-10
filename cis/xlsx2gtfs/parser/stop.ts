@@ -35,7 +35,9 @@ export function parseStop(sheet: WorkSheet): PartialGtfsStop[] {
     return groupedCells
       .filter((row) => row[STOP_COLUMN] && row[STOP_COLUMN].v)
       .map((row) => ({
-        cis_name: (row[STOP_COLUMN]!.v as string).split(";")[0]!,
+        metadata: {
+          cis_name: (row[STOP_COLUMN]!.v as string).split(";")[0]!,
+        },
         zone_id:
           tpzColumn && row[tpzColumn]?.v
             ? String(row[tpzColumn]!.v).split(",")[0]
@@ -54,7 +56,9 @@ export function parseStop(sheet: WorkSheet): PartialGtfsStop[] {
     return Object.values(stopCells)
       .filter((cell) => Boolean(cell.v))
       .map((cell) => ({
-        cis_name: (cell.v as string).split(";")[0]!,
+        metadata: {
+          cis_name: (cell.v as string).split(";")[0]!,
+        },
         location_type: 0,
       }));
   }

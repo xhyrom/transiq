@@ -58,7 +58,7 @@ for (const agencyFolderName of (await readdir(dir)).sort()) {
   const stops: GtfsStop[] = resolvePartialGtfsStops(partialStops);
   const stopsByCisName: Record<string, GtfsStop> = stops.reduce(
     (acc, stop) => {
-      acc[stop.cis_name] = stop;
+      acc[stop.metadata.cis_name] = stop;
       return acc;
     },
     {} as Record<string, GtfsStop>,

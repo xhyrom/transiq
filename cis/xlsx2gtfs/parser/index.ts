@@ -245,7 +245,7 @@ export function parseRouteTripsCalendarsAndStopTimes(
         const note = noteCell?.v ? String(noteCell.v).trim() : "";
 
         const stopId = Object.values(stops).find(
-          (stop) => stop.cis_name === stopName,
+          (stop) => stop.metadata.cis_name === stopName,
         )?.stop_id;
 
         if (!stopId) {

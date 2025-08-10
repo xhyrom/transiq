@@ -23,11 +23,14 @@ export enum GtfsStopAccess {
 export interface GtfsStop {
   stop_id: string;
   stop_name: string;
-  cis_name: string;
   stop_lat: number;
   stop_lon: number;
   zone_id?: string;
   location_type: number;
+  metadata: {
+    cis_name: string;
+    district?: string;
+  };
 }
 
 export interface GtfsRoute {
