@@ -4,11 +4,11 @@ export default {
   id: "sad-lucenec-as",
   name: "SAD Lúčenec, a.s.",
   license: {
-    attribution: "© TransData s.r.o.",
-    notes: "Data sourced from gtfs.transdata.sk, provided by TransData s.r.o.",
+    notes:
+      "Data sourced from portal.cp.sk, provided by SAD Dunajská Streda a.s. Automatically converted from XLSX to GTFS format.",
   },
   getLatestSource: async (): Promise<FileSource> => ({
-    type: "url",
-    url: "https://gtfs.transdata.sk/SADLC/gtfs.zip",
+    type: "cis",
+    id: "sad-lucenec-as",
   }),
 } satisfies Feed;

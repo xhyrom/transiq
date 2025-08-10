@@ -1121,7 +1121,7 @@ Petrov,"Zlaté Hory, Petrovy Boudy, hřeben",50.2425,17.42704
 "Tisovec,Rimavská Píla,Jednota","Tisovec, Rimavská Píla, Jednota",48.65007,19.94255
 "Hnúšťa,Hačava,Nám.M.Hrebendu","Hnúšťa, Hačava, Nám.M.Hrebendu",48.62549,19.95256
 "Hnúšťa,Hačava,Skálie","Hnúšťa, Hačava, Skálie",48.61433,19.95723
-"Hnúšťa,Hačava,závod SMZ",,,
+"Hnúšťa,Hačava,závod SMZ","Hnúšťa, Hačava, závod SMZ",-1,-1
 "Hnúšťa,,rázc.","Hnúšťa, rázc.",48.60121,19.95423
 "Hnúšťa,,Mútnik","Hnúšťa, Mútnik",48.6042,19.95981
 "Hnúšťa,Polom","Hnúšťa, Polom",48.60415,19.99118
@@ -1198,8 +1198,8 @@ Buzitka,Buzitka,48.30806,19.80151
 "Pinciná,,Šťavica","Pinciná, Šťavica",48.36066,19.77158
 "Nové Hony,,Dora","Nové Hony, Dora",48.36024,19.79654
 Tachty,Tachty,48.15454,19.94179
-"Tachty,,št.hr.CLO",,,
-"Cered,,oh.ZOLL",,,
+"Tachty,,št.hr.CLO","Tachty, št.hr.CLO",48.150066,19.950749
+"Cered,,oh.ZOLL","Cered, oh.ZOLL",19.9509720,48.1499880
 "Cered,,iskola","Cered, iskola",48.14806,19.96158
 "Cered,,Fő tér","Cered, Főtér",48.14651,19.96676
 "Cered,,Jókai út","Cered, Jókai út",48.14361,19.96395
@@ -1682,13 +1682,13 @@ Muránska Huta,Muránska Huta,48.77874,20.11037
 "Vernár,,píla","Vernár, píla",48.92506,20.27612
 "Hranovnica,,ul.SNP","Hranovnica, ul.SNP",48.98977,20.30991
 "Hranovnica,,píla","Hranovnica, píla",49.0008,20.30812
-"Poprad,Kvetnica,Lesný park",,,
+"Poprad,Kvetnica,Lesný park","Poprad, Kvetnica, Lesný park",49.01894,20.28332
 "Poprad,,Rožňavská cesta OC","Poprad, Rožňavská cesta OC",49.04749,20.29236
 "Poprad,,Dom kultúry","Poprad, Dom kultúry",49.05491,20.29581
 "Sládkovičovo,,nám.","Sládkovičovo, nám.",48.20525,17.6439
 "Senec,,aut.st.","Senec, Aut. stanica",48.2214812,17.3960837
 "Rimavská Sobota,,Rozvodňa","Rimavská Sobota, Rozvodňa",48.38457,20.04219
-"Zacharovce,,rázc.1",,,
+"Zacharovce,,rázc.1","Zacharovce, rázc.1",48.386798,20.050368
 "Uzovská Panica,,Nový Mikulov I.","Uzovská Panica, Nový Mikulov I.",48.39579,20.11699
 "Uzovská Panica,,Vysielač","Uzovská Panica, Vysielač",48.40602,20.11672
 "Rakytník,,rázc.","Rakytník, rázc.",48.38251,20.17998
@@ -1775,7 +1775,7 @@ Hrachovo,Hrachovo,48.46345,19.95012
 "Plešivec,,aut.st.","Plešivec, aut.st.",48.54861,20.40556
 "Plešivec,,žel.st.","Plešivec, žel.st.",48.55293,20.41263
 "Šiatorská Bukovinka,,št.hr.CLO","Šiatorská Bukovinka, št.hr.",48.16902,19.82231
-"Somoskőújfalu,,oh.ZOLL",,,
+"Somoskőújfalu,,oh.ZOLL","Somoskőújfalu, oh.ZOLL",48.168255,19.8190981
 "Somoskőújfalu,,községháza","Somoskőújfalu, községháza",48.16148,19.82107
 "Salgótarján,,Beszterce-lakótelep","Salgótarján, Beszterce-lakótelep",48.12833,19.81074
 "Salgótarján,,autóbusz-állomás","Salgótarján, autóbusz-állomás",48.1038,19.80454
@@ -1848,7 +1848,7 @@ Neporadza,Neporadza,48.36282,20.38856
 Riečka,Riečka,48.34065,20.33079
 Kráľ,Kráľ,48.32764,20.34215
 "Kráľ,,rázc.","Kráľ, rázc.",48.32305,20.34451
-"Kráľ,,št.hr.",,,
+"Kráľ,,št.hr.","Kráľ, štátna hranica",48.31554,20.35337
 "Abovce,,OcÚ","Abovce, OcÚ",48.31858,20.33615
 "Tisovec,,Dolina Pohorelá","Tisovec, Dolina Pohorelá",48.70269,19.87845
 "Tisovec,,Bánovo žel.st.","Tisovec, Bánovo žel.st.",48.71691,19.86393
@@ -1866,7 +1866,7 @@ Kráľ,Kráľ,48.32764,20.34215
 Tulčík,Tulčík,49.08963,21.31262
 Demjata,Demjata,49.10729,21.31589
 "Raslavice,,Hlavná","Raslavice, Hlavná",49.14979,21.31571
-"Kobyly,,OcÚ",,,
+"Kobyly,,OcÚ","Kobyly, OcÚ",49.21356634126398, 21.29686042111465
 "Kľušov,,OcÚ","Kľušov, OcÚ",49.24857,21.25695
 "Bardejov,,AS","Bardejov, AS",49.29767,21.28205
 "Bardejov,Bardejov.Kúpele","Bardejov, Bardejov.Kúpele",49.32694,21.27416
@@ -1981,7 +1981,7 @@ Kraskovo,Kraskovo,48.50129,19.98897
 "Ožďany,,Babin most","Ožďany, Babin most",48.38682,19.93059
 "Ožďany,,ŠM","Ožďany, ŠM",48.38219,19.9194
 "Lučenec,,nem.","Lučenec, nem.",48.32982,19.66082
-"Rimavská Sobota,,Cukrovarská ul.",,,
+"Rimavská Sobota,,Cukrovarská ul.","Rimavská Sobota, Cukrovarská ul.",-1,-1
 "Jesenské,,žel.st.rázc.","Jesenské, žel.st.rázc.",48.30081,20.06218
 "Jesenské,,Aduš","Jesenské, Aduš",48.30068,20.04841
 "Jesenské,,ŠM","Jesenské, ŠM",48.30169,20.03691
@@ -2037,7 +2037,7 @@ Gregorova Vieska,Gregorova Vieska,48.38488,19.57832
 "Tomášovce,,PRP-píla","Tomášovce, PRP-píla",48.36908,19.62614
 "Tomášovce,,pri moste","Tomášovce, pri moste",48.37296,19.62408
 "Tomášovce,,HZ","Tomášovce, HZ",48.3764,19.62922
-"Podrečany,,baňa",,,
+"Podrečany,,baňa","Podrečany, baňa",-1,-1
 "Podrečany,,žel.st.","Podrečany, žel.st.",48.40564,19.59925
 "Lovinobaňa,,rázc.","Lovinobaňa, rázc.",48.42864,19.5845
 "Divín,,I.","Divín, I.",48.4448,19.5258
@@ -2094,7 +2094,7 @@ Točnica,Točnica,48.41314,19.64108
 "Poltár,,nám.","Poltár, nám.",48.43189,19.79295
 "Dolný Harmanec,,kostol","Dolný Harmanec, kostol",48.80812,19.05406
 "Čremošné,,Čierna voda","Čremošné, Čierna voda",48.84798,18.90331
-"Turč.Teplice,,Dom služ.",,,
+"Turč.Teplice,,Dom služ.","Turčianske Teplice, Dom služ.",48.86393,18.861349
 "Sklabiná,,rázc.","Sklabiná, rázc.",48.16089,19.35274
 Želovce,Želovce,48.12354,19.35032
 "Slovenské Ďarmoty,,aut.st.","Slovenské Ďarmoty, aut.st.",48.09074,19.29091
@@ -4114,7 +4114,7 @@ Rokytov,Rokytov,49.31709,21.18981
 "Bardejov,,žel.zast.Kľušov","Bardejov, žel.zast.Kľušov",49.26103,21.25099
 "Kobyly,,vyšný koniec","Kobyly, vyšný koniec",49.21903,21.29402
 "Kobyly,,centrum","Kobyly, centrum",49.2136,21.2967
-"Kobyly,,mlynky",,,
+"Kobyly,,mlynky","Kobyly, mlynky",21.3022053,49.2095051
 "Janovce,,stred","Janovce, stred",49.19022,21.30505
 Tročany,Tročany,49.1834,21.32254
 "Raslavice,,Vaniškovská","Raslavice, Vaniškovská",49.15749,21.30944
