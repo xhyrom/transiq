@@ -1,14 +1,14 @@
 import type { Feed, FileSource } from "@feeds/types";
 
 export default {
-  id: "sadza",
-  name: "SAD Žilina",
+  id: "sad-prievidza",
+  name: "SAD Prievidza",
   license: {
     attribution: "© TransData s.r.o.",
-    notes: "Data sourced from portal.cp.sk, provided by TransData s.r.o.",
+    notes: "Data sourced from gtfs.transdata.sk, provided by TransData s.r.o.",
   },
   getLatestSource: async (): Promise<FileSource> => ({
     type: "url",
-    url: "https://gtfs.transdata.sk/SADZA/gtfs.zip",
+    url: "https://gtfs.transdata.sk/SADPD/gtfs.zip",
   }),
 } satisfies Feed;
