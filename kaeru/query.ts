@@ -128,8 +128,56 @@ export async function reverseGeocode(
   }
 
   const data = await response.json();
-  return {
-    district: data.address.county || data.address.district,
-    region: data.address.state || data.address.region,
-  };
+
+  switch (data.country_code) {
+    case "sk":
+      return {
+        district: data.address.county || data.address.city_district,
+        region: data.address.state || data.address.region,
+      };
+    case "cz":
+      return {
+        district:
+          data.address.city === "Hlavní mesto Praha"
+            ? data.address.city
+            : data.address.municipality,
+        region:
+          data.address.county || data.address.state || data.address.region,
+      };
+    case "de":
+      return {
+        district:
+          data.address.city ||
+          data.address.city_district ||
+          data.address.municipality,
+        region:
+          data.address.state || data.address.county || data.address.region,
+      };
+    case "ua":
+      return {
+        district: data.address.district,
+        region: data.address.state || data.address.region,
+      };
+    case "at":
+      return {
+        district:
+          data.address.city_district ||
+          data.address.county ||
+          data.address.municipality,
+        region: data.address.state || data.address.region,
+      };
+    default:
+      return {
+        district:
+          data.address.city === "Hlavné mesto Praha"
+            ? data.address.city
+            : data.address.municipality ||
+              data.address.county ||
+              data.address.city_district ||
+              data.address.district ||
+              data.address.borough,
+        region:
+          data.address.state || data.address.county || data.address.region,
+      };
+  }
 }

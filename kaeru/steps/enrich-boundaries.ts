@@ -25,14 +25,20 @@ for (const station of data) {
   if (
     station.lat &&
     station.lon &&
-    (!station.district || !station.region) &&
+    (!station.district ||
+      !station.region ||
+      station.district.includes("kraj") ||
+      station.region.includes("oblasť") ||
+      station.region.includes("okres")) &&
     (station.lat != -1 || station.lon != -1)
   ) {
     try {
       const boundaries = await reverseGeocode(station.lat, station.lon);
       station.district =
         boundaries.district?.replace("okres", "")?.trim() || "";
-      station.region = boundaries.region?.replace("kraj", "")?.trim() || "";
+      station.region =
+        boundaries.region?.replace("kraj", "")?.replace("oblasť", "")?.trim() ||
+        "";
 
       log(
         "INFO",
