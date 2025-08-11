@@ -187,13 +187,13 @@ add_shapes() {
         exit 1
     fi
 
-    local filename=$(basename "$gtfs_file")
-    local country_code_id=${filename%.zip}
+    local agency=$(basename "$gtfs_file" .zip)
+    local country_code=$(basename "$(dirname "$gtfs_file")")
 
     mkdir -p "$PREVIOUS_GTFS_DIR"
 
-    local previous_lite_file="$PREVIOUS_GTFS_DIR/${country_code_id}.lite.zip"
-    local previous_shaped_file="$PREVIOUS_GTFS_DIR/${country_code_id}.zip"
+    local previous_lite_file="$PREVIOUS_GTFS_DIR/${country_code}/${agency}.lite.zip"
+    local previous_shaped_file="$PREVIOUS_GTFS_DIR/${country_code}/${agency}.zip"
 
     if [ -f "$previous_lite_file" ] && [ "$force" = false ]; then
         echo -e "${BLUE}Found previous lite version. Comparing GTFS content...${NC}"
@@ -264,7 +264,6 @@ add_shapes() {
         exit 1
     fi
 
-    local agency=$(basename "$gtfs_file" .zip)
     local output_dir="$GTFS_SHAPED_DIR/$agency"
     local temp_zip="$GTFS_SHAPED_DIR/${agency}.zip"
 

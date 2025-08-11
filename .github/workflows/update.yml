@@ -45,7 +45,7 @@ jobs:
         run: |
           rm -rf gtfs-branch
 
-          git clone --branch gtfs --single-branch https://github.com/${{ github.repository }}.git gtfs-branch
+          git clone --branch gtfs --single-branch https://github.com/${{ github.repository }}.git gtfs-branch --depth 1
 
           mkdir -p .tmp/previous-gtfs
           cp -r gtfs-branch/gtfs/* .tmp/previous-gtfs
