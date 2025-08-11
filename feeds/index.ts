@@ -1,4 +1,4 @@
-import type { Feed, FeedFix, FileSource } from "@feeds/types";
+import type { Feed, FileSource } from "@feeds/types";
 import { getGftsZip } from "cis/client";
 import { mkdir, readdir } from "node:fs/promises";
 import { join } from "node:path";
@@ -28,10 +28,10 @@ for (const feed of feeds) {
 
     await Bun.write(fileName, buffer);
 
-    if (feed.license?.type) {
+    if (feed.license) {
       await generateLicenseFile(feed, fileName);
       spinner.succeed(
-        `[${countryCode}] Successfully downloaded ${feed.name} data with ${feed.license.type} license`,
+        `[${countryCode}] Successfully downloaded ${feed.name} data with ${feed.license.type ? `${feed.license.type} ` : ""}license`,
       );
     } else {
       spinner.succeed(
