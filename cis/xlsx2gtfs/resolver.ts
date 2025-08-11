@@ -44,10 +44,14 @@ export function resolvePartialGtfsStop(stop: PartialGtfsStop): GtfsStop {
 
     const kaeruStop = matches[0]!;
     const resolved: GtfsStop = {
-      stop_id: stopId(stop.metadata.cis_name),
-      stop_name: kaeruStop?.name || stop.metadata.cis_name,
-      stop_lat: kaeruStop?.lat || -1,
-      stop_lon: kaeruStop?.lon || -1,
+      stop_id: stopId(
+        stop.metadata.cis_name,
+        kaeruStop.country_code,
+        kaeruStop.district,
+      ),
+      stop_name: kaeruStop.name || stop.metadata.cis_name,
+      stop_lat: kaeruStop.lat || -1,
+      stop_lon: kaeruStop.lon || -1,
       zone_id: stop.zone_id,
       location_type: stop.location_type ?? 0,
       metadata: {
@@ -68,10 +72,14 @@ export function resolvePartialGtfsStop(stop: PartialGtfsStop): GtfsStop {
       );
 
       const resolved: GtfsStop = {
-        stop_id: stopId(stop.metadata.cis_name),
-        stop_name: match?.name || stop.metadata.cis_name,
-        stop_lat: match?.lat || -1,
-        stop_lon: match?.lon || -1,
+        stop_id: stopId(
+          stop.metadata.cis_name,
+          match.country_code,
+          match.district,
+        ),
+        stop_name: match.name || stop.metadata.cis_name,
+        stop_lat: match.lat || -1,
+        stop_lon: match.lon || -1,
         zone_id: stop.zone_id,
         location_type: stop.location_type ?? 0,
         metadata: {
@@ -96,7 +104,11 @@ export function resolvePartialGtfsStop(stop: PartialGtfsStop): GtfsStop {
         );
 
         const resolved: GtfsStop = {
-          stop_id: stopId(`${stop.metadata.cis_name}_${district}`),
+          stop_id: stopId(
+            stop.metadata.cis_name,
+            match.country_code,
+            match.district,
+          ),
           stop_name: match.name || stop.metadata.cis_name,
           stop_lat: match.lat || -1,
           stop_lon: match.lon || -1,

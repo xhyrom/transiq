@@ -109,7 +109,7 @@ export async function queryUbian(
 export async function reverseGeocode(
   lat: number,
   lon: number,
-): Promise<{ district?: string; region?: string }> {
+): Promise<{ district?: string; region?: string; country_code?: string }> {
   const url = new URL("https://nominatim.openstreetmap.org/reverse");
   url.searchParams.set("lat", String(lat));
   url.searchParams.set("lon", String(lon));
@@ -129,11 +129,12 @@ export async function reverseGeocode(
 
   const data = await response.json();
 
-  switch (data.country_code) {
+  switch (data.address.country_code) {
     case "sk":
       return {
         district: data.address.county || data.address.city_district,
         region: data.address.state || data.address.region,
+        country_code: data.address.country_code.toUpperCase(),
       };
     case "cz":
       return {
@@ -143,41 +144,56 @@ export async function reverseGeocode(
             : data.address.municipality,
         region:
           data.address.county || data.address.state || data.address.region,
+        country_code: data.address.country_code.toUpperCase(),
       };
     case "de":
       return {
         district:
+          data.address.borough ||
           data.address.city ||
           data.address.city_district ||
-          data.address.municipality,
+          data.address.municipality ||
+          data.address.town,
         region:
-          data.address.state || data.address.county || data.address.region,
+          data.address.state ||
+          data.address.county ||
+          data.address.region ||
+          data.address.city,
+        country_code: data.address.country_code.toUpperCase(),
       };
     case "ua":
       return {
-        district: data.address.district,
-        region: data.address.state || data.address.region,
+        district: data.address.district || data.address.borough,
+        region:
+          data.address.city === "Kyjev"
+            ? data.address.city
+            : data.address.state || data.address.region,
+        country_code: data.address.country_code.toUpperCase(),
       };
     case "at":
       return {
         district:
-          data.address.city_district ||
+          data.address.suburb ||
           data.address.county ||
+          data.address.city_district ||
           data.address.municipality,
-        region: data.address.state || data.address.region,
+        region:
+          data.address.city_district ||
+          data.address.state ||
+          data.address.region,
+        country_code: data.address.country_code.toUpperCase(),
       };
     default:
       return {
         district:
-          data.address.city === "Hlavné mesto Praha"
-            ? data.address.city
-            : data.address.municipality ||
-              data.address.county ||
-              data.address.city_district ||
-              data.address.district ||
-              data.address.borough,
+          data.address.municipality ||
+          data.address.county ||
+          data.address.city_district ||
+          data.address.district ||
+          data.address.borough,
         region:
           data.address.state || data.address.county || data.address.region,
+        country_code: data.address.country_code.toUpperCase(),
       };
   }
 }

@@ -4,7 +4,7 @@ import { parse as parseCsv } from "csv-parse/sync";
 import { stringify as stringifyCsv } from "csv-stringify/sync";
 import { reverseGeocode } from "../query";
 import { log } from "../logger";
-import type { KaeruCsvItem } from "../types";
+import { HEADERS, type KaeruCsvItem } from "../types";
 
 const csvPath = join(".transiq", "kaeru.csv");
 if (!(await exists(csvPath))) {
@@ -19,17 +19,11 @@ const data = parseCsv<KaeruCsvItem>(content, {
   cast: true,
 });
 
-const headers = ["cis_name", "name", "lat", "lon", "district", "region"];
-
 for (const station of data) {
   if (
     station.lat &&
     station.lon &&
-    (!station.district ||
-      !station.region ||
-      station.district.includes("kraj") ||
-      station.region.includes("oblasť") ||
-      station.region.includes("okres")) &&
+    (!station.country_code || !station.region || !station.district) &&
     (station.lat != -1 || station.lon != -1)
   ) {
     try {
@@ -39,16 +33,17 @@ for (const station of data) {
       station.region =
         boundaries.region?.replace("kraj", "")?.replace("oblasť", "")?.trim() ||
         "";
+      station.country_code = boundaries.country_code;
 
       log(
         "INFO",
-        `Added boundaries for ${station.cis_name}: ${station.district}, ${station.region}`,
+        `Added boundaries for ${station.cis_name}: cc: ${station.country_code}, r: ${station.region}, d: ${station.district}`,
       );
 
       const csvContent = stringifyCsv([
-        headers,
+        HEADERS,
         ...data.map((item) =>
-          headers.map((key) => item[key as keyof KaeruCsvItem] || ""),
+          HEADERS.map((key) => item[key as keyof KaeruCsvItem] || ""),
         ),
       ]);
 

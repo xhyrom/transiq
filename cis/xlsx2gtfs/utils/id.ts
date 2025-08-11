@@ -5,8 +5,13 @@ export function agencyId(name: string): string {
   return `A-${id(serializeAgencyName(name)).slice(0, 8)}`;
 }
 
-export function stopId(name: string): string {
-  return `S-${id(name).slice(0, 8)}`;
+export function stopId(
+  name: string,
+  country?: string,
+  district?: string,
+): string {
+  const base = `${name}${country ? `-${country}` : ""}${district ? `-${district}` : ""}`;
+  return `S-${id(base).slice(0, 8)}`;
 }
 
 export function tripId(): string {

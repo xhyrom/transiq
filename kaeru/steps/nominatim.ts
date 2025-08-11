@@ -4,7 +4,7 @@ import { parse as parseCsv } from "csv-parse/sync";
 import { stringify as stringifyCsv } from "csv-stringify/sync";
 import { queryGeocodeNominatim } from "../query";
 import { log } from "../logger";
-import type { KaeruCsvItem } from "../types";
+import { HEADERS, type KaeruCsvItem } from "../types";
 
 const csvPath = join(".transiq", "kaeru.csv");
 if (!(await exists(csvPath))) {
@@ -21,7 +21,6 @@ const data = parseCsv<KaeruCsvItem>(content, {
   cast: true,
 });
 
-const headers = ["cis_name", "name", "lat", "lon"];
 let processedCount = 0;
 
 for (const station of data) {
@@ -80,7 +79,7 @@ for (const station of data) {
   station.lon = bestMatch.position.lon;
 
   const csvContent = stringifyCsv([
-    headers,
+    HEADERS,
     // @ts-expect-error it works :)
     ...data.map((item) => headers.map((key) => item[key])),
   ]);
