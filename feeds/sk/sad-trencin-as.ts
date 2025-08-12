@@ -1,21 +1,21 @@
 import type { Feed, FileSource } from "@feeds/types";
 
 export default {
-  id: "sad-prievidza-as",
-  name: "SAD Prievidza a.s.",
+  id: "sad-trencin-as",
+  name: "SAD Trenčín a.s.",
   license: {
     notes:
-      "Data sourced from portal.cp.sk, provided by SAD Prievidza, a.s. Automatically converted from XLSX to GTFS format.",
+      "Data sourced from portal.cp.sk, provided by SAD Trenčín, a.s., a.s. Automatically converted from XLSX to GTFS format.",
   },
   fixes: {
     "agency.txt": {
       updateRows: [
         {
           where: {
-            agency_name: "SAD Prievidza a.s.",
+            agency_name: "SAD Trenčín a.s.",
           },
           set: {
-            agency_url: "https://sadpd.sk/",
+            agency_url: "https://sadtn.sk/",
           },
         },
       ],
@@ -23,6 +23,6 @@ export default {
   },
   getLatestSource: async (): Promise<FileSource> => ({
     type: "cis",
-    id: "sad-prievidza-as",
+    id: "sad-trencin-as",
   }),
 } satisfies Feed;
