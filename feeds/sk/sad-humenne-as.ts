@@ -2,10 +2,10 @@ import type { Feed, FileSource } from "@feeds/types";
 
 export default {
   id: "sad-humenne-as",
-  name: "SAD Humenné a.s.",
+  name: "SAD Humenné, a.s.",
   license: {
     notes:
-      "Data sourced from portal.cp.sk, provided by SAD Humenné a.s. Automatically converted from XLSX to GTFS format.",
+      "Data sourced from portal.cp.sk, provided by SAD Humenné, a.s. Automatically converted from XLSX to GTFS format.",
   },
   fixes: {
     "agency.txt": {

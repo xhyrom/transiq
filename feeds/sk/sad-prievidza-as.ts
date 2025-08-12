@@ -2,7 +2,7 @@ import type { Feed, FileSource } from "@feeds/types";
 
 export default {
   id: "sad-prievidza-as",
-  name: "SAD Prievidza a.s.",
+  name: "SAD Prievidza, a.s.",
   license: {
     notes:
       "Data sourced from portal.cp.sk, provided by SAD Prievidza, a.s. Automatically converted from XLSX to GTFS format.",

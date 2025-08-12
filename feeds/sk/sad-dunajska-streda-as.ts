@@ -5,7 +5,7 @@ export default {
   name: "SAD Dunajská Streda, a.s.",
   license: {
     notes:
-      "Data sourced from portal.cp.sk, provided by SAD Dunajská Streda a.s. Automatically converted from XLSX to GTFS format.",
+      "Data sourced from portal.cp.sk, provided by SAD Dunajská Streda, a.s. Automatically converted from XLSX to GTFS format.",
   },
   getLatestSource: async (): Promise<FileSource> => ({
     type: "cis",
