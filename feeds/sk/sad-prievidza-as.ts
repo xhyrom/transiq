@@ -12,7 +12,7 @@ export default {
       updateRows: [
         {
           where: {
-            agency_name: "SAD Prievidza, a.s.",
+            agency_name: "SAD Prievidza a.s.",
           },
           set: {
             agency_url: "https://sadpd.sk/",
