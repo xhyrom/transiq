@@ -2,9 +2,13 @@ import { join } from "node:path";
 import { exists } from "node:fs/promises";
 import { parse as parseCsv } from "csv-parse/sync";
 import { stringify as stringifyCsv } from "csv-stringify/sync";
-import { queryGeocodeMapy, queryGeocodeNominatim } from "./query";
+import {
+  queryGeocodeMapy,
+  queryGeocodeNominatim,
+  reverseGeocode,
+} from "./query";
 import { log } from "./logger";
-import type { KaeruCsvItem } from "./types";
+import { HEADERS, type KaeruCsvItem } from "./types";
 
 const csvPath = join(".transiq", "kaeru.csv");
 
@@ -203,11 +207,17 @@ EXAMPLES:
     station.lat = selected.position.lat;
     station.lon = selected.position.lon;
 
-    const headers = ["cis_name", "name", "lat", "lon"];
+    const boundaries = await reverseGeocode(station.lat, station.lon);
+    station.district = boundaries.district?.replace("okres", "")?.trim() || "";
+    station.region =
+      boundaries.region?.replace("kraj", "")?.replace("oblasť", "")?.trim() ||
+      "";
+    station.country_code = boundaries.country_code;
+
     const csvContent = stringifyCsv([
-      headers,
+      HEADERS,
       ...data.map((item) =>
-        headers.map((key) => item[key as keyof KaeruCsvItem]),
+        HEADERS.map((key) => item[key as keyof KaeruCsvItem]),
       ),
     ]);
 
