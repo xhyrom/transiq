@@ -15,6 +15,12 @@ BLUE='\033[0;34m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
+if [[ "$TMPDIR" == .* ]]; then
+  mkdir -p "$TMPDIR"
+  export TMPDIR="$(pwd)/${TMPDIR}"
+  echo -e "${BLUE}TMPDIR set to:${NC} ${GREEN}$TMPDIR${NC}"
+fi
+
 show_help() {
     echo -e "${BLUE}Morph GTFS Shape Generator${NC}"
     echo ""
