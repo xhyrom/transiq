@@ -56,7 +56,7 @@ jobs:
       - name: Install OSM data
         run: |
           mkdir -p .tmp/morph/osm
-          curl -L https://spseh-transiq.xhyrom.dev/merged-2025-08-09.osm.lz4 -o .tmp/morph/osm/latest.osm.lz4
+          curl -L https://de1-transiq.xhyrom.dev/merged-2025-08-13.osm.lz4 -o .tmp/morph/osm/latest.osm.lz4
           lz4 -d .tmp/morph/osm/latest.osm.lz4 .tmp/morph/osm/latest.osm
           rm .tmp/morph/osm/latest.osm.lz4
 
