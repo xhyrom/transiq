@@ -240,10 +240,7 @@ add_shapes() {
                     cp "$tmp_zip" "$gtfs_file"
                     echo -e "${GREEN}Successfully applied shapes to $gtfs_file${NC}"
 
-                    cp "$gtfs_file" "$previous_lite_file"
-                    cp "$tmp_zip" "$previous_shaped_file"
-
-                    rm -rf "$tmp_current" "$tmp_shaped" "$tmp_output"
+                    rm -rf "$tmp_current" "$tmp_shaped" "$tmp_output" "$previous_lite_file" "$previous_shaped_file"
 
                     return 0
                 else
@@ -251,8 +248,8 @@ add_shapes() {
                 fi
             else
                 echo -e "${BLUE}Use --force flag to generate shapes anyway.${NC}"
-                cp "$gtfs_file" "$previous_lite_file"
-                return 0
+                rm -rf "$previous_lite_file" "$previous_shaped_file"
+                return 0;
             fi
         else
             echo -e "${BLUE}GTFS content differs. Proceeding with shape generation.${NC}"
@@ -296,6 +293,7 @@ add_shapes() {
 
                 echo -e "${YELLOW}Overwriting original GTFS file...${NC}"
                 cp "$temp_zip" "$gtfs_file"
+                rm -rf "$output_dir"
                 echo -e "${GREEN}Successfully overwrote $gtfs_file with shaped version${NC}"
              else
                 echo -e "${RED}Failed to create zip file from shaped GTFS${NC}"

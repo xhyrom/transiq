@@ -60,7 +60,7 @@ jobs:
       - name: Morph
         run: |
           export TMPDIR=.tmp
-          bun morph:run
+          bun morph:run --jobs=1
 
       - name: Setup Git
         run: |
