@@ -209,26 +209,7 @@ add_shapes() {
 
             if [ "$overwrite" = true ] || [ "$backup" = true ]; then
                 if [ -f "$previous_shaped_file" ]; then
-                    echo -e "${BLUE}Applying previously generated shapes to current file...${NC}"
-
-                    local tmp_current=$(mktemp -d)
-                    local tmp_shaped=$(mktemp -d)
-                    local tmp_output=$(mktemp -d)
-                    local tmp_zip="$tmp_output/shaped.zip"
-
-                    unzip -qq "$gtfs_file" -d "$tmp_current"
-                    unzip -qq "$previous_shaped_file" -d "$tmp_shaped"
-
-                    cp -r "$tmp_current"/* "$tmp_output/"
-
-                    if [ -f "$tmp_shaped/shapes.txt" ]; then
-                        cp "$tmp_shaped/shapes.txt" "$tmp_output/"
-                        echo -e "${GREEN}Successfully copied shapes.txt from previous shaped version${NC}"
-                    else
-                        echo -e "${YELLOW}No shapes.txt found in previous shaped version${NC}"
-                    fi
-
-                    (cd "$tmp_output" && find . -type f | sort | zip -X "$tmp_zip" -@)
+                    echo -e "${BLUE}Reusing previously generated shaped file...${NC}"
 
                     if [ "$backup" = true ]; then
                         echo -e "${YELLOW}Backing up original GTFS file...${NC}"
@@ -237,10 +218,9 @@ add_shapes() {
                         echo -e "${GREEN}Original GTFS backed up to $backup_file${NC}"
                     fi
 
-                    cp "$tmp_zip" "$gtfs_file"
-                    echo -e "${GREEN}Successfully applied shapes to $gtfs_file${NC}"
-
-                    rm -rf "$tmp_current" "$tmp_shaped" "$tmp_output" "$previous_lite_file" "$previous_shaped_file"
+                    cp "$previous_shaped_file" "$gtfs_file"
+                    echo -e "${GREEN}Successfully replaced $gtfs_file with previously generated shaped version.${NC}"
+                    rm -rf "$previous_lite_file" "$previous_shaped_file"
 
                     return 0
                 else
