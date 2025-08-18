@@ -43,6 +43,11 @@ export function resolvePartialGtfsStop(stop: PartialGtfsStop): GtfsStop {
     console.log(`One match found for stop ${stop.metadata.cis_name}`);
 
     const kaeruStop = matches[0]!;
+
+    if (!kaeruStop.name || !kaeruStop.lat || !kaeruStop.lon) {
+      console.warn(`Stop ${kaeruStop.cis_name} doesn't have name/lat/lon.`);
+    }
+
     const resolved: GtfsStop = {
       stop_id: stopId(
         stop.metadata.cis_name,
