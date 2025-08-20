@@ -2,7 +2,7 @@ import { exists } from "node:fs/promises";
 import { join } from "node:path";
 import { parse as parseCsv } from "csv-parse/sync";
 import { stringify as stringifyCsv } from "csv-stringify/sync";
-import { queryUbian } from "../query";
+import { queryUbian, reverseGeocode } from "../query";
 import { log } from "../logger";
 import { HEADERS, type KaeruCsvItem } from "../types";
 
@@ -37,37 +37,13 @@ async function confirmChange(
 }
 
 for (const station of data) {
-  if (!station.name) {
-    //console.log("INFO", `[step3] Skipping unprocessed station: ${station.cis_name}`);
-    continue;
-  }
-
-  const cityName = station.cis_name.split(",,")[0];
-  if (!cityName) {
-    /*console.log(
-      "ERROR",
-      `[step3] No city name found for station: ${station.cis_name}`,
-    );*/
-    continue;
-  }
-
-  if (
-    station.name.startsWith(
-      cityName.split(" ")[0]!.split(",")[0]!.split(".")[0]!,
-    )
-  ) {
-    /*console.log(
-      "INFO",
-      `[step3] Skipping already correctly processed station: ${station.cis_name}`,
-    );*/
-    continue;
-  }
+  if (station.lat || station.lon) continue;
 
   const res = await queryUbian(station.cis_name);
 
   const items = res.items.filter((item) =>
     item.stopCity.startsWith(
-      cityName.split(" ")[0]!.split(",")[0]!.split(".")[0]!,
+      station.cis_name.split(" ")[0]!.split(",")[0]!.split(".")[0]!,
     ),
   );
 
@@ -77,11 +53,6 @@ for (const station of data) {
   }
 
   const bestMatch = items[0]!;
-  if (station.name === bestMatch.name) {
-    log("ERROR", `[ubian] Unable to fix station: ${station.cis_name}`);
-    continue;
-  }
-
   const confirmed = await confirmChange(
     `(${station.cis_name}) ${station.name}`,
     bestMatch.name,
@@ -93,15 +64,28 @@ for (const station of data) {
 
   log(
     "INFO",
-    `[ubian] (${station.cis_name}) ${station.name} -> ${bestMatch.name}`,
+    `[ubian] (${station.cis_name}) ${station.name} → ${bestMatch.name} (${bestMatch.position.lat}, ${bestMatch.position.lon})`,
   );
 
   station.name = bestMatch.name;
+  station.lat = bestMatch.position.lat;
+  station.lon = bestMatch.position.lon;
+
+  const boundaries = await reverseGeocode(station.lat, station.lon);
+  station.district = boundaries.district?.replace("okres", "")?.trim() || "";
+  station.region =
+    boundaries.region?.replace("kraj", "")?.replace("oblasť", "")?.trim() || "";
+  station.country_code = boundaries.country_code;
+
+  log(
+    "INFO",
+    `Added boundaries for ${station.cis_name}: cc: ${station.country_code}, r: ${station.region}, d: ${station.district}`,
+  );
 
   const csvContent = stringifyCsv([
     HEADERS,
     // @ts-expect-error it works :)
-    ...data.map((item) => headers.map((key) => item[key])),
+    ...data.map((item) => HEADERS.map((key) => item[key])),
   ]);
   await Bun.write(csvPath, csvContent);
 

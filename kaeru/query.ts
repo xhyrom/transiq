@@ -80,6 +80,10 @@ export interface UbianStop {
   name: string;
   id: number;
   stopCity: string;
+  position: {
+    lat: number;
+    lon: number;
+  };
 }
 
 export async function queryUbian(
@@ -103,7 +107,31 @@ export async function queryUbian(
     stopCity: item.stopCity,
   }));
 
-  return { items };
+  const urlStopsDetailed = new URL(
+    `https://ubian.azet.sk/navigation/stops/ids?${items.map((item: any) => `ids[]=${item.id}`).join("&")}`,
+  );
+  const stopsDetailedResponse = await fetch(urlStopsDetailed.toString());
+  if (!stopsDetailedResponse.ok) {
+    throw new Error(`Ubian request failed with status ${response.status}`);
+  }
+
+  const dataStopsDetailed = (await stopsDetailedResponse.json()).stops;
+
+  return {
+    items: items.map((item: any) => {
+      const stopDetailed = dataStopsDetailed.find(
+        (stop: any) => stop.stopID === item.id,
+      );
+
+      return {
+        ...item,
+        position: {
+          lat: stopDetailed.platforms?.[0]?.latitude,
+          lon: stopDetailed.platforms?.[0]?.longitude,
+        },
+      };
+    }),
+  };
 }
 
 export async function reverseGeocode(
