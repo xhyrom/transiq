@@ -193,6 +193,8 @@ add_shapes() {
         exit 1
     fi
 
+    local gtfs_lite_file="${gtfs_file%.zip}.lite.zip"
+
     local agency=$(basename "$gtfs_file" .zip)
     local country_code=$(basename "$(dirname "$gtfs_file")")
 
@@ -219,7 +221,8 @@ add_shapes() {
                     fi
 
                     cp "$previous_shaped_file" "$gtfs_file"
-                    echo -e "${GREEN}Successfully replaced $gtfs_file with previously generated shaped version.${NC}"
+                    cp "$previous_lite_file" "$gtfs_lite_file"
+                    echo -e "${GREEN}Successfully replaced $gtfs_file and $gtfs_lite_file with previous version.${NC}"
                     rm -rf "$previous_lite_file" "$previous_shaped_file"
 
                     return 0
@@ -266,9 +269,8 @@ add_shapes() {
             if [ $? -eq 0 ]; then
                  if [ "$backup" = true ]; then
                     echo -e "${YELLOW}Backing up original GTFS file...${NC}"
-                    local backup_file="${gtfs_file%.zip}.lite.zip"
-                    cp "$gtfs_file" "$backup_file"
-                    echo -e "${GREEN}Original GTFS backed up to $backup_file${NC}"
+                    cp "$gtfs_file" "$gtfs_lite_file"
+                    echo -e "${GREEN}Original GTFS backed up to $gtfs_lite_file${NC}"
                  fi
 
                 echo -e "${YELLOW}Overwriting original GTFS file...${NC}"
