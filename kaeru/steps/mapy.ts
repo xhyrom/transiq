@@ -2,7 +2,7 @@ import { exists } from "node:fs/promises";
 import { join } from "node:path";
 import { parse as parseCsv } from "csv-parse/sync";
 import { stringify as stringifyCsv } from "csv-stringify/sync";
-import { queryGeocodeMapy } from "../query";
+import { queryGeocodeMapy, reverseGeocode } from "../query";
 import { log } from "../logger";
 import { HEADERS, type KaeruCsvItem } from "../types";
 
@@ -23,15 +23,15 @@ const data = parseCsv<KaeruCsvItem>(content, {
 
 let processedCount = 0;
 
-for (const station of data) {
-  if (station.name && station.lat !== null && station.lon !== null) {
-    log("INFO", `Skipping already processed station: ${station.cis_name}`);
+for (const stop of data) {
+  if (stop.name && stop.lat !== null && stop.lon !== null) {
+    log("INFO", `Skipping already processed stop: ${stop.cis_name}`);
     continue;
   }
 
   try {
     const res = await queryGeocodeMapy({
-      query: `zastávka ${station.cis_name.replace("aut.st.", "aut.stanica").replace("žel.st.", "žel.stanica")}`,
+      query: `zastávka ${stop.cis_name.replace("Dubnica n.V.", "Dubnica nad Váhom").replace("Bzince p.Javor", "Bzince pod Javorinou").replace("aut.st.", "aut.stanica").replace("žel.st.", "žel.stanica")}`,
     });
 
     const items = res.items.filter(
@@ -42,23 +42,30 @@ for (const station of data) {
           item.label.toLowerCase().includes("autobus")),
     );
     if (items.length === 0) {
-      log("ERROR", `No type found for station: ${station.cis_name}`);
+      log("ERROR", `No type found for stop: ${stop.cis_name}`);
     } else {
       const bestMatch = items[0]!;
 
-      station.name = bestMatch.name;
-      station.lat = bestMatch.position.lat;
-      station.lon = bestMatch.position.lon;
+      stop.name = bestMatch.name;
+      stop.lat = bestMatch.position.lat;
+      stop.lon = bestMatch.position.lon;
+
+      const boundaries = await reverseGeocode(stop.lat, stop.lon);
+      stop.district = boundaries.district?.replace("okres", "")?.trim() || "";
+      stop.region =
+        boundaries.region?.replace("kraj", "")?.replace("oblasť", "")?.trim() ||
+        "";
+      stop.country_code = boundaries.country_code;
 
       log(
         "INFO",
-        `Successfully geocoded: ${station.cis_name} → ${station.name} (${station.lat}, ${station.lon})`,
+        `Successfully geocoded: ${stop.cis_name} → ${stop.name} (${stop.lat}, ${stop.lon})`,
       );
     }
   } catch (error) {
     log(
       "ERROR",
-      `Error processing station ${station.cis_name}: ${error instanceof Error ? error.message : String(error)}`,
+      `Error processing stop ${stop.cis_name}: ${error instanceof Error ? error.message : String(error)}`,
     );
   }
 
@@ -71,14 +78,8 @@ for (const station of data) {
 
   processedCount++;
   if (processedCount % 10 === 0) {
-    log(
-      "INFO",
-      `Progress: Processed ${processedCount}/${data.length} stations`,
-    );
+    log("INFO", `Progress: Processed ${processedCount}/${data.length} stops`);
   }
 }
 
-log(
-  "INFO",
-  `Completed processing. Total stations processed: ${processedCount}`,
-);
+log("INFO", `Completed processing. Total stops processed: ${processedCount}`);

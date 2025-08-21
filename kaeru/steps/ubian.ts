@@ -36,50 +36,50 @@ async function confirmChange(
   return answer === "y";
 }
 
-for (const station of data) {
-  if (station.lat || station.lon) continue;
+for (const stop of data) {
+  if (stop.lat || stop.lon) continue;
 
-  const res = await queryUbian(station.cis_name);
+  const res = await queryUbian(stop.cis_name);
 
   const items = res.items.filter((item) =>
     item.stopCity.startsWith(
-      station.cis_name.split(" ")[0]!.split(",")[0]!.split(".")[0]!,
+      stop.cis_name.split(" ")[0]!.split(",")[0]!.split(".")[0]!,
     ),
   );
 
   if (items.length === 0) {
-    log("ERROR", `[ubian] No type found for station: ${station.cis_name}`);
+    log("ERROR", `[ubian] No type found for station: ${stop.cis_name}`);
     continue;
   }
 
   const bestMatch = items[0]!;
   const confirmed = await confirmChange(
-    `(${station.cis_name}) ${station.name}`,
+    `(${stop.cis_name}) ${stop.name}`,
     bestMatch.name,
   );
   if (!confirmed) {
-    log("INFO", `[ubian] Change skipped by user for: ${station.cis_name}`);
+    log("INFO", `[ubian] Change skipped by user for: ${stop.cis_name}`);
     continue;
   }
 
   log(
     "INFO",
-    `[ubian] (${station.cis_name}) ${station.name} → ${bestMatch.name} (${bestMatch.position.lat}, ${bestMatch.position.lon})`,
+    `[ubian] (${stop.cis_name}) ${stop.name} → ${bestMatch.name} (${bestMatch.position.lat}, ${bestMatch.position.lon})`,
   );
 
-  station.name = bestMatch.name;
-  station.lat = bestMatch.position.lat;
-  station.lon = bestMatch.position.lon;
+  stop.name = bestMatch.name;
+  stop.lat = bestMatch.position.lat;
+  stop.lon = bestMatch.position.lon;
 
-  const boundaries = await reverseGeocode(station.lat, station.lon);
-  station.district = boundaries.district?.replace("okres", "")?.trim() || "";
-  station.region =
+  const boundaries = await reverseGeocode(stop.lat, stop.lon);
+  stop.district = boundaries.district?.replace("okres", "")?.trim() || "";
+  stop.region =
     boundaries.region?.replace("kraj", "")?.replace("oblasť", "")?.trim() || "";
-  station.country_code = boundaries.country_code;
+  stop.country_code = boundaries.country_code;
 
   log(
     "INFO",
-    `Added boundaries for ${station.cis_name}: cc: ${station.country_code}, r: ${station.region}, d: ${station.district}`,
+    `Added boundaries for ${stop.cis_name}: cc: ${stop.country_code}, r: ${stop.region}, d: ${stop.district}`,
   );
 
   const csvContent = stringifyCsv([
