@@ -156,11 +156,15 @@ export function parseRouteTripsCalendarsAndStopTimes(
 
         for (const holiday of HOLIDAYS) {
           if (holiday >= calendarRange.from && holiday <= calendarRange.to) {
+            const date = Number(holiday);
+
             calendarDates.push({
               service_id: calendar.service_id,
-              date: Number(holiday),
+              date: date,
               exception_type: GtfsCalendarDateException.SERVICE_ADDED,
             });
+
+            calendarDatesServiceCache.add(date);
           }
         }
       } else {
