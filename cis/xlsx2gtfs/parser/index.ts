@@ -133,6 +133,8 @@ export function parseRouteTripsCalendarsAndStopTimes(
         bikes_allowed: GtfsTripAccessibility.NO_INFORMATION,
       };
 
+      const calendarDatesServiceCache = new Set<number>();
+
       if (signs.includes(StaticSign.WEEKDAYS_ONLY)) {
         calendar.monday = 1;
         calendar.tuesday = 1;
@@ -164,11 +166,15 @@ export function parseRouteTripsCalendarsAndStopTimes(
       } else {
         for (const holiday of HOLIDAYS) {
           if (holiday >= calendarRange.from && holiday <= calendarRange.to) {
+            const date = Number(holiday);
+
             calendarDates.push({
               service_id: calendar.service_id,
-              date: Number(holiday),
+              date,
               exception_type: GtfsCalendarDateException.SERVICE_REMOVED,
             });
+
+            calendarDatesServiceCache.add(date);
           }
         }
       }
@@ -187,6 +193,7 @@ export function parseRouteTripsCalendarsAndStopTimes(
               calendar.service_id,
               range,
               GtfsCalendarDateException.SERVICE_REMOVED,
+              calendarDatesServiceCache,
             );
           }
         } else if (
@@ -207,6 +214,7 @@ export function parseRouteTripsCalendarsAndStopTimes(
               calendar.service_id,
               range,
               GtfsCalendarDateException.SERVICE_ADDED,
+              calendarDatesServiceCache,
             );
           }
         }
@@ -312,6 +320,7 @@ function addCalendarDatesForRange(
   serviceId: string,
   range: DateRange,
   exceptionType: GtfsCalendarDateException,
+  calendarDatesServiceCache?: Set<number>,
 ) {
   const fromDate = new Date(
     parseInt(range.from.substring(0, 4)),
@@ -335,10 +344,16 @@ function addCalendarDatesForRange(
       (date.getMonth() + 1).toString().padStart(2, "0") +
       date.getDate().toString().padStart(2, "0");
 
+    const dateNum = Number(dateString);
+
+    if (calendarDatesServiceCache?.has(dateNum)) continue;
+
     calendarDates.push({
       service_id: serviceId,
-      date: Number(dateString),
+      date: dateNum,
       exception_type: exceptionType,
     });
+
+    calendarDatesServiceCache?.add(dateNum);
   }
 }
