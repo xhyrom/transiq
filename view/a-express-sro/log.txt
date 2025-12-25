@@ -1,11 +1,21 @@
 Agencies: A-EXPRESS s.r.o.
 Feed Version: Unknown
 GTFS-to-HTML Version: 2.10.15
-Date Generated: 2025-12-24T01:00:47.430Z
-Timetable Page Count: 8
-Timetable Count: 8
-Calendar Service ID Count: 12
-Route Count: 8
-Trip Count: 8
-Stop Count: 144
+Date Generated: 2025-12-25T00:59:38.790Z
+Timetable Page Count: 0
+Timetable Count: 0
+Calendar Service ID Count: 0
+Route Count: 0
+Trip Count: 0
+Stop Count: 0
 Source: .tmp/tidy-gtfs/a-express-sro
+
+Warnings:
+No stop found found for stop_id=l in timetable_id=1|1011101|1
+No stop found found for stop_id=l in timetable_id=1|0100010|1
+No stop found found for stop_id=l in timetable_id=1|1101101|1
+No stop found found for stop_id=l in timetable_id=1|0010010|1
+No stop found found for stop_id=i in timetable_id=1|1011101|0
+No stop found found for stop_id=i in timetable_id=1|0100010|0
+No stop found found for stop_id=i in timetable_id=1|1101101|0
+No stop found found for stop_id=i in timetable_id=1|0010010|0
