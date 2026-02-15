@@ -118,6 +118,9 @@ jobs:
           cp -r gtfs-branch/gtfs gtfs
           NODE_OPTIONS=--max_old_space_size=8000 node gtfs-view/index.mjs
 
+      - name: Kaeru web
+        run: bun kaeru:web
+
       - name: Copy and commit GTFS files
         run: |
           cd gtfs-branch
@@ -126,6 +129,11 @@ jobs:
           mkdir -p view
 
           cp -r ../.tmp/build/gtfs-view/* view/
+
+          rm -rf kaeru || true
+          mkdir -p kaeru
+
+          cp -r ../.tmp/build/kaeru/* kaeru/
 
           git add -A
           git commit -m "👀 Update View for GTFS data $(date +'%Y-%m-%d')" || echo "No changes to commit"

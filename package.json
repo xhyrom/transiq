@@ -7,6 +7,7 @@
     "cis:xlsx2gtfs": "bun cis/xlsx2gtfs/index.ts",
     "cis:run": "bun cis:scrape && bun cis:xlsx2gtfs",
     "feeds:run": "bun feeds/index.ts",
+    "kaeru:web": "bun kaeru/web.ts",
     "morph:run": "morph/shapes init && morph/shapes all --backup"
   },
   "devDependencies": {
