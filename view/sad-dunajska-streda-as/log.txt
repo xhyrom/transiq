@@ -1,31 +1,29 @@
 Agencies: SAD Dunajská Streda a.s.
 Feed Version: Unknown
 GTFS-to-HTML Version: 2.10.15
-Date Generated: 2026-08-26T01:24:21.253Z
-Timetable Page Count: 256
-Timetable Count: 256
-Calendar Service ID Count: 686
-Route Count: 256
-Trip Count: 1781
-Stop Count: 5696
+Date Generated: 2026-08-27T06:18:52.267Z
+Timetable Page Count: 251
+Timetable Count: 251
+Calendar Service ID Count: 660
+Route Count: 251
+Trip Count: 1713
+Stop Count: 5553
 Source: .tmp/tidy-gtfs/sad-dunajska-streda-as
 
 Warnings:
-No trips found for route_id=6, direction_id=1, service_ids=["10","d","e","k","16","p"], timetable_id=6|1110100|1
-No timetables found for timetable_page_id=6|1110100|1
-No trips found for route_id=8, direction_id=0, service_ids=["1"], timetable_id=8|0000000|0
-No timetables found for timetable_page_id=8|0000000|0
-No trips found for route_id=7, direction_id=0, service_ids=["1"], timetable_id=7|0000000|0
-No timetables found for timetable_page_id=7|0000000|0
-No trips found for route_id=13, direction_id=0, service_ids=["1"], timetable_id=13|0000000|0
-No timetables found for timetable_page_id=13|0000000|0
-No trips found for route_id=17, direction_id=1, service_ids=["c","w","y","g","11","4","f","15","r","2","h","m","12","5","9","t","q","8","o","p","3","j","x","u"], timetable_id=17|0000011|1
-No timetables found for timetable_page_id=17|0000011|1
-No trips found for route_id=17, direction_id=1, service_ids=["10","d","e","k","16","p"], timetable_id=17|1110100|1
-No timetables found for timetable_page_id=17|1110100|1
-No trips found for route_id=b, direction_id=1, service_ids=["1"], timetable_id=b|0000000|1
-No timetables found for timetable_page_id=b|0000000|1
-No trips found for route_id=v, direction_id=1, service_ids=["c","w","y","g","11","15","r","2","h","m","12","5","9","t","q","8","o","p","3","j","x","u"], timetable_id=v|0000010|1
-No timetables found for timetable_page_id=v|0000010|1
-No trips found for route_id=a, direction_id=1, service_ids=["10","d","e","k","16","p"], timetable_id=a|1110100|1
-No timetables found for timetable_page_id=a|1110100|1
+No trips found for route_id=c, direction_id=1, service_ids=["16","y","2","3","k","o"], timetable_id=c|1110100|1
+No timetables found for timetable_page_id=c|1110100|1
+No trips found for route_id=3, direction_id=0, service_ids=["v"], timetable_id=3|0000000|0
+No timetables found for timetable_page_id=3|0000000|0
+No trips found for route_id=2, direction_id=0, service_ids=["v"], timetable_id=2|0000000|0
+No timetables found for timetable_page_id=2|0000000|0
+No trips found for route_id=i, direction_id=0, service_ids=["v"], timetable_id=i|0000000|0
+No timetables found for timetable_page_id=i|0000000|0
+No trips found for route_id=k, direction_id=1, service_ids=["16","y","2","3","k","o"], timetable_id=k|1110100|1
+No timetables found for timetable_page_id=k|1110100|1
+No trips found for route_id=k, direction_id=1, service_ids=["5","6","15","n","x","11","7","12","10","h","l","z","d","13","m","4","17","8","r","q","o","w","1","s","t"], timetable_id=k|0000011|1
+No timetables found for timetable_page_id=k|0000011|1
+No trips found for route_id=y, direction_id=1, service_ids=["5","6","15","n","x","10","h","l","z","d","13","m","4","17","8","r","q","o","w","1","s","t"], timetable_id=y|0000010|1
+No timetables found for timetable_page_id=y|0000010|1
+No trips found for route_id=13, direction_id=1, service_ids=["16","y","2","3","k","o"], timetable_id=13|1110100|1
+No timetables found for timetable_page_id=13|1110100|1
