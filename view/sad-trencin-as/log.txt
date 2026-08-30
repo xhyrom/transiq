@@ -1,7 +1,7 @@
 Agencies: SAD Trenčín a.s.
 Feed Version: Unknown
 GTFS-to-HTML Version: 2.10.15
-Date Generated: 2026-08-29T05:22:34.474Z
+Date Generated: 2026-08-30T03:12:24.728Z
 Timetable Page Count: 620
 Timetable Count: 620
 Calendar Service ID Count: 1521
@@ -11,101 +11,101 @@ Stop Count: 15422
 Source: .tmp/tidy-gtfs/sad-trencin-as
 
 Warnings:
-No trips found for route_id=15, direction_id=1, service_ids=["7","5"], timetable_id=15|1110000|1
-No timetables found for timetable_page_id=15|1110000|1
-No trips found for route_id=15, direction_id=1, service_ids=["13","s","t","6","9","k","f","d","e","u","11","q","p","4"], timetable_id=15|0000001|1
-No timetables found for timetable_page_id=15|0000001|1
-No trips found for route_id=15, direction_id=1, service_ids=["13","s","t","6","9","n","j","e","u","11","q","p","m","c"], timetable_id=15|0000010|1
-No timetables found for timetable_page_id=15|0000010|1
-No trips found for route_id=15, direction_id=1, service_ids=["y","13","s","t","6","9","k","f","d","n","j","e","u","11","q","p","m","c","4"], timetable_id=15|0000011|1
-No timetables found for timetable_page_id=15|0000011|1
-No trips found for route_id=6, direction_id=1, service_ids=["a","13","s","t","6","9","w","8","1","z","3","i","o","v","b","12","g","h","l","r","d","m","c","2"], timetable_id=6|1111100|1
-No timetables found for timetable_page_id=6|1111100|1
-No trips found for route_id=1q, direction_id=1, service_ids=["x","4","2"], timetable_id=1q|0000000|1
-No timetables found for timetable_page_id=1q|0000000|1
-No trips found for route_id=1q, direction_id=1, service_ids=["13","s","t","6","9","k","f","d","e","u","11","q","p","4"], timetable_id=1q|0000001|1
-No timetables found for timetable_page_id=1q|0000001|1
-No trips found for route_id=1q, direction_id=1, service_ids=["w","8","1","z","3","i","o","v","b","12","g","h","l","r","d","m","c","2"], timetable_id=1q|0001100|1
-No timetables found for timetable_page_id=1q|0001100|1
-No trips found for route_id=1q, direction_id=1, service_ids=["a","13","s","t","6","9","w","8","1","z","3","i","o","v","b","12","g","h","l","r","d","m","c","2"], timetable_id=1q|1111100|1
-No timetables found for timetable_page_id=1q|1111100|1
-No trips found for route_id=1q, direction_id=1, service_ids=["a","13","s","t","6","9","w","8","1","z","3","i","o","v","b","12","g","h","l","r","d","m","c","2"], timetable_id=1q|1111100|1
-No timetables found for timetable_page_id=1q|1111100|1
-No trips found for route_id=16, direction_id=1, service_ids=["13","s","t","6","9","n","j","e","u","11","q","p","m","c"], timetable_id=16|0000010|1
-No timetables found for timetable_page_id=16|0000010|1
-No trips found for route_id=2q, direction_id=0, service_ids=["y","13","s","t","6","9","k","f","d","n","j","e","u","11","q","p","m","c","4"], timetable_id=2q|0000011|0
-No timetables found for timetable_page_id=2q|0000011|0
-No trips found for route_id=1k, direction_id=0, service_ids=["y","13","s","t","6","9","k","f","d","n","j","e","u","11","q","p","m","c","4"], timetable_id=1k|0000011|0
-No timetables found for timetable_page_id=1k|0000011|0
-No trips found for route_id=13, direction_id=1, service_ids=["y","13","s","t","6","9","k","f","d","n","j","e","u","11","q","p","m","c","4"], timetable_id=13|0000011|1
-No timetables found for timetable_page_id=13|0000011|1
-No trips found for route_id=y, direction_id=1, service_ids=["y","13","s","t","6","9","k","f","d","n","j","e","u","11","q","p","m","c","4"], timetable_id=y|0000011|1
-No timetables found for timetable_page_id=y|0000011|1
-No trips found for route_id=1f, direction_id=1, service_ids=["13","s","t","6","9","k","f","d","e","u","11","q","p","4"], timetable_id=1f|0000001|1
-No timetables found for timetable_page_id=1f|0000001|1
-No trips found for route_id=1f, direction_id=1, service_ids=["y","13","s","t","6","9","k","f","d","n","j","e","u","11","q","p","m","c","4"], timetable_id=1f|0000011|1
-No timetables found for timetable_page_id=1f|0000011|1
-No trips found for route_id=k, direction_id=0, service_ids=["x","4","2"], timetable_id=k|0000000|0
-No timetables found for timetable_page_id=k|0000000|0
-No trips found for route_id=k, direction_id=0, service_ids=["13","s","t","6","9","k","f","d","e","u","11","q","p","4"], timetable_id=k|0000001|0
-No timetables found for timetable_page_id=k|0000001|0
-No trips found for route_id=k, direction_id=0, service_ids=["13","s","t","6","9","n","j","e","u","11","q","p","m","c"], timetable_id=k|0000010|0
-No timetables found for timetable_page_id=k|0000010|0
-No trips found for route_id=k, direction_id=0, service_ids=["y","13","s","t","6","9","k","f","d","n","j","e","u","11","q","p","m","c","4"], timetable_id=k|0000011|0
-No timetables found for timetable_page_id=k|0000011|0
-No trips found for route_id=2h, direction_id=0, service_ids=["13","s","t","6","9","n","j","e","u","11","q","p","m","c"], timetable_id=2h|0000010|0
-No timetables found for timetable_page_id=2h|0000010|0
-No trips found for route_id=9, direction_id=1, service_ids=["a","13","s","t","6","9","w","8","1","z","3","i","o","v","b","12","g","h","l","r","d","m","c","2"], timetable_id=9|1111100|1
-No timetables found for timetable_page_id=9|1111100|1
-No trips found for route_id=9, direction_id=0, service_ids=["13","s","t","6","9","k","f","d","e","u","11","q","p","4"], timetable_id=9|0000001|0
-No timetables found for timetable_page_id=9|0000001|0
-No trips found for route_id=p, direction_id=0, service_ids=["13","s","t","6","9","k","f","d","e","u","11","q","p","4"], timetable_id=p|0000001|0
-No timetables found for timetable_page_id=p|0000001|0
-No trips found for route_id=p, direction_id=0, service_ids=["13","s","t","6","9","n","j","e","u","11","q","p","m","c"], timetable_id=p|0000010|0
-No timetables found for timetable_page_id=p|0000010|0
-No trips found for route_id=p, direction_id=0, service_ids=["y","13","s","t","6","9","k","f","d","n","j","e","u","11","q","p","m","c","4"], timetable_id=p|0000011|0
-No timetables found for timetable_page_id=p|0000011|0
-No trips found for route_id=1m, direction_id=0, service_ids=["a","13","s","t","6","9","w","8","1","z","3","i","o","v","b","12","g","h","l","r","d","m","c","2"], timetable_id=1m|1111100|0
-No timetables found for timetable_page_id=1m|1111100|0
-No trips found for route_id=5, direction_id=1, service_ids=["13","s","t","6","9","k","f","d","e","u","11","q","p","4"], timetable_id=5|0000001|1
-No timetables found for timetable_page_id=5|0000001|1
-No trips found for route_id=5, direction_id=1, service_ids=["13","s","t","6","9","n","j","e","u","11","q","p","m","c"], timetable_id=5|0000010|1
-No timetables found for timetable_page_id=5|0000010|1
-No trips found for route_id=5, direction_id=1, service_ids=["y","13","s","t","6","9","k","f","d","n","j","e","u","11","q","p","m","c","4"], timetable_id=5|0000011|1
-No timetables found for timetable_page_id=5|0000011|1
-No trips found for route_id=1x, direction_id=1, service_ids=["x","4","2"], timetable_id=1x|0000000|1
-No timetables found for timetable_page_id=1x|0000000|1
-No trips found for route_id=g, direction_id=1, service_ids=["x","4","2"], timetable_id=g|0000000|1
-No timetables found for timetable_page_id=g|0000000|1
-No trips found for route_id=27, direction_id=0, service_ids=["y","13","s","t","6","9","k","f","d","n","j","e","u","11","q","p","m","c","4"], timetable_id=27|0000011|0
-No timetables found for timetable_page_id=27|0000011|0
-No trips found for route_id=27, direction_id=1, service_ids=["a","13","s","t","6","9","w","8","1","z","3","i","o","v","b","12","g","h","l","r","d","m","c","2"], timetable_id=27|1111100|1
-No timetables found for timetable_page_id=27|1111100|1
-No trips found for route_id=11, direction_id=0, service_ids=["w","8","1","z","3","i","o","v","b","12","g","h","l","r","d","m","c","2"], timetable_id=11|0001100|0
-No timetables found for timetable_page_id=11|0001100|0
-No trips found for route_id=i, direction_id=0, service_ids=["7","5"], timetable_id=i|1110000|0
-No timetables found for timetable_page_id=i|1110000|0
-No trips found for route_id=i, direction_id=0, service_ids=["13","s","t","6","9","n","j","e","u","11","q","p","m","c"], timetable_id=i|0000010|0
-No timetables found for timetable_page_id=i|0000010|0
-No trips found for route_id=3, direction_id=0, service_ids=["13","s","t","6","9","k","f","d","e","u","11","q","p","4"], timetable_id=3|0000001|0
-No timetables found for timetable_page_id=3|0000001|0
-No trips found for route_id=3, direction_id=0, service_ids=["13","s","t","6","9","n","j","e","u","11","q","p","m","c"], timetable_id=3|0000010|0
-No timetables found for timetable_page_id=3|0000010|0
-No trips found for route_id=3, direction_id=0, service_ids=["y","13","s","t","6","9","k","f","d","n","j","e","u","11","q","p","m","c","4"], timetable_id=3|0000011|0
-No timetables found for timetable_page_id=3|0000011|0
-No trips found for route_id=1z, direction_id=1, service_ids=["13","s","t","6","9","k","f","d","e","u","11","q","p","4"], timetable_id=1z|0000001|1
-No timetables found for timetable_page_id=1z|0000001|1
-No trips found for route_id=1z, direction_id=1, service_ids=["13","s","t","6","9","n","j","e","u","11","q","p","m","c"], timetable_id=1z|0000010|1
-No timetables found for timetable_page_id=1z|0000010|1
-No trips found for route_id=1z, direction_id=1, service_ids=["y","13","s","t","6","9","k","f","d","n","j","e","u","11","q","p","m","c","4"], timetable_id=1z|0000011|1
-No timetables found for timetable_page_id=1z|0000011|1
-No trips found for route_id=u, direction_id=1, service_ids=["x","4","2"], timetable_id=u|0000000|1
-No timetables found for timetable_page_id=u|0000000|1
-No trips found for route_id=u, direction_id=1, service_ids=["y","13","s","t","6","9","k","f","d","n","j","e","u","11","q","p","m","c","4"], timetable_id=u|0000011|1
+No trips found for route_id=u, direction_id=1, service_ids=["13","5"], timetable_id=u|1110000|1
+No timetables found for timetable_page_id=u|1110000|1
+No trips found for route_id=u, direction_id=1, service_ids=["4","m","n","w","o","h","1","v","b","7","s","j","e","10"], timetable_id=u|0000001|1
+No timetables found for timetable_page_id=u|0000001|1
+No trips found for route_id=u, direction_id=1, service_ids=["4","m","n","w","o","l","k","b","7","s","j","e","8","u"], timetable_id=u|0000010|1
+No timetables found for timetable_page_id=u|0000010|1
+No trips found for route_id=u, direction_id=1, service_ids=["6","4","m","n","w","o","h","1","v","l","k","b","7","s","j","e","8","u","10"], timetable_id=u|0000011|1
 No timetables found for timetable_page_id=u|0000011|1
-No trips found for route_id=2, direction_id=1, service_ids=["x","4","2"], timetable_id=2|0000000|1
-No timetables found for timetable_page_id=2|0000000|1
-No trips found for route_id=1g, direction_id=1, service_ids=["y","13","s","t","6","9","k","f","d","n","j","e","u","11","q","p","m","c","4"], timetable_id=1g|0000011|1
-No timetables found for timetable_page_id=1g|0000011|1
-No trips found for route_id=2y, direction_id=0, service_ids=["x","4","2"], timetable_id=2y|0000000|0
-No timetables found for timetable_page_id=2y|0000000|0
+No trips found for route_id=28, direction_id=1, service_ids=["p","4","m","n","w","o","3","f","q","z","11","c","g","2","t","9","a","d","i","r","v","8","u","12"], timetable_id=28|1111100|1
+No timetables found for timetable_page_id=28|1111100|1
+No trips found for route_id=7, direction_id=1, service_ids=["4","m","n","w","o","h","1","v","b","7","s","j","e","10"], timetable_id=7|0000001|1
+No timetables found for timetable_page_id=7|0000001|1
+No trips found for route_id=7, direction_id=1, service_ids=["3","f","q","z","11","c","g","2","t","9","a","d","i","r","v","8","u","12"], timetable_id=7|0001100|1
+No timetables found for timetable_page_id=7|0001100|1
+No trips found for route_id=7, direction_id=1, service_ids=["y","10","12"], timetable_id=7|0000000|1
+No timetables found for timetable_page_id=7|0000000|1
+No trips found for route_id=7, direction_id=1, service_ids=["p","4","m","n","w","o","3","f","q","z","11","c","g","2","t","9","a","d","i","r","v","8","u","12"], timetable_id=7|1111100|1
+No timetables found for timetable_page_id=7|1111100|1
+No trips found for route_id=7, direction_id=1, service_ids=["p","4","m","n","w","o","3","f","q","z","11","c","g","2","t","9","a","d","i","r","v","8","u","12"], timetable_id=7|1111100|1
+No timetables found for timetable_page_id=7|1111100|1
+No trips found for route_id=1f, direction_id=1, service_ids=["4","m","n","w","o","l","k","b","7","s","j","e","8","u"], timetable_id=1f|0000010|1
+No timetables found for timetable_page_id=1f|0000010|1
+No trips found for route_id=o, direction_id=0, service_ids=["6","4","m","n","w","o","h","1","v","l","k","b","7","s","j","e","8","u","10"], timetable_id=o|0000011|0
+No timetables found for timetable_page_id=o|0000011|0
+No trips found for route_id=1j, direction_id=0, service_ids=["6","4","m","n","w","o","h","1","v","l","k","b","7","s","j","e","8","u","10"], timetable_id=1j|0000011|0
+No timetables found for timetable_page_id=1j|0000011|0
+No trips found for route_id=r, direction_id=1, service_ids=["6","4","m","n","w","o","h","1","v","l","k","b","7","s","j","e","8","u","10"], timetable_id=r|0000011|1
+No timetables found for timetable_page_id=r|0000011|1
+No trips found for route_id=1u, direction_id=1, service_ids=["6","4","m","n","w","o","h","1","v","l","k","b","7","s","j","e","8","u","10"], timetable_id=1u|0000011|1
+No timetables found for timetable_page_id=1u|0000011|1
+No trips found for route_id=f, direction_id=1, service_ids=["4","m","n","w","o","h","1","v","b","7","s","j","e","10"], timetable_id=f|0000001|1
+No timetables found for timetable_page_id=f|0000001|1
+No trips found for route_id=f, direction_id=1, service_ids=["6","4","m","n","w","o","h","1","v","l","k","b","7","s","j","e","8","u","10"], timetable_id=f|0000011|1
+No timetables found for timetable_page_id=f|0000011|1
+No trips found for route_id=1i, direction_id=0, service_ids=["y","10","12"], timetable_id=1i|0000000|0
+No timetables found for timetable_page_id=1i|0000000|0
+No trips found for route_id=1i, direction_id=0, service_ids=["4","m","n","w","o","h","1","v","b","7","s","j","e","10"], timetable_id=1i|0000001|0
+No timetables found for timetable_page_id=1i|0000001|0
+No trips found for route_id=1i, direction_id=0, service_ids=["4","m","n","w","o","l","k","b","7","s","j","e","8","u"], timetable_id=1i|0000010|0
+No timetables found for timetable_page_id=1i|0000010|0
+No trips found for route_id=1i, direction_id=0, service_ids=["6","4","m","n","w","o","h","1","v","l","k","b","7","s","j","e","8","u","10"], timetable_id=1i|0000011|0
+No timetables found for timetable_page_id=1i|0000011|0
+No trips found for route_id=2j, direction_id=0, service_ids=["4","m","n","w","o","l","k","b","7","s","j","e","8","u"], timetable_id=2j|0000010|0
+No timetables found for timetable_page_id=2j|0000010|0
+No trips found for route_id=1v, direction_id=1, service_ids=["p","4","m","n","w","o","3","f","q","z","11","c","g","2","t","9","a","d","i","r","v","8","u","12"], timetable_id=1v|1111100|1
+No timetables found for timetable_page_id=1v|1111100|1
+No trips found for route_id=1v, direction_id=0, service_ids=["4","m","n","w","o","h","1","v","b","7","s","j","e","10"], timetable_id=1v|0000001|0
+No timetables found for timetable_page_id=1v|0000001|0
+No trips found for route_id=h, direction_id=0, service_ids=["4","m","n","w","o","h","1","v","b","7","s","j","e","10"], timetable_id=h|0000001|0
+No timetables found for timetable_page_id=h|0000001|0
+No trips found for route_id=h, direction_id=0, service_ids=["4","m","n","w","o","l","k","b","7","s","j","e","8","u"], timetable_id=h|0000010|0
+No timetables found for timetable_page_id=h|0000010|0
+No trips found for route_id=h, direction_id=0, service_ids=["6","4","m","n","w","o","h","1","v","l","k","b","7","s","j","e","8","u","10"], timetable_id=h|0000011|0
+No timetables found for timetable_page_id=h|0000011|0
+No trips found for route_id=2a, direction_id=0, service_ids=["p","4","m","n","w","o","3","f","q","z","11","c","g","2","t","9","a","d","i","r","v","8","u","12"], timetable_id=2a|1111100|0
+No timetables found for timetable_page_id=2a|1111100|0
+No trips found for route_id=2x, direction_id=1, service_ids=["4","m","n","w","o","h","1","v","b","7","s","j","e","10"], timetable_id=2x|0000001|1
+No timetables found for timetable_page_id=2x|0000001|1
+No trips found for route_id=2x, direction_id=1, service_ids=["4","m","n","w","o","l","k","b","7","s","j","e","8","u"], timetable_id=2x|0000010|1
+No timetables found for timetable_page_id=2x|0000010|1
+No trips found for route_id=2x, direction_id=1, service_ids=["6","4","m","n","w","o","h","1","v","l","k","b","7","s","j","e","8","u","10"], timetable_id=2x|0000011|1
+No timetables found for timetable_page_id=2x|0000011|1
+No trips found for route_id=n, direction_id=1, service_ids=["y","10","12"], timetable_id=n|0000000|1
+No timetables found for timetable_page_id=n|0000000|1
+No trips found for route_id=y, direction_id=1, service_ids=["y","10","12"], timetable_id=y|0000000|1
+No timetables found for timetable_page_id=y|0000000|1
+No trips found for route_id=10, direction_id=0, service_ids=["6","4","m","n","w","o","h","1","v","l","k","b","7","s","j","e","8","u","10"], timetable_id=10|0000011|0
+No timetables found for timetable_page_id=10|0000011|0
+No trips found for route_id=10, direction_id=1, service_ids=["p","4","m","n","w","o","3","f","q","z","11","c","g","2","t","9","a","d","i","r","v","8","u","12"], timetable_id=10|1111100|1
+No timetables found for timetable_page_id=10|1111100|1
+No trips found for route_id=2w, direction_id=0, service_ids=["3","f","q","z","11","c","g","2","t","9","a","d","i","r","v","8","u","12"], timetable_id=2w|0001100|0
+No timetables found for timetable_page_id=2w|0001100|0
+No trips found for route_id=1w, direction_id=0, service_ids=["13","5"], timetable_id=1w|1110000|0
+No timetables found for timetable_page_id=1w|1110000|0
+No trips found for route_id=1w, direction_id=0, service_ids=["4","m","n","w","o","l","k","b","7","s","j","e","8","u"], timetable_id=1w|0000010|0
+No timetables found for timetable_page_id=1w|0000010|0
+No trips found for route_id=1t, direction_id=0, service_ids=["4","m","n","w","o","h","1","v","b","7","s","j","e","10"], timetable_id=1t|0000001|0
+No timetables found for timetable_page_id=1t|0000001|0
+No trips found for route_id=1t, direction_id=0, service_ids=["4","m","n","w","o","l","k","b","7","s","j","e","8","u"], timetable_id=1t|0000010|0
+No timetables found for timetable_page_id=1t|0000010|0
+No trips found for route_id=1t, direction_id=0, service_ids=["6","4","m","n","w","o","h","1","v","l","k","b","7","s","j","e","8","u","10"], timetable_id=1t|0000011|0
+No timetables found for timetable_page_id=1t|0000011|0
+No trips found for route_id=z, direction_id=1, service_ids=["4","m","n","w","o","h","1","v","b","7","s","j","e","10"], timetable_id=z|0000001|1
+No timetables found for timetable_page_id=z|0000001|1
+No trips found for route_id=z, direction_id=1, service_ids=["4","m","n","w","o","l","k","b","7","s","j","e","8","u"], timetable_id=z|0000010|1
+No timetables found for timetable_page_id=z|0000010|1
+No trips found for route_id=z, direction_id=1, service_ids=["6","4","m","n","w","o","h","1","v","l","k","b","7","s","j","e","8","u","10"], timetable_id=z|0000011|1
+No timetables found for timetable_page_id=z|0000011|1
+No trips found for route_id=1y, direction_id=1, service_ids=["y","10","12"], timetable_id=1y|0000000|1
+No timetables found for timetable_page_id=1y|0000000|1
+No trips found for route_id=1y, direction_id=1, service_ids=["6","4","m","n","w","o","h","1","v","l","k","b","7","s","j","e","8","u","10"], timetable_id=1y|0000011|1
+No timetables found for timetable_page_id=1y|0000011|1
+No trips found for route_id=11, direction_id=1, service_ids=["y","10","12"], timetable_id=11|0000000|1
+No timetables found for timetable_page_id=11|0000000|1
+No trips found for route_id=2t, direction_id=1, service_ids=["6","4","m","n","w","o","h","1","v","l","k","b","7","s","j","e","8","u","10"], timetable_id=2t|0000011|1
+No timetables found for timetable_page_id=2t|0000011|1
+No trips found for route_id=2o, direction_id=0, service_ids=["y","10","12"], timetable_id=2o|0000000|0
+No timetables found for timetable_page_id=2o|0000000|0
