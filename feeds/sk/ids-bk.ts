@@ -15,7 +15,7 @@ export default {
 
       const data = (await response.json()) as any;
       const sortedFiles = data.files
-        .filter((file: any) => file.name.endsWith("-gtfs.zip"))
+        .filter((file: any) => /-gtfs(?:\.zip)?$/.test(file.name))
         .sort((a: any, b: any) => {
           const dateA = a.name.slice(0, 8);
           const dateB = b.name.slice(0, 8);
