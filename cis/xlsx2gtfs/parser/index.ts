@@ -183,6 +183,11 @@ export function parseRouteTripsCalendarsAndStopTimes(
         }
       }
 
+      // Whether any mark pinned this trip to particular dates. A trip driven
+      // entirely by date ranges legitimately has every weekday off, so the
+      // "unmarked" test below cannot look at the weekdays alone.
+      let operatesOnDates = false;
+
       for (const sign of signs) {
         const explanation = signExplanations[sign];
         if (!explanation) continue;
@@ -204,6 +209,7 @@ export function parseRouteTripsCalendarsAndStopTimes(
           explanation.type === SignType.OPERATES_ON &&
           explanation.dateRanges
         ) {
+          operatesOnDates = true;
           calendar.monday = 0;
           calendar.tuesday = 0;
           calendar.wednesday = 0;
@@ -222,6 +228,37 @@ export function parseRouteTripsCalendarsAndStopTimes(
             );
           }
         }
+      }
+
+      // An unmarked trip runs every day.
+      //
+      // The marks in row 4 *restrict* a departure — "10" is Monday to Friday,
+      // a numbered note pins it to a season — and a column with nothing above
+      // it is the ordinary case of a service that runs daily. Reading that
+      // silence as "no service" is what this used to do, and it cost STUDENT
+      // AGENCY 34 of its 38 trips: the whole of Bratislava–Wien, thirty
+      // departures with a valid timetable from 01.09.2026 to 19.10.2027,
+      // published as a route that never runs. A consumer cannot tell that from
+      // a route that has genuinely ended, which is the damaging part — the
+      // feed looked lapsed rather than broken.
+      const restricted =
+        calendar.monday ||
+        calendar.tuesday ||
+        calendar.wednesday ||
+        calendar.thursday ||
+        calendar.friday ||
+        calendar.saturday ||
+        calendar.sunday ||
+        operatesOnDates;
+
+      if (!restricted) {
+        calendar.monday = 1;
+        calendar.tuesday = 1;
+        calendar.wednesday = 1;
+        calendar.thursday = 1;
+        calendar.friday = 1;
+        calendar.saturday = 1;
+        calendar.sunday = 1;
       }
 
       let rowIndex = 5;
