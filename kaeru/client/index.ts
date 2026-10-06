@@ -34,6 +34,16 @@ export function findNearestDistricts(
     .filter((district, index, self) => self.indexOf(district) === index); // Remove duplicates
 }
 
+/** Kilometres between two points, straight line. */
+export function distanceKm(
+  lat1: number,
+  lon1: number,
+  lat2: number,
+  lon2: number,
+): number {
+  return getDistance(lat1, lon1, lat2, lon2);
+}
+
 // Haversine formula
 function getDistance(
   lat1: number,
