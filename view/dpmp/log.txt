@@ -1,17 +1,21 @@
 Agencies: Dopravný podnik mesta Prešov, akciová spoločnosť
-Feed Version: 1382
+Feed Version: 1382_1384
 GTFS-to-HTML Version: 2.10.15
-Date Generated: 2026-10-05T03:19:52.361Z
-Timetable Page Count: 227
-Timetable Count: 227
-Calendar Service ID Count: 227
-Route Count: 227
-Trip Count: 3487
-Stop Count: 4241
+Date Generated: 2026-10-06T04:17:25.460Z
+Timetable Page Count: 614
+Timetable Count: 614
+Calendar Service ID Count: 1576
+Route Count: 614
+Trip Count: 11140
+Stop Count: 11664
 Source: .tmp/tidy-gtfs/dpmp
 
 Warnings:
-No trips found for route_id=d, direction_id=1, service_ids=["1"], timetable_id=d|0000001|1
-No timetables found for timetable_page_id=d|0000001|1
-No trips found for route_id=d, direction_id=1, service_ids=["3"], timetable_id=d|0000010|1
-No timetables found for timetable_page_id=d|0000010|1
+No trips found for route_id=15, direction_id=1, service_ids=["7","3"], timetable_id=15|0000010|1
+No timetables found for timetable_page_id=15|0000010|1
+No trips found for route_id=15, direction_id=1, service_ids=["4","8"], timetable_id=15|0000001|1
+No timetables found for timetable_page_id=15|0000001|1
+No trips found for route_id=15, direction_id=1, service_ids=["7","3"], timetable_id=15|0000010|1
+No timetables found for timetable_page_id=15|0000010|1
+No trips found for route_id=15, direction_id=1, service_ids=["4","8"], timetable_id=15|0000001|1
+No timetables found for timetable_page_id=15|0000001|1
